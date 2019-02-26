@@ -1,0 +1,95 @@
+<!doctype html>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>FMW - {{ ucfirst($title) }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    <script src="js/global.js"></script>
+    <script type="text/javascript" src="js/{{ $title }}.js"></script>
+    <link rel="stylesheet" href="css/global.css"/>
+    <link rel="stylesheet" href="css/{{ $title }}.css"/>
+    <meta name="csrf-token"content="{{ csrf_token() }}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class=".col-xs-6 .col-sm-4 centered">
+
+        <!-- menu de navigation -->
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li>
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "menu") !== false) { echo "class = 'visit'"; } ?> href='/menu'>Menu</a>
+                </li>
+
+                <li>
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit") !== false) { echo "class = 'visit'";} ?> href='/lister_produit'>Produit</a>
+                </li>
+
+                <li>
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "recette") !== false) { echo "class = 'visit'"; } ?> href='/lister_recette'>Recette</a>
+                </li>
+
+            </ul>
+
+
+            <ul class="nav-list">
+
+                <!-- menu des produits -->
+                <?php if (strpos($_SERVER['REQUEST_URI'], "produit") !== false) { ?>
+
+                    <li>
+                        <!-- si on à le mot clef menu + list_product -->
+                        <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
+                            echo "class = 'visit'";
+                        } ?> href='/lister_produit'>Lister les produits</a>
+                    </li>
+
+                    <li>
+                        <!-- si on à le mot clef menu + ajouter produit -->
+                        <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
+                            echo "class = 'visit'";
+                        } ?> href='/ajouter_produit'>Ajouter un produit</a>
+                    </li>
+                <!-- ajouter la condition modifier -->
+
+                <?php } ?>
+
+
+            <!-- menu des recettes -->
+                <?php if (strpos($_SERVER['REQUEST_URI'], "recette") !== false) { ?>
+
+                <li>
+                    <!-- si on à le mot clef menu + list_product -->
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
+                        echo "class = 'visit'";
+                    } ?> href='/lister_recette'>Lister les recettes</a>
+                </li>
+
+                <li>
+                    <!-- si on à le mot clef menu + ajouter produit -->
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
+                        echo "class = 'visit'";
+                    } ?> href='/ajouter_recette'>Ajouter une recette</a>
+                </li>
+
+                <?php } ?>
+
+
+            </ul>
+        </div>
+
+        @yield('content')
+
+
+    </div>
+
+</div>
+</body>
+</html>
+
