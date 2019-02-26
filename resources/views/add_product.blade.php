@@ -3,7 +3,6 @@
 @section('content')
     <h1>Ajoutez des produits</h1>
 
-
     <?php
     if (!empty($aProduit)) {
         var_dump($aProduit);
@@ -31,7 +30,6 @@
                 </div>
             </div>
 
-
             <a href="#" id="hidden_delete">X</a>
         </div>
         <div id="container_input"></div>
@@ -39,18 +37,8 @@
             <button type="button" id="ajouter_produit" class="btn btn-success">+</button>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="ajouter" class="btn btn-primary">Envoyer</button>
         </div>
     </form>
-    <?php
-    if (!empty($aIngredient)) {
-        foreach ($aIngredient as $ingredient) {
-            if (!empty($ingredient)) {
-                echo "Ingrédient  : " . $ingredient;
-                echo "<br>";
-            }
-        }
-    }
-    ?>
 
 @endsection

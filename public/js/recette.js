@@ -12,13 +12,13 @@ $(document).ready(function () {
     });
 
     // autocomplete
-    $(".produit").autocomplete({
+    /*$(".produit").autocomplete({
         source: "autocomplete",
         select: function (event, ui) {
             event.preventDefault();
             $(".produit").val(ui.item.id);
         }
-    });
+    });*/
 
 
 });

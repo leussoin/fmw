@@ -1,4 +1,4 @@
-@extends('layouts/master', ['title' => 'accueil.js'])
+@extends('layouts/master', ['title' => 'menu'])
 
 @section('content')
 
