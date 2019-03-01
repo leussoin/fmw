@@ -8,8 +8,9 @@ Route::get('/produit/ajouter', 'c_product@add_product_get');
 Route::post('/produit/ajouter', 'c_product@add_product_post');
 
 
-Route::post('/produit/modifier', 'c_product@update_product_post');
 Route::get('/produit/modifier/{id}', 'c_product@update_product_get');
+Route::post('/produit/modifier/{id}', 'c_product@update_product_post');
+
 
 
 Route::get('/produit/supprimer/{id}', 'c_product@ajax_delete_product');

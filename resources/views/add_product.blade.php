@@ -3,12 +3,6 @@
 @section('content')
     <h1>Ajoutez des produits</h1>
 
-    <?php
-    if (!empty($aProduit)) {
-        var_dump($aProduit);
-    }
-    ?>
-
     <form method="post">
         {{ csrf_field() }}
         <div class="row">
@@ -37,7 +31,7 @@
             <button type="button" id="ajouter_produit" class="btn btn-success">+</button>
         </div>
         <div class="form-group">
-            <button type="submit" name="ajouter" class="btn btn-primary">Envoyer</button>
+            <button type="submit" name="ajouter" class="btn btn-primary">Ajouter</button>
         </div>
     </form>
 

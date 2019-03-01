@@ -10,11 +10,13 @@
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
+<script type="text/javascript" src="{{ URL::asset("js/global.js") }}"></script>
+<script type="text/javascript" src="{{ URL::asset("js/$title.js") }}"></script>
 
-<script src="../js/global.js"></script>
-<script type="text/javascript" src="../js/{{ $title }}.js"></script>
-<link rel="stylesheet" href="../css/global.css"/>
-<link rel="stylesheet" href="../../css/{{ $title }}.css"/>
+<link rel="stylesheet" href="{{ URL::asset("css/global.css") }}"/>
+<link rel="stylesheet" href="{{ URL::asset("css/$title.css") }}"/>
+
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -27,17 +29,19 @@
         <div class="nav-container">
             <ul class="nav-list">
                 <li>
-                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "menu") !== false) { echo "class = 'visit'"; } ?> href='/menu'>Menu</a>
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "menu")) {
+                        echo "class = 'visit'";
+                    } ?> href='/menu'>Menu</a>
                 </li>
 
                 <li>
-                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit") !== false) {
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit")) {
                         echo "class = 'visit'";
                     } ?> href='/produit/lister'>Produit</a>
                 </li>
 
                 <li>
-                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "recette") !== false) {
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) {
                         echo "class = 'visit'";
                     } ?> href='/recette/lister'>Recette</a>
                 </li>
@@ -48,11 +52,11 @@
             <ul class="nav-list">
 
                 <!-- menu des produits -->
-                <?php if (strpos($_SERVER['REQUEST_URI'], "produit") !== false) { ?>
+                <?php if (strpos($_SERVER['REQUEST_URI'], "produit")) { ?>
 
                 <li>
                     <!-- si on à le mot clef menu + list_product -->
-                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit/lister")) {
                         echo "class = 'visit'";
                     } ?> href='/produit/lister'>Lister les produits</a>
                 </li>
@@ -65,11 +69,18 @@
                 </li>
                 <!-- ajouter la condition modifier -->
 
-                <?php } ?>
+                <?php if (strpos($_SERVER['REQUEST_URI'], "modifier")) { ?>
+
+                <li>
+                    <!-- si on à le mot clef menu + ajouter produit -->
+                    <a class='visit' href=''>Modifier un produit</a>
+                </li>
+                <?php }
+                } ?>
 
 
             <!-- menu des recettes -->
-                <?php if (strpos($_SERVER['REQUEST_URI'], "recette") !== false) { ?>
+                <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) { ?>
 
                 <li>
                     <!-- si on à le mot clef menu + list_product -->

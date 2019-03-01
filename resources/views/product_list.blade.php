@@ -13,6 +13,7 @@
             <th scope="col">Nom</th>
             <th scope="col">Valeur calorifique</th>
             <th scope="col">Prix</th>
+            <th scope="col">Supprimer</th>
         </tr>
         </thead>
         <tbody>
