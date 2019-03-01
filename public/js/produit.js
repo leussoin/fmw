@@ -17,7 +17,7 @@ $(document).ready(function () {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "/supprimer_produit/" + id,
+                url: "/produit/supprimer/" + id,
                 type: 'post',
                 data: {id: id},
                 dataType: 'JSON',

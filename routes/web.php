@@ -13,7 +13,7 @@ Route::post('/produit/modifier/{id}', 'c_product@update_product_post');
 
 
 
-Route::get('/produit/supprimer/{id}', 'c_product@ajax_delete_product');
+Route::post('/produit/supprimer/{id}', 'c_product@ajax_delete_product');
 
 
 Route::get('/recette/lister', 'c_list_recipe@index_get');
