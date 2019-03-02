@@ -1,7 +1,16 @@
 @extends('layouts/master', ['title' => 'produit'])
 
 @section('content')
+
+    <div class=".col-xs-6 .col-sm-4 centered">
+
     <h1>Lister les produits</h1>
+
+    Afficher les produits supprimés
+    <label class="switch">
+        <input type="checkbox" id="checkbox_deleted_products">
+        <span class="slider"></span>
+    </label>
 
     <input type="hidden" id="token" value="{{ csrf_token() }}">
 
@@ -17,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($aProduit as $produit)
+        @foreach($aProduct as $produit)
             <tr id="{{$produit->id}}">
 
                 <td>{{ $produit->id }}</td>

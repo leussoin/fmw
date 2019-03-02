@@ -1,6 +1,7 @@
 @extends('layouts/master', ['title' => 'produit'])
 
 @section('content')
+
     <h1>Ajoutez des produits</h1>
 
 

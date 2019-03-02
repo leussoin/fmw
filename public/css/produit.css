@@ -17,7 +17,3 @@ table.table {
 .table td:hover {
     cursor: pointer;
 }
-
-#hidden_delete {
-    visibility: hidden;
-}

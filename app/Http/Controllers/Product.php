@@ -12,27 +12,38 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 
+/**
+ * Handle all that refers to products
+ * @package App\Http\Controllers
+ */
+class Product extends Controller {
 
-class c_product extends Controller {
-
-
-    public function list_product() {
-        $aProduit = DB::select("SELECT * from product where status = 1");
-        return view('product_list')->with(compact('aProduit'));
+    /**
+     * Display all product into a table
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function productList() {
+        $aProduct = \App\Product::getAllProduct();
+        return view('product_list')->with(compact('aProduct'));
 
     }
 
-    public function add_product_get() {
-        //select * from unit
+    /**
+     * Get all units
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    /*public function getAllUnit() {
         $aUnit = DB::select("SELECT * from unit");
         return view('add_product')->with(compact('aUnit'));
-    }
+    }*/
 
     /**
      * add one or many products
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View add product
      */
-    public function add_product_post() {
+    public function productAddPost() {
+
+        $iInsertedRow = 0;
 
         $aNomProduit = Request('aNomProduit');
         $aPrixProduit = Request('aPrixProduit');
@@ -57,22 +68,32 @@ class c_product extends Controller {
         if (empty($error)) {
             foreach ($aNomProduit as $key => $info) {
 
-                DB::insert('insert into product (cal, name, price, status, created_at, modified_at) values(?,?,?,?,?,?)',
-                    [$aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key], 1, date("Y-m-d H:i:s"), date("Y-m-d H:i:s")]);
-                $aData[] = array("nom" => $aNomProduit[$key], "prix" => $aPrixProduit[$key], "calories" => $aCaloriesProduit[$key]);
+                $iInsertedRow = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key]);
+                //$aData[] = array("nom" => $aNomProduit[$key], "prix" => $aPrixProduit[$key], "calories" => $aCaloriesProduit[$key]);
             }
+        }
+
+        if ($iInsertedRow > 0) {
+            $mResult = "Insertion(s) réussie(s).";
+        } else {
+            $mResult = "Une erreur s'est produite sur la requette.";
         }
 
         return view('add_product')->with(compact('mResult'));
     }
 
-    public function update_product_get($id) {
-
-        $aProduct = DB::select("SELECT * from product where id = " . $id);
+    public function updateProductGet($id) {
+        $aProduct = \App\Product::getProductById($id);
         return view('modify_product')->with(compact('aProduct'));
     }
 
-    public function update_product_post($id) {
+    /**
+     * Update a product with his ID
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateProductPost($id) {
 
         echo "ok";
 
@@ -88,8 +109,7 @@ class c_product extends Controller {
             if (Validator::isValidStr($sName) !== false) {
                 if (Validator::isValidInt($fPrice) !== false) {
                     if (Validator::isValidInt($iCal) !== false) {
-                        $iQueryModif = DB::update('UPDATE product set name = "' . $sName . '", price =' . $fPrice . ', cal = ' . $iCal . ', modified_at = "' . date("Y-m-d H:i:s") . '"   where id = ' . $id);
-
+                        $iModifiedRow = \App\Product::updateProduct($sName, $fPrice, $iCal, $id);
                     } else {
                         $error = "la valeur énérgetique du produit est incorecte.";
                     }
@@ -99,34 +119,29 @@ class c_product extends Controller {
             } else {
                 $error = "le nom du produit est incorect.";
             }
-
         }
+        /*
+                if ($iModifiedRow > 0) {
+                    echo "errur";
+                } else {
+                    echo "tout vas bien";
+                }*/
+
 
         //TODO: gérer l'affichage des cas d'erreur (conerver les données etc ...)
 
-        return redirect()->action('c_product@list_product');
+        return redirect()->action('Product@productList');
     }
 
-    public
-    function ajax_delete_product($id) {
+    public function deleteProductAjax($id) {
 
-        $iQueryModif = DB::update('UPDATE product set status = 0, modified_at = "' . date("Y-m-d H:i:s") . '" where id = ' . $id);
-        if ($iQueryModif > 0) {
+        $iModifiedRow = \App\Product::deleteProduct($id);
+        if ($iModifiedRow > 0) {
             $sMessage = "Suppression effectuée.";
         } else {
             $sMessage = "Erreur sur la suppression du produit.";
         }
         return json_encode($sMessage);
-
-    }
-
-
-    public
-    function ajax_get_produit(Request $request) {
-        $data = produit::select("nom_produit")
-            ->where("nom_produit", "LIKE", "%{$request->input('query')}%")
-            ->get();
-        return response()->json($data);
 
     }
 

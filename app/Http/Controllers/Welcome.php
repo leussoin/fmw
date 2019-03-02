@@ -3,15 +3,16 @@
  * Created by PhpStorm.
  * User: Fixe
  * Date: 23/02/2019
- * Time: 13:49
+ * Time: 12:42
  */
 
 namespace App\Http\Controllers;
 
 
-class c_add_recipe {
+class welcome extends Controller {
 
-    public function add_recipe_get() {
-        return view('add_recipe');
+    public function welcome() {
+        return view('welcome');
     }
+
 }

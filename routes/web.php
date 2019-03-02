@@ -1,22 +1,26 @@
 <?php
 
-Route::get('/menu', 'c_welcome@welcome_get');
+Route::get('/menu', 'Welcome@welcome');
 
-Route::get('/produit/lister', 'c_product@list_product');
+Route::get('/produit/lister', 'Product@productList');
 
-Route::get('/produit/ajouter', 'c_product@add_product_get');
-Route::post('/produit/ajouter', 'c_product@add_product_post');
-
-
-Route::get('/produit/modifier/{id}', 'c_product@update_product_get');
-Route::post('/produit/modifier/{id}', 'c_product@update_product_post');
+Route::get('/produit/ajouter', 'Product@productAddGet');
+Route::post('/produit/ajouter', 'Product@productAddPost');
 
 
+Route::get('/produit/modifier/{id}', 'Product@updateProductGet');
+Route::post('/produit/modifier/{id}', 'Product@updateProductPost');
 
-Route::post('/produit/supprimer/{id}', 'c_product@ajax_delete_product');
+Route::post('/produit/supprimer/{id}', 'Product@deleteProductAjaxPost');
+
+Route::get('/recette/lister', 'Recipe@recipeList');
+
+Route::get('/recette/ajouter', 'Recipe@addRecipeGet');
+Route::post('/recette/ajouter', 'Recipe@addRecipePost');
 
 
-Route::get('/recette/lister', 'c_list_recipe@index_get');
 
-Route::get('/recette/ajouter', 'c_add_recipe@add_recipe_get');
+
+//Route::resource('/recette', 'Recipe');
+
 

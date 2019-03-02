@@ -46,10 +46,7 @@ class Validator {
 
     /**
      * Check date
-     *
-     * @author Marc Schuffenecker <mschuffenecker@nsi.admr.org>
-     * @version 6.4
-     * @since 5.0.0
+
      * @access public
      * @param array|string $mDate
      * @param boolean|string $sIndex
@@ -87,10 +84,6 @@ class Validator {
 
     /**
      * Check if value is a boolean. Value might be in an array['index'] = value
-     *
-     * @author Marc Schuffenecker <mschuffenecker@nsi.admr.org>
-     * @version 6.4
-     * @since 6.0.5
      * @access public
      * @param array|string $mData
      * @param boolean|string $sIndex
@@ -106,10 +99,6 @@ class Validator {
 
     /**
      * Check dateTime
-     *
-     * @author Marc Schuffenecker <mschuffenecker@nsi.admr.org>
-     * @version 6.4
-     * @since 5.0.0
      * @access public
      * @param array|string $mDateTime
      * @param boolean|string $sIndex
@@ -131,13 +120,11 @@ class Validator {
     /**
      * Check if valid numeric
      *
-     * @author Marc Schuffenecker <mschuffenecker@nsi.admr.org>
-     * @version 6.4
-     * @since 5.0.0
+
      * @access public
      * @param array|int $mData Value to test, may be an array
      * @param boolean $bNotZero If true, value has to be > 0
-     * @param bool $sInd²ex Index of (array) $mData
+     * @param bool $sIndex Index of (array) $mData
      * @param mixed $mValue Value to compare with
      * @return boolean
      */
@@ -195,10 +182,6 @@ class Validator {
 
     /**
      * Check if valid string
-     *
-     * @author Marc Schuffenecker <mschuffenecker@nsi.admr.org>
-     * @version 6.4
-     * @since 5.0.0
      * @access public
      * @param string|array $mStr Value to test
      * @param boolean $bStrict If true, check type with, is_string()
@@ -220,11 +203,6 @@ class Validator {
 
     /**
      * Check if a string contains valid integer for SQL querying
-     *
-     * @author Matthieu Leroy <mleroy@nsi.admr.org>
-     * @author Marc Schuffenecker <mschuffenecker@nsi.admr.org>
-     * @version 6.4
-     * @since 6.0.0
      * @access public
      * @param array|string $mData Value to test
      * @param boolean $bNotZero If true, value has to be > 0
@@ -270,9 +248,6 @@ class Validator {
     /**
      * Check if a string is a valid json string
      *
-     * @author Maxime Bergeon <mbergeon@nsi.admr.org>
-     * @version 6.4
-     * @since 6.0.0
      * @access public
      * @param mixed $mStr [array of] string to check against
      * @param mixed $sIndex Index of (array) $mStr if provided
@@ -301,10 +276,6 @@ class Validator {
 
     /**
      * Check if a string is a valid NNI
-     *
-     * @author Maxime Bergeon <mbergeon@nsi.admr.org>
-     * @version 6.4
-     * @since 6.0.0
      * @access public
      * @param mixed $mStr [array of] string to check against
      * @param mixed $sIndex Index of (array) $mStr if provided

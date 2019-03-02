@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <a href="#" id="hidden_delete">X</a>
+            <a href="#" class="hidden_delete">X</a>
         </div>
         <div id="container_input"></div>
         <div class="form-group">

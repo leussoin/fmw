@@ -41,5 +41,21 @@ $(document).ready(function () {
     });
 
 
+
+    //checkbox_deleted_products.checked => true or false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
