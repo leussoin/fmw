@@ -19,6 +19,7 @@ Route::get('/recette/ajouter', 'Recipe@addRecipeGet');
 Route::post('/recette/ajouter', 'Recipe@addRecipePost');
 
 
+Route::resource('/settings', 'Settings');
 
 
 //Route::resource('/recette', 'Recipe');

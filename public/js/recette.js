@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     let wrapper = $("#container_input");
 
     $("#add_product").on('click', function () {
