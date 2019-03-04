@@ -145,5 +145,23 @@ class Product extends Controller {
 
     }
 
+    /**
+     * Get product name with ajax
+     * @param Request $request
+     * @return array
+     */
+    public function getProductByPartialName(Request $request) {
+
+        $term = $request->get('term');
+        $data = DB::select("select name from product where name like '%$term%'");
+        $aData[] = array();
+        foreach ($data as $a) {
+            foreach ($a as $i) {
+                $aData[] = $i;
+            }
+        }
+        return $aData;
+    }
+
 
 }

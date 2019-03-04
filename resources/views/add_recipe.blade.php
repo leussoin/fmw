@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <input type="text" class="form-control produit" placeholder="Entrez le nom de la recette"
+                    <input type="text" class="form-control" placeholder="Entrez le nom de la recette"
                            name="sRecipeName"/>
                 </div>
             </div>

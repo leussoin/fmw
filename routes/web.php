@@ -11,6 +11,10 @@ Route::post('/produit/ajouter', 'Product@productAddPost');
 Route::get('/produit/modifier/{id}', 'Product@updateProductGet');
 Route::post('/produit/modifier/{id}', 'Product@updateProductPost');
 
+Route::get('/produit/autocomplete', 'Product@getProductByPartialName');
+
+
+
 Route::post('/produit/supprimer/{id}', 'Product@deleteProductAjaxPost');
 
 Route::get('/recette/lister', 'Recipe@recipeList');
@@ -24,4 +28,7 @@ Route::resource('/settings', 'Settings');
 
 //Route::resource('/recette', 'Recipe');
 
+
+Route::get('/toto','AdminController@index');
+Route::get('/display/{term}','AdminController@searchData');
 

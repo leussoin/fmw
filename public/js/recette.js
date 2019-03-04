@@ -13,12 +13,11 @@ $(document).ready(function () {
     });
 
     // autocomplete
-    /*$(".produit").autocomplete({
-        source: "autocomplete",
-        select: function( event, ui ) {
-            event.preventDefault();
-            $(".produit").val(ui.item.id);
+    $(".produit").autocomplete({
+        source: "/produit/autocomplete",
+        select : function(event, ui){ // lors de la sélection d'une proposition
+            $('#description').val( ui.item ); // on ajoute la description de l'objet dans un bloc
         }
-    });*/
+    });
 
 });

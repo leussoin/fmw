@@ -46,13 +46,17 @@ class Product extends Model {
         return $iModifiedRow;
     }
 
-    public static function ajax_get_produit(Request $request) {
+    public static function getProductByPartialNameAjax(Request $request) {
         $data = produit::select("nom_produit")
             ->where("nom_produit", "LIKE", "%{$request->input('query')}%")
             ->get();
         return response()->json($data);
     }
 
+    public static function getIdProductByName($sProduct) {
+        $id = produit::select("SELECT id from product where name = ".$sProduct);
+        return $id;
+    }
 
 }
 
