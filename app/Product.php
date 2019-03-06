@@ -47,15 +47,15 @@ class Product extends Model {
     }
 
     public static function getProductByPartialNameAjax(Request $request) {
-        $data = produit::select("nom_produit")
+        $data = DB::select("nom_produit")
             ->where("nom_produit", "LIKE", "%{$request->input('query')}%")
             ->get();
         return response()->json($data);
     }
 
     public static function getIdProductByName($sProduct) {
-        $id = produit::select("SELECT id from product where name = ".$sProduct);
-        return $id;
+        $idProduct = DB::Table('product')->select('id')->where('name',$sProduct)->get();
+        return $idProduct;
     }
 
 }

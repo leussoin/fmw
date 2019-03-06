@@ -19,24 +19,29 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <input type="text" class="form-control produit" placeholder="Entrez un produit"
+                    <input type="text" id="name"  class="form-control produit" placeholder="Entrez un produit"
                            name="aProductName[]"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="aQuantity[]" placeholder="Quantité">
+                    <input type="text"  id="quantity" class="form-control" name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
+
             <div class="col">
                 <div class="form-group">
-                    <select class="form-control" name="aUnit[]">
-                        <option>Default select</option>
+                    <select class="form-control" id="unit" name="aUnit[]">
+                        @foreach($aUnitSelect as $unit)
+                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <a href="#" class="hidden_delete">X</a>
         </div>
+
+
         <div id="container_input"></div>
         <div class="form-group">
             <button type="button" id="add_product" class="btn btn-success">+</button>
@@ -45,9 +50,5 @@
             <button type="submit" name="ajouter" class="btn btn-primary">Ajouter</button>
         </div>
     </form>
-
-
-
-
 
 @endsection

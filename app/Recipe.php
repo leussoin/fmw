@@ -19,7 +19,8 @@ class Recipe extends Model {
     }
 
 
-    public static function addRecipe($sName) {
+    public static function setRecipeName($sName) {
+
         $iInsertedRow = DB::table('recipe')->insert(
             ['name' => $sName,
                 'statuscode' => 1,
@@ -31,25 +32,34 @@ class Recipe extends Model {
         return $iInsertedRow;
     }
 
+    /**
+     *
+     * @param $aProduct
+     * @return bool
+     */
 
-    public static function addProductForRecipe($aData) {
-        $iInsertedRow = DB::table('recipe')->insert(
-            ['name' => $sName,
-                'statuscode' => 1,
-                'created_at' => date("Y-m-d H:i:s"),
-                'modified_at' => date("Y-m-d H:i:s"),
-                'owner' => 1
+    public static function addProductForRecipeTableAssoc($aProduct) {
+
+        $idRecipe = $aProduct['id_recipe'];
+        $iIdProduct = $aProduct['id_product'];
+        $iQuantity = $aProduct['quantity'];
+        $idUnit = $aProduct['id_unit'];
+
+
+        $iInsertedRow = DB::table('recipe_assoc')->insert(
+            [
+                'id_unit' => $idUnit,
+                'product_id' => $iIdProduct,
+                'quantity' => $iQuantity,
+                'recipe_id' => $idRecipe
             ]
         );
         return $iInsertedRow;
     }
 
-
-
-
-
-
-
-
+    public static function getRecipeIdByName($sName) {
+        $idRecipe = DB::select("SELECT id from recipe where name = '" . $sName . "' ");
+        return $idRecipe;
+    }
 }
 

@@ -39,7 +39,9 @@ class Recipe extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function addRecipeGet() {
-        return view('add_recipe');
+        $aUnit = \App\Misc::getUnit();
+
+        return view('add_recipe', ['aUnit' => $aUnit]);
     }
 
 
@@ -49,57 +51,93 @@ class Recipe extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function addRecipePost() {
+
+        $aUnitSelect = \App\Misc::getUnit();
+
+
         $sRecipeName = Request('sRecipeName');
         $aProductName = Request('aProductName');
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
 
-        if (Validator::isValidStr($sRecipeName)) {
-            //$iRowInserted = \App\Recipe::addRecipe($sRecipeName);
-            //if ($iRowInserted > 0) {
-            foreach ($aProductName as $key => $name) {
-                if (Validator::isValidStr($name)) {
-                    if (Validator::isValidInt($aQuantity[$key])) {
-                        $iIdProduct = \App\Product::getIdProductByName($name);
-                        if (!empty($iIdProduct)) {
-                            echo "tout est OK";
-                            $aParams['quantity'] = $aQuantity[$key];
-                            $aParams['name'] = $name;
-                            $aParams['id_product'] = $iIdProduct;
+        $iTotalInsertedProduct = 0;
+
+        if (count($aProductName) === count($aQuantity) && count($aQuantity) === count($aUnit)) {
+            if (Validator::isValidStr($sRecipeName)) {
+                \App\Misc::setInitTransaction();
+                $iRecipeNameInserted = \App\Recipe::setRecipeName($sRecipeName);
+                if ($iRecipeNameInserted > 0) {
+                    $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
+                    $idRecipe = $oRecipe[0]->id;
+
+                    foreach ($aProductName as $key => $name) {
+                        if (Validator::isValidStr($name)) {
+                            if (Validator::isValidInt($aQuantity[$key])) {
+
+                                $oProduct = \App\Product::getIdProductByName($name);
+
+                                $iIdProduct = $oProduct[0]->id;
+                                if (!empty($iIdProduct)) {
+
+                                    $aParams['id_recipe'] = $idRecipe;
+                                    $aParams['id_product'] = $iIdProduct;
+                                    $aParams['quantity'] = (float)$aQuantity[$key];
+                                    $aParams['id_unit'] =  (int)$aUnit[$key];
+
+
+                                    // j'ai validé toutes mes informations et j'ai mes ID, plus qu'à les rentrer
+                                    $iInsertedProduct = \App\Recipe::addProductForRecipeTableAssoc($aParams);
+
+                                    if ($iInsertedProduct === true) {
+                                        $iTotalInsertedProduct++;
+
+
+                                    } else {
+                                        echo "Une erreur sur l'insertion des produit s'est passée";
+                                        \App\Misc::setRollbackTransaction();
+                                        break;
+                                    }
+                                } else {
+                                    \App\Misc::setRollbackTransaction();
+                                    unset($aParams);
+                                    echo "Un des produit est inconnu.";
+                                }
+                            } else {
+                                echo "Erreur sur la quantité";
+                            }
                         } else {
-                            unset($aParams);
-                            break;
-                            //TODO: ajouter un message d'erreur : un produit est foiré ou bien quantité n'est pas un int
+                            echo "Erreur sur nom d'un des produits";
                         }
-                    } else {
-                        echo "Erreur sur la quantité";
                     }
                 } else {
-                    echo "Erreur sur nom d'un des produits";
+                    // si une erreur est survenue alors on rollback
+                    \App\Misc::setRollbackTransaction();
+                    echo "Une erreur s'est produite sur la requette AddRecipe";
                 }
-            }
-            /*} else {
-                $sError = "Une erreur s'est produite sur la requette AddRecipe";
+            } else {
+                echo "Erreur sur nom de la recette";
             }
         } else {
-            echo "Erreur sur nom de la recette";
-        */
+            echo "Il manque des informations.";
         }
 
-        if (!empty($aParams)) {
-            foreach ($aParams as $param) {
-                dd($param);
-            }
+        if (count($aProductName) === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
+            \App\Misc::setCommitTransaction();
+            echo "Ajout de la recette OK";
+        } else {
+            echo "Ajout de la recette KO";
         }
 
-        return view('add_recipe');
+        return view('add_recipe', ['aUnitSelect' => $aUnitSelect]);
     }
 
     /**
      * Handle select like to suggest products to users
+     * Handle select like to suggest products to users
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProductByPartialNameAjaxPost() {
+    public
+    function getProductByPartialNameAjaxPost() {
         $term = Request('term');
         $sProduct = \App\Product::getProductByPartialNameAjax($term);
         return response()->json($sProduct);
