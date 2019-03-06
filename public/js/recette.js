@@ -4,6 +4,9 @@ $(document).ready(function () {
     let wrapper = $("#container_input");
     let $icpt = 0, sName, iQantity, sUnit;
 
+    /**
+     * Add product row when add or update product to create a recipe
+     */
     $("#add_product").on('click', function () {
         $icpt++;
         sName = $('#name').val();
@@ -20,12 +23,17 @@ $(document).ready(function () {
         $( "#unit option:selected" ).text("Unité");
     });
 
-
+    /**
+     * Delete product row when add or update product to create a recipe
+     */
     $(wrapper).on("click", ".delete", function (e) {
         e.preventDefault();
         $(this).parent('div').remove();
     });
 
+    /**
+     * Display availlable products to add or update a recipe
+     */
     // autocomplete
     $(".produit").autocomplete({
         source: "/produit/autocomplete",
@@ -34,7 +42,9 @@ $(document).ready(function () {
         }
     });
 
-
+    /**
+     * Soft delete recipe ajax
+     */
     $(".suppr-recipe").on("click", function () {
         let id = $(this).attr("data-id");
         if (confirm("Voulez vous supprimer cette recette ?")) {
@@ -56,8 +66,4 @@ $(document).ready(function () {
             });
         }
     });
-
-
-
-
 });

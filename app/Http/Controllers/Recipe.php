@@ -39,9 +39,8 @@ class Recipe extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function addRecipeGet() {
-        $aUnit = \App\Misc::getUnit();
-
-        return view('add_recipe', ['aUnit' => $aUnit]);
+        $aUnitSelect = \App\Misc::getUnit();
+        return view('add_recipe', ['aUnitSelect' => $aUnitSelect]);
     }
 
 
@@ -132,7 +131,6 @@ class Recipe extends Controller {
     }
 
     /**
-     * Handle select like to suggest products to users
      * Handle select like to suggest products to users
      * @return \Illuminate\Http\JsonResponse
      */
