@@ -20,6 +20,7 @@ $(document).ready(function () {
         $( "#unit option:selected" ).text("Unité");
     });
 
+
     $(wrapper).on("click", ".delete", function (e) {
         e.preventDefault();
         $(this).parent('div').remove();
@@ -32,5 +33,31 @@ $(document).ready(function () {
             $('#description').val(ui.item); // on ajoute la description de l'objet dans un bloc
         }
     });
+
+
+    $(".suppr-recipe").on("click", function () {
+        let id = $(this).attr("data-id");
+        if (confirm("Voulez vous supprimer cette recette ?")) {
+            $(this).closest('tr').remove();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/recette/supprimer/" + id,
+                type: 'post',
+                data: {id: id},
+                dataType: 'JSON',
+                success: function (response) {
+                    alert(response);
+                },
+                error: function (e) {
+                    console.log(e.responseText);
+                },
+            });
+        }
+    });
+
+
+
 
 });

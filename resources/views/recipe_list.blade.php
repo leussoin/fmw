@@ -1,13 +1,8 @@
 @extends('layouts/master', ['title' => 'recette'])
 
 @section('content')
-Ici j'ai la liste de mes recettes oué !
 
-
-
-<div class=".col-xs-6 .col-sm-4 centered">
-
-    <h1>Lister les produits</h1>
+    <h1>Lister les recettes</h1>
 
     Afficher les produits supprimés
     <label class="switch">
@@ -36,7 +31,7 @@ Ici j'ai la liste de mes recettes oué !
                 <td>{{$recipe->owner }}</td>
                 <td>
                     <a data-id="{{ $recipe->id }}" class="suppr-recipe btn btn-info btn-sm">
-                        <span class="glyphicon glyphicon-trash"></span> X
+                        <span class="glyphicon glyphicon-trash">X</span>
                     </a>
                 </td>
 

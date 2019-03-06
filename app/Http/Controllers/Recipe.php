@@ -145,4 +145,18 @@ class Recipe extends Controller {
     }
 
 
+    public function deleteRecipeAjaxPost($id) {
+
+        $iModifiedRow = \App\Recipe::deleteRecipe($id);
+        if ($iModifiedRow > 0) {
+            $sMessage = "Suppression effectuée.";
+        } else {
+            $sMessage = "Erreur sur la suppression du produit.";
+        }
+        return json_encode($sMessage);
+
+    }
+
+
+
 }

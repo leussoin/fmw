@@ -61,5 +61,11 @@ class Recipe extends Model {
         $idRecipe = DB::select("SELECT id from recipe where name = '" . $sName . "' ");
         return $idRecipe;
     }
+
+
+    public static function deleteRecipe($id) {
+        $iModifiedRow = DB::update('UPDATE recipe set status = 0, modified_at = "' . date("Y-m-d H:i:s") . '" where id = ' . $id);
+        return $iModifiedRow;
+    }
 }
 
