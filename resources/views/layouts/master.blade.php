@@ -67,7 +67,7 @@
                 <li>
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "settings")) {
                         echo "class = 'visit'";
-                    } ?> href='/settings'>Paramétres</a>
+                    } ?> href='/settings'>Paramètres</a>
                 </li>
 
             </ul>

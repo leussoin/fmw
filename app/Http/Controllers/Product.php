@@ -88,7 +88,7 @@ class Product extends Controller {
     }
 
     /**
-     * Update a product with his ID
+     * Update a product
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateProductPost() {
@@ -97,7 +97,6 @@ class Product extends Controller {
         $sName = Request('sName');
         $fPrice = Request('fPrice');
         $iCal = Request('iCal');
-
 
         if (!empty($sName) && !empty($fPrice) && !empty($iCal)) {
 
@@ -115,7 +114,6 @@ class Product extends Controller {
                 $error = "le nom du produit est incorect.";
             }
         }
-
         return redirect()->action('Product@productList');
     }
 
@@ -141,7 +139,6 @@ class Product extends Controller {
      * @param Request $request
      * @return array
      */
-    //todo : clean this function and set in right model
     public function getProductByPartialName(Request $request) {
 
         $term = $request->get('term');
@@ -154,6 +151,5 @@ class Product extends Controller {
         }
         return $aData;
     }
-
 
 }

@@ -6,26 +6,29 @@
 
     <form method="post">
         {{ csrf_field() }}
+        <input type="hidden" value="{{$oRecipe->id}}" name="id">
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Entrez le nom de la recette"
-                           name="sRecipeName"/>
+                           value="{{ $oRecipe->name }}" name="sRecipeName"/>
                 </div>
             </div>
             <a href="#" class="hidden_delete">X</a>
         </div>
 
+        <!-- utilier le boolean pour afficher la portion une vue ou l'autre -->
+
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <input type="text" id="name"  class="form-control produit" placeholder="Entrez un produit"
-                           name="aProductName[]"/>
+                           value=" {{ $aProduct[0][0]->name }}" name="aProductName[]"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <input type="text"  id="quantity" class="form-control" name="aQuantity[]" placeholder="Quantité">
+                    <input type="text" value="{{ $oProduct[0]->quantity }}" id="quantity" class="form-control" name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
 

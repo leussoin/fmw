@@ -75,7 +75,7 @@ class Product extends Model {
 
     /**
      * Soft delete a product
-     * @param $id
+     * @param Request $request
      * @return bool
      */
     public static function getProductByPartialNameAjax(Request $request) {
@@ -85,10 +85,28 @@ class Product extends Model {
         return response()->json($data);
     }
 
+
+    /**
+     * Get id product with his name
+     * @param $sProduct
+     * @return \Illuminate\Support\Collection
+     */
     public static function getIdProductByName($sProduct) {
         $idProduct = DB::Table('product')->select('id')->where('name',$sProduct)->get();
         return $idProduct;
     }
+
+    /**
+     * Get product by ID recipe
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getProductByIdRecipe($id) {
+        $aIdProduct = DB::Table('recipe_assoc')->select('*')->where('recipe_id', $id)->get();
+        return $aIdProduct;
+    }
+
+
 
 }
 

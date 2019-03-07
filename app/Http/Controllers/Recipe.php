@@ -81,7 +81,7 @@ class Recipe extends Controller {
                                     $aParams['id_recipe'] = $idRecipe;
                                     $aParams['id_product'] = $iIdProduct;
                                     $aParams['quantity'] = (float)$aQuantity[$key];
-                                    $aParams['id_unit'] =  (int)$aUnit[$key];
+                                    $aParams['id_unit'] = (int)$aUnit[$key];
 
 
                                     // j'ai validé toutes mes informations et j'ai mes ID, plus qu'à les rentrer
@@ -93,24 +93,23 @@ class Recipe extends Controller {
 
                                     } else {
                                         echo "Une erreur sur l'insertion des produit s'est passée";
-                                        \App\Misc::setRollbackTransaction();
                                         break;
                                     }
                                 } else {
-                                    \App\Misc::setRollbackTransaction();
                                     unset($aParams);
                                     echo "Un des produit est inconnu.";
+                                    break;
                                 }
                             } else {
                                 echo "Erreur sur la quantité";
+                                break;
                             }
                         } else {
                             echo "Erreur sur nom d'un des produits";
+                            break;
                         }
                     }
                 } else {
-                    // si une erreur est survenue alors on rollback
-                    \App\Misc::setRollbackTransaction();
                     echo "Une erreur s'est produite sur la requette AddRecipe";
                 }
             } else {
@@ -120,10 +119,12 @@ class Recipe extends Controller {
             echo "Il manque des informations.";
         }
 
+
         if (count($aProductName) === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
             \App\Misc::setCommitTransaction();
             echo "Ajout de la recette OK";
         } else {
+            \App\Misc::setRollbackTransaction();
             echo "Ajout de la recette KO";
         }
 
@@ -134,8 +135,7 @@ class Recipe extends Controller {
      * Handle select like to suggest products to users
      * @return \Illuminate\Http\JsonResponse
      */
-    public
-    function getProductByPartialNameAjaxPost() {
+    public function getProductByPartialNameAjaxPost() {
         $term = Request('term');
         $sProduct = \App\Product::getProductByPartialNameAjax($term);
         return response()->json($sProduct);
@@ -151,10 +151,100 @@ class Recipe extends Controller {
         } else {
             $sMessage = "Erreur sur la suppression du produit.";
         }
+
         return json_encode($sMessage);
+    }
+
+
+    /**
+     * Display view to allow update recipe
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function updateRecipeGet($id) {
+
+        //todo : optimiser les objets (un seul objet produit ou bien un objet recette avec un tableau de produit
+        $aUnitSelect = \App\Misc::getUnit();
+        $oRecipe = \App\Recipe::getRecipeByID($id);
+        $oProduct = \App\Product::getProductByIdRecipe($id);
+        $aProduct = array();
+        foreach ($oProduct as $product) {
+            $aProduct[] = \App\Product::getProductById($product->product_id);
+        }
+
+        return view('add_recipe', [
+            'aUnitSelect' => $aUnitSelect,
+            'oProduct' => $oProduct,
+            'oRecipe' => $oRecipe,
+            'aProduct' => $aProduct,
+        ]);
 
     }
 
+
+    /**
+     * Update a recipe
+     * @param Request $request
+     * @return void
+     */
+    public function updateRecipePost(Request $request) {
+
+        //dd($request->all());
+        $sRecipeName = Request('sRecipeName');
+        $aProductName = Request('aProductName');
+        $aQuantity = Request('aQuantity');
+        $aUnit = Request('aUnit');
+        $id = Request('id');
+
+        $aData['id'] = $id;
+        $aData['name'] = htmlspecialchars($sRecipeName);
+
+
+        //modification de la recette
+        if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {
+            $iRowUpdated = \App\Recipe::updateRecipe($aData);
+        }
+
+
+        foreach ($aProductName as $key => $product) {
+            if (!empty($product[$key]) && !empty($aQuantity[$key]) && !empty($aUnit[$key])) {
+
+                if (Validator::isValidStr($product[$key]) !== false) {
+                    if (Validator::isValidInt($aQuantity[$key]) !== false) {
+                        if (Validator::isValidInt($aUnit[$key]) !== false) {
+
+
+                            // $iModifiedRow = \App\Product::updateProduct($sName, $fPrice, $iCal, $id);
+                        } else {
+                            $error = "L'unité est incorecte.";
+                        }
+                    } else {
+                        $error = "la quantité est incorecte.";
+                    }
+                } else {
+                    $error = "le nom du produit est incorect.";
+                }
+                if (!empty($error)) {
+                    echo $error;
+                }
+            }
+        }
+
+        /*
+         *                            \App\Misc::setInitTransaction();
+
+                            // tout vas bien j'init la transaction
+                            \App\Misc::setCommitTransaction();
+                            echo "Ajout de la recette OK";
+                        } else {
+                            \App\Misc::setRollbackTransaction();
+         *
+         *
+         *
+         * *
+         */
+        return redirect()->action('Recipe@recipeList');
+    }
 
 
 }

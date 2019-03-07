@@ -46,7 +46,7 @@ $(document).ready(function () {
     });
 
     /**
-     * redirect toupdate product view
+     * redirect to update product view
      */
     $('.table tr').on("click", function () {
         let id = $(this).closest("tr").attr("id");
