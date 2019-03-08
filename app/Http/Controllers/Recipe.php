@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Lcobucci\JWT\Signer\Ecdsa;
 
 
 class Recipe extends Controller {
@@ -194,57 +195,95 @@ class Recipe extends Controller {
         $aProductName = Request('aProductName');
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
-        $id = Request('id');
 
+        // id du nom de la recette
+        $id = Request('id');
         $aData['id'] = $id;
         $aData['name'] = htmlspecialchars($sRecipeName);
+
+        $sError = "";
+        $iCptAddedProduct = 0;
 
 
         //modification de la recette
         if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {
             $iRowUpdated = \App\Recipe::updateRecipe($aData);
+            if ($iRowUpdated > 0) {
+                \App\Misc::setInitTransaction();
+            }
         }
-
 
         foreach ($aProductName as $key => $product) {
             if (!empty($product[$key]) && !empty($aQuantity[$key]) && !empty($aUnit[$key])) {
-
                 if (Validator::isValidStr($product[$key]) !== false) {
                     if (Validator::isValidInt($aQuantity[$key]) !== false) {
                         if (Validator::isValidInt($aUnit[$key]) !== false) {
 
+                            $oProduct = \App\Product::getProductByName($product);
 
-                            // $iModifiedRow = \App\Product::updateProduct($sName, $fPrice, $iCal, $id);
+                            //ligne deleted > 1 je continue sinon break + rollback
+                            $iRowDeleted = \App\Product::deleteProductAssocTable($oProduct[0]->id);
+
+                            if ($iRowDeleted === 0) {
+                                \App\Misc::setRollbackTransaction();
+                                //todo: attention au message à portée technique !
+                                $sError = "Il y'à une erreur sur l'a suppresion du produit";
+                                break;
+                            }
                         } else {
-                            $error = "L'unité est incorecte.";
+                            $sError = "L'unité est incorecte.";
                         }
                     } else {
-                        $error = "la quantité est incorecte.";
+                        $sError = "la quantité est incorecte.";
                     }
                 } else {
-                    $error = "le nom du produit est incorect.";
+                    $sError = "le nom du produit est incorect.";
                 }
-                if (!empty($error)) {
-                    echo $error;
+                if (!empty($sError)) {
+                    echo $sError;
                 }
             }
         }
 
-        /*
-         *                            \App\Misc::setInitTransaction();
+        //pour chaque produit je l'ajoute
+        foreach ($aProductName as $key => $product) {
 
-                            // tout vas bien j'init la transaction
-                            \App\Misc::setCommitTransaction();
-                            echo "Ajout de la recette OK";
-                        } else {
-                            \App\Misc::setRollbackTransaction();
-         *
-         *
-         *
-         * *
-         */
+            /*$sRecipeName = Request('sRecipeName');
+            $aProductName = Request('aProductName');
+            $aQuantity = Request('aQuantity');
+            $aUnit = Request('aUnit');*/
+
+            // je récupére l'ID du produit
+            $oProduct = \App\Product::getProductByName($product);
+            dd($oProduct);
+
+
+
+            $aProduct['id_recipe'] = (int)$id;
+            dd($product);
+            $aProduct['id_product'] = $idProduct[0]->id;
+            $aProduct['quantity'] = (int)$aQuantity[$key];
+            $aProduct['id_unit'] = (int)$aUnit[$key];
+
+            // j'envoie le tableau pour creer un produit
+            $iInsertedProduct = \App\Recipe::addProductForRecipeTableAssoc($aProduct);
+            if ($iInsertedProduct > 0) {
+                $iCptAddedProduct++;
+            }
+        }
+
+
+        if (count($aProductName) === $iCptAddedProduct) {
+            // tout vas bien j'init la transaction
+
+            \App\Misc::setCommitTransaction();
+            echo "Ajout de la recette OK";
+        } else {
+            \App\Misc::setRollbackTransaction();
+            echo "Ajout de la recette KO";
+        }
         return redirect()->action('Recipe@recipeList');
-    }
 
+    }
 
 }

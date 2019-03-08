@@ -131,8 +131,8 @@ class Product extends Controller {
             $sMessage = "Erreur sur la suppression du produit.";
         }
         return json_encode($sMessage);
-
     }
+
 
     /**
      * Get product name with ajax

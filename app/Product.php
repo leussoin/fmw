@@ -13,6 +13,9 @@ class Product extends Model {
         'aQuantity'
     ];
 
+    protected $table = 'product';
+
+
     /**
      * Get all active product
      * @return array
@@ -91,9 +94,10 @@ class Product extends Model {
      * @param $sProduct
      * @return \Illuminate\Support\Collection
      */
-    public static function getIdProductByName($sProduct) {
-        $idProduct = DB::Table('product')->select('id')->where('name',$sProduct)->get();
-        return $idProduct;
+    public static function getProductByName($sProduct) {
+
+        $oProduct = DB::table('product')->where('name', "=", $sProduct)->get();
+        return $oProduct;
     }
 
     /**
@@ -106,6 +110,17 @@ class Product extends Model {
         return $aIdProduct;
     }
 
+
+    /**
+     * Delete product into assoc table
+     * @param $id
+     * @return false|string
+     */
+    public static function deleteProductAssocTable($id) {
+
+        $iDeletedRow = Product::where('id', $id)->delete();
+        return $iDeletedRow;
+    }
 
 
 }
