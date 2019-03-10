@@ -25,6 +25,7 @@ class Recipe extends Model {
      */
     public static function setRecipeName($sName) {
 
+
         $iInsertedRow = DB::table('recipe')->insert(
             ['name' => $sName,
                 'status' => 1,

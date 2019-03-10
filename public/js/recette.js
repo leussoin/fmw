@@ -14,10 +14,11 @@ $(document).ready(function () {
         sUnit = $( "#unit option:selected" ).text();
 
         $(wrapper).append(`<div class="row">`
-            + `<div class="col"><div class="form-group"><input value="`+ sName +`" disabled type="text" id="name_` + $icpt + `" class="form-control produit" name="aName[]"/></div></div>`
-            + `<div class="col"><div class="form-group"><input value="`+ iQantity +`" disabled type="text" id="quantity_` + $icpt + `" class="form-control" name="aQuantity[]"></div></div>`
-            + `<div class="col"><div class="form-group"><input value="`+ sUnit +`" disabled type="text" id="units_` + $icpt + `"class="form-control" name="aUnit[]"></div></div>`
+            + `<div class="col"><div class="form-group"><input value="`+ sName +`"  type="text" id="name_` + $icpt + `" class="form-control produit" name="aProductName[]"/></div></div>`
+            + `<div class="col"><div class="form-group"><input value="`+ iQantity +`"  type="text" id="quantity_` + $icpt + `" class="form-control" name="aQuantity[]"></div></div>`
+            + `<div class="col"><div class="form-group"><input value="`+ sUnit +`"  type="text" id="units_` + $icpt + `"class="form-control" name="aUnit[]"></div></div>`
             + `<a href="#" class="delete">X</a></div>`);
+
        $('#name').val("");
        $('#quantity').val("");
         $( "#unit option:selected" ).text("Unité");

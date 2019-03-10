@@ -53,12 +53,14 @@ class Recipe extends Controller {
     public function addRecipePost() {
 
         $aUnitSelect = \App\Misc::getUnit();
+        // dd($request->aProductName);
 
 
-        $sRecipeName = Request('sRecipeName');
+        $sRecipeName = htmlspecialchars(Request('sRecipeName'));
         $aProductName = Request('aProductName');
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
+
 
         $iTotalInsertedProduct = 0;
 
@@ -69,7 +71,6 @@ class Recipe extends Controller {
                 if ($iRecipeNameInserted > 0) {
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
                     $idRecipe = $oRecipe[0]->id;
-
                     foreach ($aProductName as $key => $name) {
                         if (Validator::isValidStr($name)) {
                             if (Validator::isValidInt($aQuantity[$key])) {
@@ -86,7 +87,7 @@ class Recipe extends Controller {
 
 
                                     // j'ai validé toutes mes informations et j'ai mes ID, plus qu'à les rentrer
-                                    $iInsertedProduct = \App\Recipe::addProductForRecipeTableAssoc($aParams);
+                                    $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aParams);
 
                                     if ($iInsertedProduct === true) {
                                         $iTotalInsertedProduct++;
@@ -94,20 +95,16 @@ class Recipe extends Controller {
 
                                     } else {
                                         echo "Une erreur sur l'insertion des produit s'est passée";
-                                        break;
                                     }
                                 } else {
                                     unset($aParams);
                                     echo "Un des produit est inconnu.";
-                                    break;
                                 }
                             } else {
                                 echo "Erreur sur la quantité";
-                                break;
                             }
                         } else {
                             echo "Erreur sur nom d'un des produits";
-                            break;
                         }
                     }
                 } else {
@@ -117,7 +114,7 @@ class Recipe extends Controller {
                 echo "Erreur sur nom de la recette";
             }
         } else {
-            echo "Il manque des informations.";
+            echo "Il manque des informations (un ou plusieurs champs sont vides)";
         }
 
 
@@ -165,13 +162,22 @@ class Recipe extends Controller {
     public function updateRecipeGet($id) {
 
         //todo : optimiser les objets (un seul objet produit ou bien un objet recette avec un tableau de produit
+
+        //recupération du tableau d'unités
         $aUnitSelect = \App\Misc::getUnit();
+        // récupération des informations de la recette
         $oRecipe = \App\Recipe::getRecipeByID($id);
+        // récupération des product à partir de l'ID de la recéte
         $oProduct = \App\Product::getProductByIdRecipe($id);
+
         $aProduct = array();
-        foreach ($oProduct as $product) {
-            $aProduct[] = \App\Product::getProductById($product->product_id);
+        foreach ($oProduct as $key =>$product) {
+            $aDataProduct = \App\Product::getProductById($product->product_id);
+            $aProduct[$key]['name'] = $aDataProduct[0]->name;
         }
+//pour chaque produit je recrée un tableau ou je récupére l'unité, sa valeur, sa quantité etc etc...
+
+
 
         return view('add_recipe', [
             'aUnitSelect' => $aUnitSelect,

@@ -94,7 +94,7 @@ class Product extends Model {
      * @param $sProduct
      * @return \Illuminate\Support\Collection
      */
-    public static function getProductByName($sProduct) {
+    public static function getIdProductByName($sProduct) {
         $aProduct = DB::table('product')->where('name', "=", $sProduct)->get();
         return $aProduct;
     }
