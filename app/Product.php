@@ -95,9 +95,8 @@ class Product extends Model {
      * @return \Illuminate\Support\Collection
      */
     public static function getProductByName($sProduct) {
-
-        $oProduct = DB::table('product')->where('name', "=", $sProduct)->get();
-        return $oProduct;
+        $aProduct = DB::table('product')->where('name', "=", $sProduct)->get();
+        return $aProduct;
     }
 
     /**
@@ -110,17 +109,6 @@ class Product extends Model {
         return $aIdProduct;
     }
 
-
-    /**
-     * Delete product into assoc table
-     * @param $id
-     * @return false|string
-     */
-    public static function deleteProductAssocTable($id) {
-
-        $iDeletedRow = Product::where('id', $id)->delete();
-        return $iDeletedRow;
-    }
 
 
 }

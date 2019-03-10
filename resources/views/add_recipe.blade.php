@@ -17,7 +17,7 @@
             <a href="#" class="hidden_delete">X</a>
         </div>
 
-        <!-- utilier le boolean pour afficher la portion une vue ou l'autre -->
+        <!-- utilier le boolean pour afficher la portion une vue ou l'aoRecipe utre -->
 
         <div class="row">
             <div class="col">

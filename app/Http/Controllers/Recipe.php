@@ -185,10 +185,9 @@ class Recipe extends Controller {
 
     /**
      * Update a recipe
-     * @param Request $request
      * @return void
      */
-    public function updateRecipePost(Request $request) {
+    public function updateRecipePost() {
 
         //dd($request->all());
         $sRecipeName = Request('sRecipeName');
@@ -207,9 +206,23 @@ class Recipe extends Controller {
 
         //modification de la recette
         if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {
+            \App\Misc::setInitTransaction();
+
             $iRowUpdated = \App\Recipe::updateRecipe($aData);
             if ($iRowUpdated > 0) {
-                \App\Misc::setInitTransaction();
+
+                // si j'ai modifié, alors je supprime tous mes enregistrements where id recette = pouet
+                $iRowDeleted = \App\RecipeAssoc::deleteProductAssocTable($aData);
+
+                if ($iRowDeleted > 0) {
+                    echo "Deletion des produits dans la table d'asso OK";
+                } else {
+                    echo "Deletion des produits dans la table d'asso KO";
+                }
+
+            } else {
+                echo "Erreur sur l'update du nom de ma recette";
+                // rajouter une valeur kaikpart pour à la fin de la fonction rollback
             }
         }
 
@@ -220,16 +233,20 @@ class Recipe extends Controller {
                         if (Validator::isValidInt($aUnit[$key]) !== false) {
 
                             $oProduct = \App\Product::getProductByName($product);
+                            // j'ai toutes les informations du produit dont l'ID je peux les add dans la table d'association
 
-                            //ligne deleted > 1 je continue sinon break + rollback
-                            $iRowDeleted = \App\Product::deleteProductAssocTable($oProduct[0]->id);
 
-                            if ($iRowDeleted === 0) {
-                                \App\Misc::setRollbackTransaction();
-                                //todo: attention au message à portée technique !
-                                $sError = "Il y'à une erreur sur l'a suppresion du produit";
-                                break;
+                            $aDataProduct['id_recipe'] = (int)$id;
+                            $aDataProduct['id_product'] = $oProduct[0]->id;
+                            $aDataProduct['quantity'] = (int)$aQuantity[$key];
+                            $aDataProduct['id_unit'] = (int)$aUnit[$key];
+
+                            $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aDataProduct);
+
+                            if ($iInsertedProduct === true) {
+                                $iCptAddedProduct++;
                             }
+
                         } else {
                             $sError = "L'unité est incorecte.";
                         }
@@ -245,43 +262,16 @@ class Recipe extends Controller {
             }
         }
 
-        //pour chaque produit je l'ajoute
-        foreach ($aProductName as $key => $product) {
-
-            /*$sRecipeName = Request('sRecipeName');
-            $aProductName = Request('aProductName');
-            $aQuantity = Request('aQuantity');
-            $aUnit = Request('aUnit');*/
-
-            // je récupére l'ID du produit
-            $oProduct = \App\Product::getProductByName($product);
-            dd($oProduct);
-
-
-
-            $aProduct['id_recipe'] = (int)$id;
-            dd($product);
-            $aProduct['id_product'] = $idProduct[0]->id;
-            $aProduct['quantity'] = (int)$aQuantity[$key];
-            $aProduct['id_unit'] = (int)$aUnit[$key];
-
-            // j'envoie le tableau pour creer un produit
-            $iInsertedProduct = \App\Recipe::addProductForRecipeTableAssoc($aProduct);
-            if ($iInsertedProduct > 0) {
-                $iCptAddedProduct++;
-            }
-        }
-
 
         if (count($aProductName) === $iCptAddedProduct) {
             // tout vas bien j'init la transaction
-
             \App\Misc::setCommitTransaction();
             echo "Ajout de la recette OK";
         } else {
             \App\Misc::setRollbackTransaction();
             echo "Ajout de la recette KO";
         }
+
         return redirect()->action('Recipe@recipeList');
 
     }

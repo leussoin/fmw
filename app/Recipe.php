@@ -36,28 +36,6 @@ class Recipe extends Model {
         return $iInsertedRow;
     }
 
-    /**
-     * Add id' informations into assoc table
-     * @param $aProduct
-     * @return bool
-     */
-    public static function addProductForRecipeTableAssoc($aProduct) {
-
-        $idRecipe = $aProduct['id_recipe'];
-        $iIdProduct = $aProduct['id_product'];
-        $iQuantity = $aProduct['quantity'];
-        $idUnit = $aProduct['id_unit'];
-
-        $iInsertedRow = DB::table('recipe_assoc')->insert(
-            [
-                'id_unit' => $idUnit,
-                'product_id' => $iIdProduct,
-                'quantity' => $iQuantity,
-                'recipe_id' => $idRecipe
-            ]
-        );
-        return $iInsertedRow;
-    }
 
     /**
      * Get id recipe with his name
