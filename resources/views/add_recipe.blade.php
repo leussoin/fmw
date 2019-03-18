@@ -20,23 +20,25 @@
             <a href="#" class="hidden_delete">X</a>
         </div>
 
-        {{ csrf_field() }}
+    {{ csrf_field() }}
 
     <!-- afficher au moins une ligne si j'ai 0 produits-->
 
-    <?php
+        <?php
+
         if (empty($oRecipe)) { ?>
 
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <input type="text" id="name" class="form-control produit" placeholder="Entrez un produit"
-                           name = "aProductName[]"/>
+                           name="aProductName[]"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <input type="text" value="" id="quantity" class="form-control" name="aQuantity[]" placeholder="Quantité">
+                    <input type="text" value="" id="quantity" class="form-control" name="aQuantity[]"
+                           placeholder="Quantité">
                 </div>
             </div>
 
@@ -54,33 +56,25 @@
 
 
         <?php } else {
-            // sinon pour chaque produit de la recette je recupére tous mes produits
+        // sinon pour chaque produit de la recette je recupére tous mes produits
 
-        foreach ($aProduct as $product) {
+        foreach ($aProduct as $product) { ?>
 
-       // dd($product['name']);
-            ?>
-
-        <input type="hidden" value="<?php if (!empty($oRecipe)) {
-            echo $oRecipe->id;
-        }?>" name="id">
-
-        <?php //dd($product); ?>
+        <input type="hidden" value="<?php echo $oRecipe->id; ?>" name="id">
 
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <input type="text" id="name" class="form-control produit" placeholder="Entrez un produit"
-                           value="<?php if (!empty($aProduct)) {
-                               echo $product[0]->name;
-                           }?>" name="aProductName[]"/>
+                           value="<?php echo $product[0]->name; ?>" name="aProductName[]"/>
                 </div>
             </div>
+
+
             <div class="col">
                 <div class="form-group">
-                    <input type="text" value="<?php if (!empty($oRecipe)) {
-                        echo $product['quantity'];
-                    }?>" id="quantity" class="form-control" name="aQuantity[]" placeholder="Quantité">
+                    <input type="text" value="<?php echo $product[0]->quantity; ?>" id="quantity" class="form-control"
+                           name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
 
@@ -96,7 +90,7 @@
             <a href="#" class="hidden_delete">X</a>
         </div>
 
-        <?php }
+    <?php }
 
         } ?>
 

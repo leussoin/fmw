@@ -51,5 +51,16 @@ class RecipeAssoc extends Model {
     }
 
 
+    /**
+     * Get all product with quantity from an ID recipe
+     * @param $id
+     * @return false|string
+     */
+    public static function getRecipeProducts($id) {
+
+        $aProduct = DB::table('recipe_assoc')->where('recipe_id', $id)->get();
+        return $aProduct;
+    }
+
 }
 

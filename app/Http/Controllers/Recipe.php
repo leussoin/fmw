@@ -167,6 +167,7 @@ class Recipe extends Controller {
         //$aDataFullRecipe = \App\Recipe::getRecipeAndProduct($id);
         //todo : optimiser les objets (un seul objet produit ou bien un objet recette avec un tableau de produit)
 
+
         //recupération du tableau d'unités
         $aUnitSelect = \App\Misc::getUnit();
         // récupération des informations de la recette
@@ -174,13 +175,14 @@ class Recipe extends Controller {
         // récupération des product à partir de l'ID de la recéte
         $oProduct = \App\Product::getProductByIdRecipe($id);
 
+
         // pour chacun d'entre eux => recupére le nom par l'ID
         foreach ($oProduct as $key => $product) {
             $aProduct[$key] = \App\Product::getProductById($product->product_id);
+            var_dump($aProduct[$key]);
+            // je veux la quantité pour chaque produit
+            $aProduct[$key][0]->quantity = $oProduct[$key]->quantity;
         }
-
-
-//pour chaque produit je recrée un tableau ou je récupére l'unité, sa valeur, sa quantité etc etc...
 
 
         return view('add_recipe', [
@@ -241,21 +243,23 @@ class Recipe extends Controller {
                     if (Validator::isValidInt($aQuantity[$key]) !== false) {
                         if (Validator::isValidInt($aUnit[$key]) !== false) {
 
-                            $oProduct = \App\Product::getProductByName($product);
-                            // j'ai toutes les informations du produit dont l'ID je peux les add dans la table d'association
+                            $oProduct = \App\Product::getIdProductByName($product);
 
+                            if (count($oProduct) !== 0) {
+                                $aDataProduct['id_recipe'] = (int)$id;
+                                $aDataProduct['id_product'] = $oProduct[0]->id;
+                                $aDataProduct['quantity'] = (int)$aQuantity[$key];
+                                $aDataProduct['id_unit'] = (int)$aUnit[$key];
+                                // j'ai toutes les informations du produit dont l'ID je peux les add dans la table d'association
 
-                            $aDataProduct['id_recipe'] = (int)$id;
-                            $aDataProduct['id_product'] = $oProduct[0]->id;
-                            $aDataProduct['quantity'] = (int)$aQuantity[$key];
-                            $aDataProduct['id_unit'] = (int)$aUnit[$key];
+                                $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aDataProduct);
 
-                            $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aDataProduct);
-
-                            if ($iInsertedProduct === true) {
-                                $iCptAddedProduct++;
+                                if ($iInsertedProduct === true) {
+                                    $iCptAddedProduct++;
+                                }
+                            } else {
+                                $sError = "Erreur sur la recupération du produit (requette 'getIdProductByName' erreur ou bien produit inconu en base ?";
                             }
-
                         } else {
                             $sError = "L'unité est incorecte.";
                         }
