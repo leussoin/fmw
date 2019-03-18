@@ -18,6 +18,12 @@ $(document).ready(function () {
             + `<div class="col"><div class="form-group"><input value="`+ iQantity +`"  type="text" id="quantity_` + $icpt + `" class="form-control" name="aQuantity[]"></div></div>`
             + `<div class="col"><div class="form-group"><input value="`+ sUnit +`"  type="text" id="units_` + $icpt + `"class="form-control" name="aUnit[]"></div></div>`
             + `<a href="#" class="delete">X</a></div>`);
+        $(".produit").autocomplete({
+            source: "/produit/autocomplete",
+            select: function (event, ui) { // lors de la sélection d'une proposition
+                $('#description').val(ui.item); // on ajoute la description de l'objet dans un bloc
+            }
+        });
 
        $('#name').val("");
        $('#quantity').val("");

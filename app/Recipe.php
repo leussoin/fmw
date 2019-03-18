@@ -64,7 +64,7 @@ class Recipe extends Model {
      * @return Model|\Illuminate\Database\Query\Builder|object|null
      */
     public static function getRecipeByID($id) {
-        return $aRecipe =  DB::table('recipe')->where('id', $id)->first();
+        return $aRecipe = DB::table('recipe')->where('id', $id)->first();
     }
 
     /**
@@ -74,8 +74,41 @@ class Recipe extends Model {
      */
     public static function updateRecipe($aData) {
 
-        $iModifiedRow = DB::update('UPDATE recipe set name = "' .  $aData['name'] . '", modified_at = "' . date("Y-m-d H:i:s") . '"   where id = ' . $aData['id']);
+        $iModifiedRow = DB::update('UPDATE recipe set name = "' . $aData['name'] . '", modified_at = "' . date("Y-m-d H:i:s") . '"   where id = ' . $aData['id']);
         return $iModifiedRow;
+    }
+
+    /**
+     * Get full information about a product
+     * @param $aData
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getRecipeAndProduct($aData) {
+
+        $oRecipeProduct = DB::table('recipe')
+            ->join('recipe_assoc', 'recipe_assoc.recipe_id', '=', 'recipe.id')
+            ->join('product', 'recipe_assoc.product_id', '=', 'product.id')
+            ->join('unit', 'recipe_assoc.product_id', '=', 'product.id')
+            //->join('product', 'recipe_assoc.id_unit', '=', 'unit.id')
+            ->join('user', 'recipe.owner', '=', 'user.id')
+            ->where('recipe.id', '=', $aData)
+            ->select(
+                'product.name as ProductName',
+                'cal',
+                'product',
+                'status as ProductStatus',
+                'product.created_at as ProductCreateDate',
+                'product.modified_at as ProductModifDate',
+                'price,recipe.id as RecipeId',
+                'recipe.name as RecipeName',
+                'recipe.status as RecipeStatus',
+                'recipe.created_at as ProductCreateDate',
+                'recipe.modified_at as ProductModifDate',
+                'quantity',
+                'user.name as UserName')
+            ->get();
+
+        return $oRecipeProduct;
 
     }
 

@@ -65,20 +65,21 @@
             echo $oRecipe->id;
         }?>" name="id">
 
+        <?php //dd($product); ?>
 
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <input type="text" id="name" class="form-control produit" placeholder="Entrez un produit"
-                           value="<?php if (!empty($oRecipe)) {
-                               echo $product['name'];
+                           value="<?php if (!empty($aProduct)) {
+                               echo $product[0]->name;
                            }?>" name="aProductName[]"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <input type="text" value="<?php if (!empty($oRecipe)) {
-                        echo $product->quantity;
+                        echo $product['quantity'];
                     }?>" id="quantity" class="form-control" name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>

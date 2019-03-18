@@ -161,7 +161,11 @@ class Recipe extends Controller {
      */
     public function updateRecipeGet($id) {
 
-        //todo : optimiser les objets (un seul objet produit ou bien un objet recette avec un tableau de produit
+        $aProduct = array();
+
+        // recupére les infos de la recette + jointure sur recipe assoc + jointure => fail :'(
+        //$aDataFullRecipe = \App\Recipe::getRecipeAndProduct($id);
+        //todo : optimiser les objets (un seul objet produit ou bien un objet recette avec un tableau de produit)
 
         //recupération du tableau d'unités
         $aUnitSelect = \App\Misc::getUnit();
@@ -170,18 +174,17 @@ class Recipe extends Controller {
         // récupération des product à partir de l'ID de la recéte
         $oProduct = \App\Product::getProductByIdRecipe($id);
 
-        $aProduct = array();
-        foreach ($oProduct as $key =>$product) {
-            $aDataProduct = \App\Product::getProductById($product->product_id);
-            $aProduct[$key]['name'] = $aDataProduct[0]->name;
+        // pour chacun d'entre eux => recupére le nom par l'ID
+        foreach ($oProduct as $key => $product) {
+            $aProduct[$key] = \App\Product::getProductById($product->product_id);
         }
-//pour chaque produit je recrée un tableau ou je récupére l'unité, sa valeur, sa quantité etc etc...
 
+
+//pour chaque produit je recrée un tableau ou je récupére l'unité, sa valeur, sa quantité etc etc...
 
 
         return view('add_recipe', [
             'aUnitSelect' => $aUnitSelect,
-            'oProduct' => $oProduct,
             'oRecipe' => $oRecipe,
             'aProduct' => $aProduct,
         ]);
