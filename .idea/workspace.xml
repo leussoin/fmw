@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="98bf1ac2-816d-4fcf-ae89-fa161c086584" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/RecipeAssoc.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/RecipeAssoc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/add_recipe.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/add_recipe.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -513,7 +510,7 @@
       <workItem from="1552233718651" duration="1237000" />
       <workItem from="1552249318989" duration="8438000" />
       <workItem from="1552337563735" duration="6904000" />
-      <workItem from="1552944854813" duration="3618000" />
+      <workItem from="1552944854813" duration="3755000" />
     </task>
     <task id="LOCAL-00001" summary="modif produit OK">
       <created>1551480622102</created>
@@ -606,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1552945981609</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="modification avec autocomplete OK">
+      <created>1552948845770</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1552948845770</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -615,7 +619,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140248000" />
+    <option name="totallyTimeSpent" value="140385000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -628,9 +632,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.47995666" visible="true" weight="0.13155803" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47995666" visible="true" weight="0.13155803" />
       <window_info id="Structure" order="1" sideWeight="0.5200433" side_tool="true" weight="0.13155803" />
       <window_info id="Favorites" order="2" sideWeight="0.5072698" side_tool="true" weight="0.1236089" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.32974428" />
@@ -711,7 +714,8 @@
     <MESSAGE value="update recipe OK !" />
     <MESSAGE value="debugage affichage des produits d'une recette (controler recipe)" />
     <MESSAGE value="autocomplete sur les produits ajoutés à la volée sur une recette OK !" />
-    <option name="LAST_COMMIT_MESSAGE" value="autocomplete sur les produits ajoutés à la volée sur une recette OK !" />
+    <MESSAGE value="modification avec autocomplete OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="modification avec autocomplete OK" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/storage/framework/views/fe8f96c13fdcab2c2dad5f9281c6252d1f5cc2a7.php">
