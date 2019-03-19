@@ -55,6 +55,7 @@ class Recipe extends Model {
      */
     public static function deleteRecipe($id) {
         $iModifiedRow = DB::update('UPDATE recipe set status = 0, modified_at = "' . date("Y-m-d H:i:s") . '" where id = ' . $id);
+        var_dump($iModifiedRow);
         return $iModifiedRow;
     }
 

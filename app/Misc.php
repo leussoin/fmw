@@ -11,9 +11,29 @@ class Misc extends Model {
      * @return array
      */
     public static function getUnit() {
-        $aUnit = DB::select("SELECT * from unit");
+        $oUnit = DB::select("SELECT * from unit");
+        $aUnit = array();
+        foreach ($oUnit as $key => $unit) {
+            $aUnit[$key]['id'] = $unit->id;
+            $aUnit[$key]['name'] = $unit->name;
+        }
         return $aUnit;
     }
+
+
+    /**
+     * Get all informations about units to recreate dynamics inputs
+     * @return array
+     */
+    /*public static function getUnitAjax() {
+        $oUnit = DB::select("SELECT * from unit");
+        $aUnit = array();
+        foreach ($oUnit as $key => $unit) {
+            $aUnit[$key]['id'] = $unit->id;
+            $aUnit[$key]['name'] = $unit->name;
+        }
+        return json_encode($aUnit);
+    }*/
 
     /**
      * Get id unit with name

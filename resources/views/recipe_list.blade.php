@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         @foreach($aRecipe as $recipe)
-            <tr id="{{$recipe->id}}">
+            <tr <?php if($recipe->status === 0) {echo "class='table-danger' ";} ?>  id="{{$recipe->id}}">
 
                 <td>{{$recipe->id }}</td>
                 <td>{{$recipe->name }}</td>

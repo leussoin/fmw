@@ -45,8 +45,10 @@
             <div class="col">
                 <div class="form-group">
                     <select class="form-control" id="unit" name="aUnit[]">
-                        @foreach($aUnitSelect as $unit)
-                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                        <option value="">Choisissez l'unité</option>
+
+                    @foreach($aUnitSelect as $unit)
+                            <option value="{{ $unit['id'] }}">{{ $unit['name'] }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -77,12 +79,13 @@
                            name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
+<?php         //dd($aUnit[0]->name); ?>
 
             <div class="col">
                 <div class="form-group">
                     <select class="form-control" id="unit" name="aUnit[]">
-                        @foreach($aUnitSelect as $unit)
-                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                        @foreach($aUnit as $unit)
+                            <option value="{{ $unit['id'] }}">{{ $unit['name'] }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -169,7 +169,7 @@ class Recipe extends Controller {
 
 
         //recupération du tableau d'unités
-        $aUnitSelect = \App\Misc::getUnit();
+        $aUnit = \App\Misc::getUnit();
         // récupération des informations de la recette
         $oRecipe = \App\Recipe::getRecipeByID($id);
         // récupération des product à partir de l'ID de la recéte
@@ -179,14 +179,14 @@ class Recipe extends Controller {
         // pour chacun d'entre eux => recupére le nom par l'ID
         foreach ($oProduct as $key => $product) {
             $aProduct[$key] = \App\Product::getProductById($product->product_id);
-            var_dump($aProduct[$key]);
+
             // je veux la quantité pour chaque produit
             $aProduct[$key][0]->quantity = $oProduct[$key]->quantity;
         }
 
 
         return view('add_recipe', [
-            'aUnitSelect' => $aUnitSelect,
+            'aUnit' => $aUnit,
             'oRecipe' => $oRecipe,
             'aProduct' => $aProduct,
         ]);
@@ -198,13 +198,13 @@ class Recipe extends Controller {
      * Update a recipe
      * @return void
      */
-    public function updateRecipePost() {
+    public function updateRecipePost(request $request) {
 
-        //dd($request->all());
         $sRecipeName = Request('sRecipeName');
         $aProductName = Request('aProductName');
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
+
 
         // id du nom de la recette
         $id = Request('id');
@@ -288,5 +288,19 @@ class Recipe extends Controller {
         return redirect()->action('Recipe@recipeList');
 
     }
+
+
+    public function getUnitAjax() {
+
+        $aUnit = \App\Misc::getUnit();
+        return json_encode($aUnit);
+    }
+
+
+
+
+
+
+
 
 }

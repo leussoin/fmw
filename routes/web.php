@@ -33,6 +33,11 @@ Route::post('/recette/modifier/{id}', 'Recipe@updateRecipePost');
 Route::resource('/settings', 'Settings');
 
 
+// -------------- Ajax recette
+Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
+
+
+
 //Route::resource('/recette', 'Recipe');
 
 
