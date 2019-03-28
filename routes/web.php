@@ -37,7 +37,6 @@ Route::resource('/settings', 'Settings');
 Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 
 
-
 //Route::resource('/recette', 'Recipe');
 
 
