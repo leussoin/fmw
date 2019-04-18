@@ -8,6 +8,9 @@ $(document).ready(function () {
      * Add product row when add or update product to create a recipe
      */
     $("#add_product").on('click', function () {
+
+        console.log("click");
+
         $icpt++;
         sName = $('#name').val();
         iQantity = $('#quantity').val();
@@ -15,10 +18,10 @@ $(document).ready(function () {
 
 
         $(wrapper).append(`<div class="row">`
-            + `<div class="col"><div class="form-group"><input placeholder="Entrez un produit" value="` + sName + `"  type="text" id="name_` + $icpt + `" class="form-control produit" name="aProductName[]"/></div></div>`
+            + `<div class="col"><div class="form-group"><input placeholder="Entrez un produit fait" value="` + sName + `"  type="text" id="name_` + $icpt + `" class="form-control produit" name="aProductName[]"/></div></div>`
             + `<div class="col"><div class="form-group"><input placeholder="Quantité" value="` + iQantity + `"  type="text" id="quantity_` + $icpt + `" class="form-control" name="aQuantity[]"></div></div>`
-            + `<div class="col"><div class="form-group"><select id="units_` + $icpt + `" class="form-control unit-select" name="aUnit[]"><option>Choisissez l'unité</option></div></div>`
-            + `<a href="#" class="delete">X</a></div>`);
+            + `<div class="col"><div class="form-group"><select id="units_` + $icpt + `" class="form-control unit-select" name="aUnit[]"><option>Choisissez l'unité</option></select></div></div>`
+            + `<a href="#" class="delete">X</a></>`);
 
 
         $.ajax({
@@ -32,7 +35,7 @@ $(document).ready(function () {
                 // pour chaque ligne dans mon tableau d'unités
                 // pour chaque valeur j'ajoute une option
                 data.forEach(function (unit) {
-                    $('.unit-select').append('<option value=' + unit.id + '>' + unit.name + '</option>');
+                    $('#units_'+$icpt).append('<option value=' + unit.id + '>' + unit.name + '</option>');
                 });
             },
             error: function (e) {
@@ -47,11 +50,13 @@ $(document).ready(function () {
                 $('#description').val(ui.item); // on ajoute la description de l'objet dans un bloc
             }
         });
-
-        $('#name').val("");
-        $('#quantity').val("");
-        $("#unit option:selected").text("Unité");
+        /*
+                $('#name').val("");
+                $('#quantity').val("");
+                $("#unit option:selected").text("Unité");
+                */
     });
+
 
     /**
      * Delete product row when add or update product to create a recipe
@@ -60,6 +65,7 @@ $(document).ready(function () {
         e.preventDefault();
         $(this).parent('div').remove();
     });
+
 
     /**
      * Display availlable products to add or update a recipe
@@ -71,6 +77,7 @@ $(document).ready(function () {
             $('#description').val(ui.item); // on ajoute la description de l'objet dans un bloc
         }
     });
+
 
     /**
      * Soft delete recipe ajax
@@ -97,6 +104,7 @@ $(document).ready(function () {
         }
     });
 
+
     /**
      * redirect to update product view
      */
@@ -107,6 +115,4 @@ $(document).ready(function () {
             window.location = "/recette/modifier/" + id;
         }
     });
-
-
 });

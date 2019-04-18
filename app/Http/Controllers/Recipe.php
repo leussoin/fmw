@@ -172,7 +172,7 @@ class Recipe extends Controller {
         $aUnit = \App\Misc::getUnit();
         // récupération des informations de la recette
         $oRecipe = \App\Recipe::getRecipeByID($id);
-        // récupération des product à partir de l'ID de la recéte
+        // récupération des product à partir de l'ID de la recete
         $oProduct = \App\Product::getProductByIdRecipe($id);
 
 
