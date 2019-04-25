@@ -72,6 +72,7 @@ class Recipe extends Controller {
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
                     $idRecipe = $oRecipe[0]->id;
                     foreach ($aProductName as $key => $name) {
+
                         if (Validator::isValidStr($name)) {
                             if (Validator::isValidInt($aQuantity[$key])) {
 
@@ -160,7 +161,7 @@ class Recipe extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function updateRecipeGet($id) {
-
+        $aUnitSelect = \App\Misc::getUnit();
         $aProduct = array();
 
         // recupére les infos de la recette + jointure sur recipe assoc + jointure => fail :'(
@@ -175,7 +176,6 @@ class Recipe extends Controller {
         // récupération des product à partir de l'ID de la recete
         $oProduct = \App\Product::getProductByIdRecipe($id);
 
-
         // pour chacun d'entre eux => recupére le nom par l'ID
         foreach ($oProduct as $key => $product) {
             $aProduct[$key] = \App\Product::getProductById($product->product_id);
@@ -184,11 +184,12 @@ class Recipe extends Controller {
             $aProduct[$key][0]->quantity = $oProduct[$key]->quantity;
         }
 
-
         return view('add_recipe', [
             'aUnit' => $aUnit,
             'oRecipe' => $oRecipe,
             'aProduct' => $aProduct,
+            'aUnitSelect' => $aUnitSelect,
+            'oProduct' => $oProduct
         ]);
 
     }
@@ -196,7 +197,9 @@ class Recipe extends Controller {
 
     /**
      * Update a recipe
+     * @param Request $request
      * @return void
+     * @throws \Exception
      */
     public function updateRecipePost(request $request) {
 
@@ -213,39 +216,50 @@ class Recipe extends Controller {
 
         $sError = "";
         $iCptAddedProduct = 0;
+        $iProduct = 0;
 
 
         //modification de la recette
         if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {
-            \App\Misc::setInitTransaction();
 
-            $iRowUpdated = \App\Recipe::updateRecipe($aData);
+            \App\Misc::setInitTransaction();
+            $iRowUpdated = \App\Recipe::updateRecipeName($aData);
             if ($iRowUpdated > 0) {
 
                 // si j'ai modifié, alors je supprime tous mes enregistrements where id recette = pouet
                 $iRowDeleted = \App\RecipeAssoc::deleteProductAssocTable($aData);
 
                 if ($iRowDeleted > 0) {
+
                     echo "Deletion des produits dans la table d'asso OK";
+
                 } else {
                     echo "Deletion des produits dans la table d'asso KO";
                 }
 
             } else {
+
                 echo "Erreur sur l'update du nom de ma recette";
                 // rajouter une valeur kaikpart pour à la fin de la fonction rollback
             }
         }
-
         foreach ($aProductName as $key => $product) {
-            if (!empty($product[$key]) && !empty($aQuantity[$key]) && !empty($aUnit[$key])) {
-                if (Validator::isValidStr($product[$key]) !== false) {
+
+            // si AUCUN des elements de mon produits n'est vide (si TOUT est rempli)
+            if (!empty($product) || !empty($aQuantity[$key]) || !empty($aUnit[$key])) {
+
+
+                if (Validator::isValidStr($product) !== false) {
+
                     if (Validator::isValidInt($aQuantity[$key]) !== false) {
+
                         if (Validator::isValidInt($aUnit[$key]) !== false) {
 
                             $oProduct = \App\Product::getIdProductByName($product);
 
-                            if (count($oProduct) !== 0) {
+                            // si j'ai bien un produit
+                            if (count($oProduct) === 1) {
+
                                 $aDataProduct['id_recipe'] = (int)$id;
                                 $aDataProduct['id_product'] = $oProduct[0]->id;
                                 $aDataProduct['quantity'] = (int)$aQuantity[$key];
@@ -258,7 +272,7 @@ class Recipe extends Controller {
                                     $iCptAddedProduct++;
                                 }
                             } else {
-                                $sError = "Erreur sur la recupération du produit (requette 'getIdProductByName' erreur ou bien produit inconu en base ?";
+                                $sError = "Erreur sur la recupération du produit (requette 'getIdProductByName' erreur ou bien produit inconu en base ou bien doublon sur l'ID du produit?)";
                             }
                         } else {
                             $sError = "L'unité est incorecte.";
@@ -275,18 +289,25 @@ class Recipe extends Controller {
             }
         }
 
-
-        if (count($aProductName) === $iCptAddedProduct) {
-            // tout vas bien j'init la transaction
-            \App\Misc::setCommitTransaction();
-            echo "Ajout de la recette OK";
-        } else {
-            \App\Misc::setRollbackTransaction();
-            echo "Ajout de la recette KO";
+        // compte le veritable nombre de produit modifiés
+        foreach ($aProductName as $product) {
+            if (!empty($product)) {
+                $iProduct++;
+            }
         }
 
-        return redirect()->action('Recipe@recipeList');
+        if ($iProduct === $iCptAddedProduct) {
 
+            // tout vas bien j'init la transaction
+
+            \DB::commit();
+            echo "Ajout de la recette OK";
+        } else {
+            \DB::rollBack();
+            echo "Ajout de la recette KO";
+
+        }
+        return redirect()->action('Recipe@recipeList');
     }
 
 
@@ -295,12 +316,6 @@ class Recipe extends Controller {
         $aUnit = \App\Misc::getUnit();
         return json_encode($aUnit);
     }
-
-
-
-
-
-
 
 
 }

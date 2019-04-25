@@ -2,7 +2,15 @@
 
 @section('content')
 
-    <h1>Ajoutez vos recettes</h1>
+    <?php
+    if (!empty($oRecipe->id)) {
+        $title = "Modification de la recette '" . ucfirst($oRecipe->name) . "'.";
+    } else {
+        $title = 'Création d\'une nouvelle recette';
+    }
+    ?>
+
+    <h1>{{ $title }}</h1>
 
 
     <form method="post">
@@ -22,11 +30,6 @@
     {{ csrf_field() }}
 
     <!-- afficher au moins une ligne si j'ai 0 produits-->
-
-        <?php
-
-        if (empty($oRecipe)) { ?>
-
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -45,7 +48,7 @@
                 <div class="form-group">
                     <select class="form-control" id="unit" name="aUnit[]">
                         <option value="">Choisissez l'unité</option>
-                    @foreach($aUnitSelect as $unit)
+                        @foreach($aUnitSelect as $unit)
                             <option value="{{ $unit['id'] }}">{{ $unit['name'] }}</option>
                         @endforeach
                     </select>
@@ -54,11 +57,10 @@
             <a href="#" class="hidden_delete">X</a>
         </div>
 
-
-        <?php } else {
+        <?php if (!empty($oRecipe)) {
         // sinon pour chaque produit de la recette je recupére tous mes produits
 
-        foreach ($aProduct as $product) { ?>
+        foreach ($aProduct as $key => $product) { ?>
 
         <input type="hidden" value="<?php echo $oRecipe->id; ?>" name="id">
 
@@ -77,21 +79,35 @@
                            name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
-<?php         //dd($aUnit[0]->name); ?>
+
+            <?php// dd($aUnit);
+            /*
+             * afficher la croix de suppression pour supprimer un produit
+             * comparer la valeur de ma table d'association avec ma liste d'unité pour select la bonne unité
+             *
+             * reecrire la fonction de suppression des lignes de produits
+             */
+            ?>
+
 
             <div class="col">
                 <div class="form-group">
                     <select class="form-control" id="unit" name="aUnit[]">
-                        @foreach($aUnit as $unit)
-                            <option value="{{ $unit['id'] }}">{{ $unit['name'] }}</option>
-                        @endforeach
+                        <?php foreach ($aUnit as $unit) { ?>
+                            <option value="{{ $unit['id'] }}"
+                            <?php if($oProduct[$key]->id_unit === $unit['id']) { echo "selected"; } ?>
+
+                            >{{ $unit['name'] }}</option>
+
+                        <?php } ?>
                     </select>
                 </div>
             </div>
-            <a href="#" class="hidden_delete">X</a>
+        <a href="#" class="delete">X</a>
         </div>
 
-    <?php }
+
+        <?php }
 
         } ?>
 
@@ -100,7 +116,7 @@
             <button type="button" id="add_product" class="btn btn-success">+</button>
         </div>
         <div class="form-group">
-            <button type="submit" name="ajouter" class="btn btn-primary">Ajouter</button>
+            <button type="submit" name="ajouter" class="btn btn-primary">Envoyer</button>
         </div>
     </form>
 

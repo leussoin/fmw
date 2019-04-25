@@ -28,7 +28,7 @@ class Recipe extends Model {
 
         $iInsertedRow = DB::table('recipe')->insert(
             ['name' => $sName,
-                'status' => 1,
+                'statuscode' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
                 'modified_at' => date("Y-m-d H:i:s"),
                 'owner' => 1
@@ -36,7 +36,6 @@ class Recipe extends Model {
         );
         return $iInsertedRow;
     }
-
 
     /**
      * Get id recipe with his name
@@ -69,11 +68,11 @@ class Recipe extends Model {
     }
 
     /**
-     * Update recipe
+     * Update recipe name
      * @param $aData
      * @return int
      */
-    public static function updateRecipe($aData) {
+    public static function updateRecipeName($aData) {
 
         $iModifiedRow = DB::update('UPDATE recipe set name = "' . $aData['name'] . '", modified_at = "' . date("Y-m-d H:i:s") . '"   where id = ' . $aData['id']);
         return $iModifiedRow;

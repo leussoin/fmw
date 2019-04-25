@@ -56,12 +56,6 @@ $(document).ready(function () {
         });
 
 
-        /*
-        dans la ligne j'ai un select composée des options de mon appel ajax => amélioration : faire un seul appel
-        je prends la valeur picked de mon premier select et j'attribue la valeur selected sur le nouveau select
-
-         */
-
         // reset des valeurs du premier champ
         $('#name').val("");
         $('#quantity').val("");

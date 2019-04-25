@@ -96,6 +96,7 @@ class Product extends Controller {
         $sName = Request('sName');
         $fPrice = Request('fPrice');
         $iCal = Request('iCal');
+        $aProduct = \App\Product::getProductById($id);
 
         if (!empty($sName) && !empty($fPrice) && !empty($iCal)) {
 
@@ -113,7 +114,7 @@ class Product extends Controller {
                 $error = "le nom du produit est incorect.";
             }
         }
-        return redirect()->action('Product@productList');
+        return view('Product@productList')->with(compact('aProduct'));
     }
 
     /**

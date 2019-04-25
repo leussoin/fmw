@@ -22,7 +22,6 @@ class RecipeAssoc extends Model {
      */
     public static function addProductForRecipeTableAssoc($aProduct) {
 
-
         $idRecipe = $aProduct['id_recipe'];
         $iIdProduct = $aProduct['id_product'];
         $iQuantity = $aProduct['quantity'];
@@ -45,7 +44,6 @@ class RecipeAssoc extends Model {
      * @return false|string
      */
     public static function deleteProductAssocTable($aData) {
-
         $iDeletedRow = RecipeAssoc::where('recipe_id', $aData['id'])->delete();
         return $iDeletedRow;
     }
