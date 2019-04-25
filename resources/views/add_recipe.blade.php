@@ -5,7 +5,6 @@
     <h1>Ajoutez vos recettes</h1>
 
 
-
     <form method="post">
         <!-- nom de la recette -->
         <div class="row">
@@ -46,7 +45,6 @@
                 <div class="form-group">
                     <select class="form-control" id="unit" name="aUnit[]">
                         <option value="">Choisissez l'unité</option>
-
                     @foreach($aUnitSelect as $unit)
                             <option value="{{ $unit['id'] }}">{{ $unit['name'] }}</option>
                         @endforeach

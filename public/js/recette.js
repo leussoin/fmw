@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 
     let wrapper = $("#container_input");
-    let $icpt = 0, sName, iQantity, sUnit;
+    let icpt = 0, sName, iQantity, iIdUnit;
 
     /**
      * Add product row when add or update product to create a recipe
@@ -11,19 +11,21 @@ $(document).ready(function () {
 
         console.log("click");
 
-        $icpt++;
+        icpt++;
         sName = $('#name').val();
         iQantity = $('#quantity').val();
-        sUnit = $("#unit option:selected").text();
+        iIdUnit = $("#unit option:selected").val();
 
+        console.log(sName, iQantity, iIdUnit);
 
+        // ajout de la nouvelle ligne
         $(wrapper).append(`<div class="row">`
-            + `<div class="col"><div class="form-group"><input placeholder="Entrez un produit fait" value="` + sName + `"  type="text" id="name_` + $icpt + `" class="form-control produit" name="aProductName[]"/></div></div>`
-            + `<div class="col"><div class="form-group"><input placeholder="Quantité" value="` + iQantity + `"  type="text" id="quantity_` + $icpt + `" class="form-control" name="aQuantity[]"></div></div>`
-            + `<div class="col"><div class="form-group"><select id="units_` + $icpt + `" class="form-control unit-select" name="aUnit[]"><option>Choisissez l'unité</option></select></div></div>`
+            + `<div class="col"><div class="form-group"><input placeholder="Entrez un produit" value="` + sName + `"  type="text" id="name_` + icpt + `" class="form-control produit" name="aProductName[]"/></div></div>`
+            + `<div class="col"><div class="form-group"><input placeholder="Quantité" value="` + iQantity + `"  type="text" id="quantity_` + icpt + `" class="form-control" name="aQuantity[]"></div></div>`
+            + `<div class="col"><div class="form-group"><select id="units_` + icpt + `" class="form-control unit-select" name="aUnit[]"><option>Choisissez l'unité</option></select></div></div>`
             + `<a href="#" class="delete">X</a></>`);
 
-
+        // recupération des unités
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -31,12 +33,14 @@ $(document).ready(function () {
             url: "/recette/getUnitAjax",
             type: 'get',
             dataType: 'JSON',
+            // construction de mes options sur la valeur choisie
             success: function (data, status, error) {
-                // pour chaque ligne dans mon tableau d'unités
-                // pour chaque valeur j'ajoute une option
                 data.forEach(function (unit) {
-                    $('#units_'+$icpt).append('<option value=' + unit.id + '>' + unit.name + '</option>');
+                    $('#units_' + icpt).append('<option value=' + unit.id + '>' + unit.name + '</option>');
                 });
+                $('#units_'+ icpt).val(iIdUnit);
+
+
             },
             error: function (e) {
                 console.log(e.responseText);
@@ -50,11 +54,19 @@ $(document).ready(function () {
                 $('#description').val(ui.item); // on ajoute la description de l'objet dans un bloc
             }
         });
+
+
         /*
-                $('#name').val("");
-                $('#quantity').val("");
-                $("#unit option:selected").text("Unité");
-                */
+        dans la ligne j'ai un select composée des options de mon appel ajax => amélioration : faire un seul appel
+        je prends la valeur picked de mon premier select et j'attribue la valeur selected sur le nouveau select
+
+         */
+
+        // reset des valeurs du premier champ
+        $('#name').val("");
+        $('#quantity').val("");
+        $("#unit").prop('selectedIndex',0);
+
     });
 
 
