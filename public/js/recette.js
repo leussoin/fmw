@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    CKEDITOR.replace('summary-ckeditor');
 
     let wrapper = $("#container_input");
     let icpt = 0, sName, iQantity, iIdUnit;
@@ -38,7 +39,7 @@ $(document).ready(function () {
                 data.forEach(function (unit) {
                     $('#units_' + icpt).append('<option value=' + unit.id + '>' + unit.name + '</option>');
                 });
-                $('#units_'+ icpt).val(iIdUnit);
+                $('#units_' + icpt).val(iIdUnit);
 
 
             },
@@ -59,7 +60,7 @@ $(document).ready(function () {
         // reset des valeurs du premier champ
         $('#name').val("");
         $('#quantity').val("");
-        $("#unit").prop('selectedIndex',0);
+        $("#unit").prop('selectedIndex', 0);
 
     });
 
@@ -68,6 +69,7 @@ $(document).ready(function () {
      * Delete product row when add or update product to create a recipe
      */
     $(wrapper).on("click", ".delete", function (e) {
+        alert('toto');
         e.preventDefault();
         $(this).parent('div').remove();
     });

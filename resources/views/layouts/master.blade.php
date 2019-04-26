@@ -10,7 +10,7 @@
 
 <link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 
 <!-- Datatables librairies -->
@@ -26,6 +26,9 @@
 
 <link rel="stylesheet" href="{{ URL::asset("css/global.css") }}"/>
 <link rel="stylesheet" href="{{ URL::asset("css/$title.css") }}"/>
+
+<script src="{{ URL::asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+
 
 
 <meta name="csrf-token" content="{{ csrf_token() }}">

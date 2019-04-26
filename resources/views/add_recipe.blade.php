@@ -111,6 +111,10 @@
 
         } ?>
 
+        <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+
+
+
         <div id="container_input"></div>
         <div class="form-group">
             <button type="button" id="add_product" class="btn btn-success">+</button>
@@ -119,5 +123,6 @@
             <button type="submit" name="ajouter" class="btn btn-primary">Envoyer</button>
         </div>
     </form>
+
 
 @endsection
