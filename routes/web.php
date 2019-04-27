@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/menu', 'Welcome@welcome');
+Route::get('/', 'Login@login');
 
 
 // ----------- Produits
@@ -38,8 +39,6 @@ Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 
 
 //Route::resource('/recette', 'Recipe');
-
-
-Route::get('/toto','AdminController@index');
-Route::get('/display/{term}','AdminController@searchData');
+//Route::get('/toto','AdminController@index');
+//Route::get('/display/{term}','AdminController@searchData');
 
