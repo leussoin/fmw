@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    CKEDITOR.replace('summary-ckeditor');
 
     let wrapper = $("#container_input");
     let icpt = 0, sName, iQantity, iIdUnit;
@@ -78,7 +77,6 @@ $(document).ready(function () {
     /**
      * Display availlable products to add or update a recipe
      */
-    // autocomplete
     $(".produit").autocomplete({
         source: "/produit/autocomplete",
         select: function (event, ui) { // lors de la sélection d'une proposition

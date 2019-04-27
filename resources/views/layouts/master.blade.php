@@ -30,7 +30,6 @@
 <script src="{{ URL::asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 
 
-
 <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -75,26 +74,22 @@
                 <?php if (strpos($_SERVER['REQUEST_URI'], "produit")) { ?>
 
                 <li>
-                    <!-- si on à le mot clef menu + list_product -->
+                    <!-- lister produits -->
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit/lister")) {
                         echo "class = 'visit'";
                     } ?> href='/produit/lister'>Lister les produits</a>
                 </li>
 
                 <li>
-                    <!-- si on à le mot clef menu + ajouter produit -->
+                    <!-- ajouter produits -->
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
                         echo "class = 'visit'";
                     } ?> href='/produit/ajouter'>Ajouter un produit</a>
                 </li>
-                <!-- ajouter la condition modifier -->
 
+                <!-- modifier produits -->
                 <?php if (strpos($_SERVER['REQUEST_URI'], "modifier")) { ?>
-
-                <li>
-                    <!-- si on à le mot clef menu + ajouter produit -->
-                    <a class='visit' href=''>Modifier un produit</a>
-                </li>
+                <li><a class='visit' href=''>Modifier un produit</a></li>
                 <?php }
                 } ?>
 
@@ -103,18 +98,25 @@
                 <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) { ?>
 
                 <li>
-                    <!-- si on à le mot clef menu + list_product -->
+                    <!-- lister recette -->
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
                         echo "class = 'visit'";
                     } ?> href='/recette/lister'>Lister les recettes</a>
                 </li>
 
                 <li>
-                    <!-- si on à le mot clef menu + ajouter produit -->
+                    <!-- ajouter recette -->
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
                         echo "class = 'visit'";
                     } ?> href='/recette/ajouter'>Ajouter une recette</a>
                 </li>
+
+                <li>
+                    <!-- modifier recette -->
+                <?php if (strpos($_SERVER['REQUEST_URI'], "modifier")) { ?>
+                <li><a class='visit' href=''>Modifier une recette</a></li>
+                </li>
+                <?php } ?>
 
                 <?php } ?>
 

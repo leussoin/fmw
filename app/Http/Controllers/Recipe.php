@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Lcobucci\JWT\Signer\Ecdsa;
 
 
 class Recipe extends Controller {
@@ -60,6 +59,7 @@ class Recipe extends Controller {
         $aProductName = Request('aProductName');
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
+        $sCookingRecipe = Request('cooking_recipe');
 
 
         $iTotalInsertedProduct = 0;
@@ -67,10 +67,11 @@ class Recipe extends Controller {
         if (count($aProductName) === count($aQuantity) && count($aQuantity) === count($aUnit)) {
             if (Validator::isValidStr($sRecipeName)) {
                 \App\Misc::setInitTransaction();
-                $iRecipeNameInserted = \App\Recipe::setRecipeName($sRecipeName);
+                $iRecipeNameInserted = \App\Recipe::setRecipeData($sRecipeName, $sCookingRecipe);
                 if ($iRecipeNameInserted > 0) {
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
                     $idRecipe = $oRecipe[0]->id;
+                   // dd($aProductName);
                     foreach ($aProductName as $key => $name) {
 
                         if (Validator::isValidStr($name)) {
@@ -92,8 +93,6 @@ class Recipe extends Controller {
 
                                     if ($iInsertedProduct === true) {
                                         $iTotalInsertedProduct++;
-
-
                                     } else {
                                         echo "Une erreur sur l'insertion des produit s'est passée";
                                     }
@@ -120,6 +119,7 @@ class Recipe extends Controller {
 
 
         if (count($aProductName) === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
+
             \App\Misc::setCommitTransaction();
             echo "Ajout de la recette OK";
         } else {
@@ -161,6 +161,7 @@ class Recipe extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function updateRecipeGet($id) {
+
         $aUnitSelect = \App\Misc::getUnit();
         $aProduct = array();
 
@@ -207,12 +208,14 @@ class Recipe extends Controller {
         $aProductName = Request('aProductName');
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
+        $sCookingRecipe = Request('cooking_recipe');
 
 
         // id du nom de la recette
         $id = Request('id');
         $aData['id'] = $id;
         $aData['name'] = htmlspecialchars($sRecipeName);
+        $aData['cooking_recipe'] = htmlspecialchars($sCookingRecipe);
 
         $sError = "";
         $iCptAddedProduct = 0;
@@ -223,7 +226,8 @@ class Recipe extends Controller {
         if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {
 
             \App\Misc::setInitTransaction();
-            $iRowUpdated = \App\Recipe::updateRecipeName($aData);
+
+            $iRowUpdated = \App\Recipe::updateRecipeData($aData);
             if ($iRowUpdated > 0) {
 
                 // si j'ai modifié, alors je supprime tous mes enregistrements where id recette = pouet

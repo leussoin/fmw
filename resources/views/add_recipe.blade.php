@@ -111,7 +111,7 @@
 
         } ?>
 
-        <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+        <textarea class="form-control" id="summary-ckeditor" name="cooking_recipe"><?php if (!empty($oRecipe->cooking_recipe)) {echo $oRecipe->cooking_recipe;} ?></textarea>
 
 
 
@@ -124,5 +124,8 @@
         </div>
     </form>
 
+    <script>
+        CKEDITOR.replace('summary-ckeditor');
+    </script>
 
 @endsection

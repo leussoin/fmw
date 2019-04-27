@@ -19,23 +19,29 @@ class Recipe extends Model {
     }
 
     /**
-     * Set the name of new recipe
+     * Set the name and cooking recipe of new recipe
      * @param $sName
+     * @param $sCookingRecipe
      * @return bool
      */
-    public static function setRecipeName($sName) {
-
+    public static function setRecipeData($sName, $sCookingRecipe) {
 
         $iInsertedRow = DB::table('recipe')->insert(
-            ['name' => $sName,
+            [
+                'name' => $sName,
+                'cooking_recipe' => $sCookingRecipe,
                 'statuscode' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
                 'modified_at' => date("Y-m-d H:i:s"),
                 'owner' => 1
             ]
         );
+
         return $iInsertedRow;
     }
+
+
+
 
     /**
      * Get id recipe with his name
@@ -72,9 +78,13 @@ class Recipe extends Model {
      * @param $aData
      * @return int
      */
-    public static function updateRecipeName($aData) {
+    public static function updateRecipeData($aData) {
 
-        $iModifiedRow = DB::update('UPDATE recipe set name = "' . $aData['name'] . '", modified_at = "' . date("Y-m-d H:i:s") . '"   where id = ' . $aData['id']);
+        $iModifiedRow = DB::update('UPDATE recipe set 
+            name = "' . $aData['name'] . '", 
+            cooking_recipe = "' . $aData['cooking_recipe'] . '", 
+            modified_at = "' . date("Y-m-d H:i:s") . '"   
+            where id = ' . $aData['id']);
         return $iModifiedRow;
     }
 
