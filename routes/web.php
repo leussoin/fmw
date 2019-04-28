@@ -1,7 +1,9 @@
 <?php
 
 Route::get('/menu', 'Welcome@welcome');
-Route::get('/', 'Login@login');
+
+Route::get('/', 'Login@getLogin');
+Route::post('/', 'Login@postLogin');
 
 
 // ----------- Produits

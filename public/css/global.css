@@ -121,3 +121,7 @@ table.table {
 .table td:hover {
     cursor: pointer;
 }
+
+#user-name{
+    color: whitesmoke;
+}

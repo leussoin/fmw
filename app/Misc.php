@@ -41,9 +41,31 @@ class Misc extends Model {
      * @return array $idUnit
      */
     public static function getIdUnitByName($sName) {
-        $idUnit = DB::select("SELECT id from unit where name = '".$sName."' ");
+        $idUnit = DB::select("SELECT id from unit where name = '" . $sName . "' ");
         return $idUnit;
     }
+
+    /**
+     * Get user by name and password input
+     * @param $aData
+     * @return array $user
+     */
+    public static function getUserByNameAndPass($aData) {
+        return DB::select("SELECT * from user where name = '" . $aData['name'] . "' and passwd = '" . $aData['password'] . "' ");
+
+    }
+
+    /**
+     * Check if user is authenticated
+     * @return array $user
+     */
+    public static function isAuth() {
+
+        if (empty(session('oUser'))) {
+            header('Location: /');
+        }
+    }
+
 
     /**
      * This function is called to init query transaction

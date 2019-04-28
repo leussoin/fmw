@@ -1,3 +1,6 @@
+<?php App\Misc::isAuth(); ?>
+
+
 <!doctype html>
 
 <meta charset="utf-8">
@@ -65,8 +68,10 @@
                     } ?> href='/settings'>Paramètres</a>
                 </li>
 
-            </ul>
+                <?php $oUser = session('oUser'); ?>
+                <li><span id="user-name">Bienvenue {{$oUser->name}}</span></li>
 
+            </ul>
 
             <ul class="nav-list">
 
@@ -74,6 +79,7 @@
                 <?php if (strpos($_SERVER['REQUEST_URI'], "produit")) { ?>
 
                 <li>
+
                     <!-- lister produits -->
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit/lister")) {
                         echo "class = 'visit'";
@@ -93,35 +99,35 @@
                 <?php }
                 } ?>
 
-
             <!-- menu des recettes -->
-                <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) { ?>
+            <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) { ?>
 
-                <li>
-                    <!-- lister recette -->
-                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
-                        echo "class = 'visit'";
-                    } ?> href='/recette/lister'>Lister les recettes</a>
-                </li>
+            <li>
+                <!-- lister recette -->
+                <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
+                    echo "class = 'visit'";
+                } ?> href='/recette/lister'>Lister les recettes</a>
+            </li>
 
-                <li>
-                    <!-- ajouter recette -->
-                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
-                        echo "class = 'visit'";
-                    } ?> href='/recette/ajouter'>Ajouter une recette</a>
-                </li>
+            <li>
+                <!-- ajouter recette -->
+                <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
+                    echo "class = 'visit'";
+                } ?> href='/recette/ajouter'>Ajouter une recette</a>
+            </li>
 
-                <li>
-                    <!-- modifier recette -->
-                <?php if (strpos($_SERVER['REQUEST_URI'], "modifier")) { ?>
-                <li><a class='visit' href=''>Modifier une recette</a></li>
-                </li>
-                <?php } ?>
+            <!-- modifier recette -->
+            <?php if (strpos($_SERVER['REQUEST_URI'], "modifier")) { ?>
+            <li><a class='visit' href=''>Modifier une recette</a></li>
 
-                <?php } ?>
+
+            <?php }
+
+            } ?>
 
 
             </ul>
+
         </div>
 
         @yield('content')

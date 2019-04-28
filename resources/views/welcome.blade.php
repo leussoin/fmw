@@ -2,7 +2,6 @@
 
 @section('content')
 
-    Allez bon c'est bon ça tourne.... peut être que demain ça commencera peut être ...
-
+Coucou <?php echo $oUser->name; ?> bien ou bien ?
 
 @endsection

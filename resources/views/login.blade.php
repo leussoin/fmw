@@ -19,19 +19,18 @@
 
     <div class=".col-xs-6 .col-sm-4 centered">
 
-        <form>
+        <form method="POST">
+            {{ csrf_field() }}
+
             <div class="form-group">
                 <label for="Login">Login</label>
-                <input type="text" class="form-control" id="login" aria-describedby="Login" placeholder="Entrez votre login">
+                <input type="text" class="form-control" name="login" id="login" aria-describedby="Login" placeholder="Entrez votre login">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Entre votre mot de passe">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Entre votre mot de passe">
             </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

@@ -7,21 +7,6 @@ use Illuminate\Http\Request;
 
 class Recipe extends Controller {
 
-    /*public $sRecipeName;
-    public $aQuantity;
-    public $aUnit;
-    public $aProductName;
-
-    public function __construct($sRecipeName = null, $aProductName = null, $aQuantity = null, $aUnit = null) {
-
-        $this->aProductName = $aProductName;
-        $this->aQuantity = $aQuantity;
-        $this->aUnit = $aUnit;
-        $this->sRecipeName = $sRecipeName;
-
-    }
-*/
-
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +37,6 @@ class Recipe extends Controller {
     public function addRecipePost() {
 
         $aUnitSelect = \App\Misc::getUnit();
-        // dd($request->aProductName);
 
 
         $sRecipeName = htmlspecialchars(Request('sRecipeName'));
