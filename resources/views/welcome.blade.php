@@ -1,7 +1,8 @@
-@extends('layouts/master', ['title' => 'menu'])
+<?php App\Misc::isAuth(); ?>
 
+@extends('layouts/master', ['title' => "menu"])
 @section('content')
 
-Coucou <?php echo $oUser->name; ?> bien ou bien ?
+    Coucou <?php echo $oUser->name; ?> bien ou bien ?
 
 @endsection

@@ -22,7 +22,6 @@ Route::post('/produit/supprimer/{id}', 'Product@deleteProductAjaxPost');
 
 // -------------- Recettes
 
-
 Route::get('/recette/lister', 'Recipe@recipeList');
 
 Route::get('/recette/ajouter', 'Recipe@addRecipeGet');
@@ -35,7 +34,6 @@ Route::post('/recette/modifier/{id}', 'Recipe@updateRecipePost');
 
 Route::resource('/settings', 'Settings');
 
-
 // -------------- Ajax recette
 Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 
@@ -44,3 +42,7 @@ Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 //Route::get('/toto','AdminController@index');
 //Route::get('/display/{term}','AdminController@searchData');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

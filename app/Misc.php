@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
 use DB;
 
 class Misc extends Model {
@@ -61,7 +62,8 @@ class Misc extends Model {
      */
     public static function isAuth() {
 
-        if (empty(session('oUser'))) {
+        $user = session('oUser');
+        if ($user == null) {
             header('Location: /');
         }
     }

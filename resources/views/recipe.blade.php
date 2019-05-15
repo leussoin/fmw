@@ -1,3 +1,5 @@
+<?php App\Misc::isAuth(); ?>
+
 @extends('layouts/master', ['title' => 'recipe'])
 @section('content')
 

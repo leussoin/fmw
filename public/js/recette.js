@@ -88,10 +88,11 @@ $(document).ready(function () {
     /**
      * Soft delete recipe ajax
      */
-    $(".suppr-recipe").on("click", function () {
+    $(".suppr-recipe").on("click", function (e) {
         let id = $(this).attr("data-id");
         if (confirm("Voulez vous supprimer cette recette ?")) {
-            $(this).closest('tr').remove();
+            $(this).closest('tr').css('background', 'pink');
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -100,7 +101,9 @@ $(document).ready(function () {
                 type: 'post',
                 data: {id: id},
                 dataType: 'JSON',
+
                 success: function (response) {
+
                     alert(response);
                 },
                 error: function (e) {
@@ -108,6 +111,8 @@ $(document).ready(function () {
                 },
             });
         }
+        e.stopPropagation();
+
     });
 
 

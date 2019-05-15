@@ -19,7 +19,9 @@ use Illuminate\Http\Request;
 class Settings extends Controller {
 
     public function index() {
-        return view('settings');
+
+        $oUser = session('oUser');
+        return view('settings', ['oUser' => $oUser]);
     }
 
 

@@ -1,6 +1,3 @@
-<?php App\Misc::isAuth(); ?>
-
-
 <!doctype html>
 
 <meta charset="utf-8">
@@ -37,7 +34,13 @@
 </head>
 <body>
 
+
 <div class="container">
+
+    <?php
+    App\Misc::isAuth();
+    ?>
+
 
     <div class=".col-xs-6 .col-sm-4 centered">
 

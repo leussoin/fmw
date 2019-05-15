@@ -1,6 +1,8 @@
-@extends('layouts/master', ['title' => "menu" ])
+<?php App\Misc::isAuth(); ?>
 
-@section('content____')
+
+@extends('layouts/master', ['title' => "menu" ])
+@section('content')
 
 <h1>C'est le menu teh</h1>
 

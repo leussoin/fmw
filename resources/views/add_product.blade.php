@@ -1,6 +1,11 @@
+<?php App\Misc::isAuth(); ?>
+
 @extends('layouts/master', ['title' => 'produit'])
 
 @section('content')
+
+
+
     <h1>Ajoutez des produits</h1>
 
     <form method="post">

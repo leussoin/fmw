@@ -1,6 +1,9 @@
+<?php App\Misc::isAuth(); ?>
+
 @extends('layouts/master', ['title' => 'recette'])
 
 @section('content')
+
 
     <h1>Lister les recettes</h1>
 
