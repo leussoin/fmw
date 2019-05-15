@@ -15,24 +15,40 @@
 
     <h1>{{ $title }}</h1>
 
+    <?php// dd($oRecipe);?>
 
     <form method="post">
         <!-- nom de la recette -->
         <div class="row">
             <div class="col">
                 <div class="form-group">
+                    <label>Nom de la recette</label>
                     <input type="text" class="form-control" placeholder="Entrez le nom de la recette"
                            value="<?php if (!empty($oRecipe)) {
                                echo $oRecipe->name;
                            }?>" name="sRecipeName"/>
                 </div>
             </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label>Valeur calorifique</label>
+                    <input type="text" class="form-control" placeholder="Valeur calorifique"
+                           value="<?php if (!empty($oRecipe->total_calorie)) {
+                               echo $oRecipe->total_calorie;
+                           }?>" name="iTotalCal"/>
+                </div>
+            </div>
+
+
+
+
             <a href="#" class="hidden_delete">X</a>
         </div>
 
-    {{ csrf_field() }}
-
-    <!-- afficher au moins une ligne si j'ai 0 produits-->
+        {{ csrf_field() }}
+        <span>Liste des produits de la recette</span>
+        <!-- afficher au moins une ligne si j'ai 0 produits-->
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -97,25 +113,30 @@
                 <div class="form-group">
                     <select class="form-control" id="unit" name="aUnit[]">
                         <?php foreach ($aUnit as $unit) { ?>
-                            <option value="{{ $unit['id'] }}"
-                            <?php if($oProduct[$key]->id_unit === $unit['id']) { echo "selected"; } ?>
+                        <option value="{{ $unit['id'] }}"
+                        <?php if ($oProduct[$key]->id_unit === $unit['id']) {
+                            echo "selected";
+                        } ?>
 
-                            >{{ $unit['name'] }}</option>
+                        >{{ $unit['name'] }}</option>
 
                         <?php } ?>
                     </select>
                 </div>
             </div>
-        <a href="#" class="delete">X</a>
+            <a href="#" class="delete">X</a>
         </div>
 
 
         <?php }
 
         } ?>
+        <span>Procédure de la recette</span>
 
-        <textarea class="form-control" id="summary-ckeditor" name="cooking_recipe"><?php if (!empty($oRecipe->cooking_recipe)) {echo $oRecipe->cooking_recipe;} ?></textarea>
-
+        <textarea class="form-control" id="summary-ckeditor"
+                  name="cooking_recipe"><?php if (!empty($oRecipe->cooking_recipe)) {
+                echo $oRecipe->cooking_recipe;
+            } ?></textarea>
 
 
         <div id="container_input"></div>

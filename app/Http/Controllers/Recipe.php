@@ -25,6 +25,10 @@ class Recipe extends Controller {
      */
     public function addRecipeGet() {
         $aUnitSelect = \App\Misc::getUnit();
+
+        //calcul du total calorifique de ma recette
+        //$iTotalCalorie = \App\RecipeAssoc::getRecipeProducts();   => besoin de l'ID de la recette
+
         return view('add_recipe', ['aUnitSelect' => $aUnitSelect]);
     }
 
@@ -55,42 +59,49 @@ class Recipe extends Controller {
                 if ($iRecipeNameInserted > 0) {
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
                     $idRecipe = $oRecipe[0]->id;
-                   // dd($aProductName);
+                    // dd($aProductName);
                     foreach ($aProductName as $key => $name) {
+                        if (!empty($name)) {
 
-                        if (Validator::isValidStr($name)) {
-                            if (Validator::isValidInt($aQuantity[$key])) {
-
-                                $oProduct = \App\Product::getIdProductByName($name);
-
-                                $iIdProduct = $oProduct[0]->id;
-                                if (!empty($iIdProduct)) {
-
-                                    $aParams['id_recipe'] = $idRecipe;
-                                    $aParams['id_product'] = $iIdProduct;
-                                    $aParams['quantity'] = (float)$aQuantity[$key];
-                                    $aParams['id_unit'] = (int)$aUnit[$key];
+                            if (Validator::isValidStr($name)) {
 
 
-                                    // j'ai validé toutes mes informations et j'ai mes ID, plus qu'à les rentrer
-                                    $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aParams);
+                                if (Validator::isValidInt($aQuantity[$key])) {
 
-                                    if ($iInsertedProduct === true) {
-                                        $iTotalInsertedProduct++;
+                                    $oProduct = \App\Product::getIdProductByName($name);
+
+                                    $iIdProduct = $oProduct[0]->id;
+                                    if (!empty($iIdProduct)) {
+
+                                        $aParams['id_recipe'] = $idRecipe;
+                                        $aParams['id_product'] = $iIdProduct;
+                                        $aParams['quantity'] = (float)$aQuantity[$key];
+                                        $aParams['id_unit'] = (int)$aUnit[$key];
+
+
+                                        // j'ai validé toutes mes informations et j'ai mes ID, plus qu'à les rentrer
+                                        $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aParams);
+
+                                        if ($iInsertedProduct === true) {
+                                            $iTotalInsertedProduct++;
+                                        } else {
+                                            echo "Une erreur sur l'insertion des produit s'est produite";
+                                        }
                                     } else {
-                                        echo "Une erreur sur l'insertion des produit s'est passée";
+                                        unset($aParams);
+                                        echo "Un des produit est inconnu.";
                                     }
                                 } else {
-                                    unset($aParams);
-                                    echo "Un des produit est inconnu.";
+                                    echo "Erreur sur la quantité";
                                 }
                             } else {
-                                echo "Erreur sur la quantité";
+                                echo "Erreur sur nom d'un des produits";
                             }
                         } else {
-                            echo "Erreur sur nom d'un des produits";
+                            echo 'Le premier champs est vide';
                         }
                     }
+
                 } else {
                     echo "Une erreur s'est produite sur la requette AddRecipe";
                 }
@@ -148,10 +159,7 @@ class Recipe extends Controller {
 
         $aUnitSelect = \App\Misc::getUnit();
         $aProduct = array();
-
-        // recupére les infos de la recette + jointure sur recipe assoc + jointure => fail :'(
-        //$aDataFullRecipe = \App\Recipe::getRecipeAndProduct($id);
-        //todo : optimiser les objets (un seul objet produit ou bien un objet recette avec un tableau de produit)
+        $iTotalCalorie = 0;
 
 
         //recupération du tableau d'unités
@@ -159,22 +167,29 @@ class Recipe extends Controller {
         // récupération des informations de la recette
         $oRecipe = \App\Recipe::getRecipeByID($id);
         // récupération des product à partir de l'ID de la recete
-        $oProduct = \App\Product::getProductByIdRecipe($id);
+        $listeObjProduit = \App\Product::getProductByIdRecipe($id);
 
         // pour chacun d'entre eux => recupére le nom par l'ID
-        foreach ($oProduct as $key => $product) {
+        foreach ($listeObjProduit as $key => $product) {
             $aProduct[$key] = \App\Product::getProductById($product->product_id);
-
             // je veux la quantité pour chaque produit
-            $aProduct[$key][0]->quantity = $oProduct[$key]->quantity;
+            $aProduct[$key][0]->quantity = $listeObjProduit[$key]->quantity;
+
+            $aInfosProduits =  \App\Product::getProductById($product->product_id);
+            $iCalorie = $aInfosProduits[0]->cal * $product->quantity;
+
+            $iTotalCalorie += $iCalorie;
         }
+
+        $oRecipe->total_calorie = $iTotalCalorie;
+
 
         return view('add_recipe', [
             'aUnit' => $aUnit,
             'oRecipe' => $oRecipe,
             'aProduct' => $aProduct,
             'aUnitSelect' => $aUnitSelect,
-            'oProduct' => $oProduct
+            'oProduct' => $listeObjProduit
         ]);
 
     }
@@ -204,7 +219,6 @@ class Recipe extends Controller {
         $sError = "";
         $iCptAddedProduct = 0;
         $iProduct = 0;
-
 
         //modification de la recette
         if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {

@@ -55,7 +55,6 @@ class RecipeAssoc extends Model {
      * @return false|string
      */
     public static function getRecipeProducts($id) {
-
         $aProduct = DB::table('recipe_assoc')->where('recipe_id', $id)->get();
         return $aProduct;
     }
