@@ -44,10 +44,16 @@ class Product extends Model {
      */
     public static function addProduct($iCal, $iName, $iPrice) {
 
-        $iInsertedRow = DB::insert('insert into product (cal, name, price, status, created_at, modified_at) values(?,?,?,?,?,?)',
-            [$iCal, $iName, $iPrice, 1, date("Y-m-d H:i:s"), date("Y-m-d H:i:s")]);
-        return $iInsertedRow;
-
+        //$iInsertedRow = DB::insert('insert into product (cal, name, price, status, created_at, modified_at) values(?,?,?,?,?,?)', [$iCal, $iName, $iPrice, 1, date("Y-m-d H:i:s"), date("Y-m-d H:i:s")]);
+        $IdInsertedRow = DB::table('product')->insertGetId([
+            'cal' => $iCal,
+            'name' => $iName,
+            'price' => $iPrice,
+            'status' => 1,
+            'created_at' => date("Y-m-d H:i:s"),
+            'modified_at' => date("Y-m-d H:i:s")
+        ]);
+        return $IdInsertedRow;
     }
 
 
@@ -108,7 +114,6 @@ class Product extends Model {
         $aIdProduct = DB::Table('recipe_assoc')->select('*')->where('recipe_id', $id)->get();
         return $aIdProduct;
     }
-
 
 
 }

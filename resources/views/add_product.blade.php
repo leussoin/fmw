@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-
     <h1>Ajoutez des produits</h1>
 
     <form method="post">
@@ -26,6 +24,21 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="aCaloriesProduit[]"
                            placeholder="Entrez sa valeur calorifique">
+                </div>
+            </div>
+
+            <?php // dd($aSeason); ?>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="sel2">Mutiple select list (hold shift to select more than one):</label>
+                    <select name='aSeason[]' multiple class="form-control" id="sel2">
+                        <?php if (!empty($aSeason)) { ?>
+                        @foreach ($aSeason as $season)
+                            <option value='{{$season->id}}'>{{$season->nom}}</option>
+                        @endforeach
+                        <?php } ; ?>
+                    </select>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use DB;
+use Illuminate\Support\Collection;
 
 class Misc extends Model {
     /**
@@ -66,6 +67,26 @@ class Misc extends Model {
         if ($user == null) {
             header('Location: /');
         }
+    }
+
+    /**
+     * Get all seasons
+     * @param $sProduct
+     * @return Collection
+     */
+    public static function getSeasons() {
+        return DB::table('saisonalite')->get();
+    }
+
+
+    /**
+     * Set one season for a product
+     * @param $sProduct
+     * @return Collection
+     */
+    public static function setProductSeason($id_produit, $id_season) {
+
+        return DB::table('assoc_saison')->insert(['id_produit' => $id_produit, 'id_season' => $id_season]);
     }
 
 

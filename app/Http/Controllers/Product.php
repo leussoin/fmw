@@ -5,11 +5,17 @@
  * Date: 23/02/2019
  * Time: 13:49
  */
+
 namespace App\Http\Controllers;
 
 
+use App\Misc;
 use DB;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 /**
  * Handle all that refers to products
@@ -20,15 +26,16 @@ class Product extends Controller {
     /**
      * Display the form to add a product
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function productAddGet() {
-        return view('add_product');
+        $aSeason = Misc::getSeasons();
+        return view('add_product')->with(compact('aSeason'));
     }
 
     /**
      * Display all product into a table
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function productList() {
         $aProduct = \App\Product::getAllProduct();
@@ -38,7 +45,7 @@ class Product extends Controller {
 
     /**
      * add one or many products
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View add product
+     * @return Factory|View add product
      */
     public function productAddPost() {
 
@@ -46,7 +53,13 @@ class Product extends Controller {
 
         $aNomProduit = Request('aNomProduit');
         $aPrixProduit = Request('aPrixProduit');
+        $aSeason = Request('aSeason');
+        $aListSeason = Misc::getSeasons();
+
+        $iLastInsertedIdProduct = 0;
+
         $aCaloriesProduit = Request('aCaloriesProduit');
+
 
         foreach ($aNomProduit as $key => $nom) {
             if (Validator::isValidStr($nom) !== false) {
@@ -66,11 +79,20 @@ class Product extends Controller {
 
         if (empty($error)) {
             foreach ($aNomProduit as $key => $info) {
-
-                $iInsertedRow = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key]);
-                //$aData[] = array("nom" => $aNomProduit[$key], "prix" => $aPrixProduit[$key], "calories" => $aCaloriesProduit[$key]);
+                $iLastInsertedIdProduct = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key]);
             }
+
+            if ($iLastInsertedIdProduct != 0) {
+
+                foreach ($aSeason as $idSaison) {
+                    $mResult = Misc::setProductSeason($iLastInsertedIdProduct, $idSaison);
+                }
+            } else {
+                echo "Une erreur est survenue sur l'insertion du produit";
+            }
+
         }
+
 
         if ($iInsertedRow > 0) {
             $mResult = "Insertion(s) réussie(s).";
@@ -78,7 +100,11 @@ class Product extends Controller {
             $mResult = "Une erreur s'est produite sur la requette.";
         }
 
-        return view('add_product')->with(compact('mResult'));
+        return view('add_product',
+            ['mResult' => $mResult,
+                'aSeason' => $aListSeason
+            ]);
+
     }
 
     public function updateProductGet($id) {
@@ -88,7 +114,7 @@ class Product extends Controller {
 
     /**
      * Update a product
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updateProductPost() {
 
