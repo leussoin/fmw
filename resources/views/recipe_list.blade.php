@@ -16,7 +16,7 @@
     <input type="hidden" id="token" value="{{ csrf_token() }}">
 
 
-    <table class="table">
+    <table class="datatable">
         <thead>
         <tr>
             <th scope="col">#</th>

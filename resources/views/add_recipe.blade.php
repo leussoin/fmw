@@ -58,7 +58,7 @@
             </div>
             <div class="col">
                 <div class="form-group">
-                    <input type="text" value="" id="quantity" class="form-control" name="aQuantity[]"
+                    <input type="text" id="quantity" class="form-control" name="aQuantity[]"
                            placeholder="Quantité">
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 
 
@@ -133,9 +134,27 @@ class Recipe extends Controller {
         $term = Request('term');
         $sProduct = \App\Product::getProductByPartialNameAjax($term);
         return response()->json($sProduct);
-
     }
 
+
+    /**
+     * Handle select like to suggest recipe to users
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getRecipeByPartialName(Request $request) {
+        $term = $request->get('term');
+        $data = DB::select("select id, name from recipe where name like '%$term%'");
+        $aData[] = array();
+        foreach ($data as $k => $a) {
+            foreach ($a as $i) {
+                $aData[$k] = $i;
+            }
+        }
+        return $aData;
+
+
+    }
 
     public function deleteRecipeAjaxPost($id) {
 
@@ -175,7 +194,7 @@ class Recipe extends Controller {
             // je veux la quantité pour chaque produit
             $aProduct[$key][0]->quantity = $listeObjProduit[$key]->quantity;
 
-            $aInfosProduits =  \App\Product::getProductById($product->product_id);
+            $aInfosProduits = \App\Product::getProductById($product->product_id);
             $iCalorie = $aInfosProduits[0]->cal * $product->quantity;
 
             $iTotalCalorie += $iCalorie;
@@ -192,6 +211,15 @@ class Recipe extends Controller {
             'oProduct' => $listeObjProduit
         ]);
 
+    }
+
+    /**
+     * Get the calorific value of a recipe when the user selects it
+     * @param $name
+     * @return void
+     */
+    public function getCalWithRecipeName($platChoisi) {
+        var_dump($platChoisi);
     }
 
 
@@ -314,7 +342,6 @@ class Recipe extends Controller {
 
 
     public function getUnitAjax() {
-
         $aUnit = \App\Misc::getUnit();
         return json_encode($aUnit);
     }

@@ -1,6 +1,13 @@
 <?php
 
 Route::get('/menu', 'Welcome@welcome');
+Route::get('/recette/autocomplete', 'Recipe@getRecipeByPartialName');
+
+
+Route::get('/recette/getCalorie/{platChoisi}', 'Recipe@getCalWithRecipeName');
+
+
+
 
 Route::get('/', 'Login@getLogin');
 Route::post('/', 'Login@postLogin');
@@ -42,7 +49,3 @@ Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 //Route::get('/toto','AdminController@index');
 //Route::get('/display/{term}','AdminController@searchData');
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

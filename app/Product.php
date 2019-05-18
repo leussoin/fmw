@@ -83,7 +83,7 @@ class Product extends Model {
 
 
     /**
-     * Soft delete a product
+     * Get product with partial name
      * @param Request $request
      * @return bool
      */

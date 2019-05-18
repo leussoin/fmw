@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
 
 class Recipe extends Model {
 
@@ -67,7 +69,7 @@ class Recipe extends Model {
     /**
      * Get recipe by ID
      * @param $id
-     * @return Model|\Illuminate\Database\Query\Builder|object|null
+     * @return Model|Builder|object|null
      */
     public static function getRecipeByID($id) {
         return $aRecipe = DB::table('recipe')->where('id', $id)->first();
@@ -91,7 +93,7 @@ class Recipe extends Model {
     /**
      * Get full information about a product
      * @param $aData
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function getRecipeAndProduct($aData) {
 
@@ -119,6 +121,21 @@ class Recipe extends Model {
             ->get();
 
         return $oRecipeProduct;
+
+    }
+
+    /**
+     * Get recipe name for autocomplete
+     * @param $name
+     * @return Collection
+     */
+    public static function getRecipeByPartialName($name) {
+
+        return DB::table('recipe')->select('name')->where('name','LIKE',"%{$name}%")->get();
+        //return json_encode($sRecipeName[0]->name);
+
+            //$data = DB::select("name")->where("name", "LIKE", "%.$name.%")->get();
+            //return response()->json($data);
 
     }
 
