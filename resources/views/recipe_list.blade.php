@@ -27,18 +27,21 @@
         </thead>
         <tbody>
         @foreach($aRecipe as $recipe)
-            <tr <?php if($recipe->statuscode === 0) {echo "class='table-danger' ";} ?>  id="{{$recipe->id}}">
+            <a href="">
+                <tr <?php if ($recipe->statuscode === 0) {
+                    echo "class='table-danger' ";
+                } ?>  id="{{$recipe->id}}">
 
-                <td>{{$recipe->id }}</td>
-                <td>{{$recipe->name }}</td>
-                <td>{{$recipe->owner }}</td>
-                <td>
-                    <a data-id="{{ $recipe->id }}" class="suppr-recipe btn btn-info btn-sm">
-                        <span class="glyphicon glyphicon-trash">X</span>
-                    </a>
-                </td>
+                    <td>{{$recipe->id }}</td>
+                    <td>{{$recipe->name }}</td>
+                    <td>{{$recipe->owner }}</td>
+                    <td>
+                        <a data-id="{{ $recipe->id }}" class="suppr-recipe btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-trash">X</span>
+                        </a>
+                    </td>
 
-            </tr>
+                </tr>
             </a>
 
         @endforeach

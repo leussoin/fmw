@@ -5,8 +5,10 @@
 @section('content')
 
     <h1>Paramétrage pour les utilisateurs</h1>
-    <form method="post">
+    <form id="formulaire" method="post">
         {{ csrf_field() }}
+        <input type='hidden' name="products" id='products'>
+
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -66,13 +68,7 @@
 
 
 
-            <div class="col">
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Liste d'ingrédients</label>
-                    <textarea id="liste-ingredients" class="form-control"></textarea>
-                    </select>
-                </div>
-            </div>
+            <div class="col">Toto<div id="div-textarea"></div></div>
         </div>
 
         <div class="col">
@@ -84,7 +80,7 @@
                     <option value="2">Bon, pas plus de 100 grammes de rapé dans mes pates</option>
                     <option value="3">Et si on réduisait la viande ?</option>
                     <option value="4">C'est l'heure des grandes résolutions</option>
-                    <option value="5">A moi les plaquettes, et pas en chocolat :)</option>
+                    <option value="5">A moi les tablettes, et pas en chocolat :)</option>
 
                     <option value="Confidentiel">Ne préfére pas répondre</option>
 
@@ -97,7 +93,7 @@
 
 
         <div class="form-group">
-            <button type="submit" name="ajouter" class="btn btn-primary">Sauvegarder</button>
+            <button type="submit" id="save" name="save" class="btn btn-primary">Sauvegarder</button>
         </div>
     </form>
 

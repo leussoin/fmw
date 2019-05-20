@@ -1,3 +1,15 @@
-.multiselect-container>li>a>label {
+.multiselect-container > li > a > label {
     padding: 4px 20px 3px 20px;
+}
+
+#div-textarea {
+    width: 500px;
+    height: 250px;
+    background: #6cb2eb;
+}
+
+.box-product {
+    background: pink;
+    display: inline-block;
+    margin: 5px;
 }

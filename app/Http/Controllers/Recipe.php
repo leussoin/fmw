@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Misc;
+use App\RecipeAssoc;
 use DB;
 use Illuminate\Http\Request;
 
@@ -25,7 +27,7 @@ class Recipe extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function addRecipeGet() {
-        $aUnitSelect = \App\Misc::getUnit();
+        $aUnitSelect = Misc::getUnit();
 
         //calcul du total calorifique de ma recette
         //$iTotalCalorie = \App\RecipeAssoc::getRecipeProducts();   => besoin de l'ID de la recette
@@ -41,7 +43,7 @@ class Recipe extends Controller {
      */
     public function addRecipePost() {
 
-        $aUnitSelect = \App\Misc::getUnit();
+        $aUnitSelect = Misc::getUnit();
 
 
         $sRecipeName = htmlspecialchars(Request('sRecipeName'));
@@ -55,7 +57,7 @@ class Recipe extends Controller {
 
         if (count($aProductName) === count($aQuantity) && count($aQuantity) === count($aUnit)) {
             if (Validator::isValidStr($sRecipeName)) {
-                \App\Misc::setInitTransaction();
+                Misc::setInitTransaction();
                 $iRecipeNameInserted = \App\Recipe::setRecipeData($sRecipeName, $sCookingRecipe);
                 if ($iRecipeNameInserted > 0) {
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
@@ -81,7 +83,7 @@ class Recipe extends Controller {
 
 
                                         // j'ai validé toutes mes informations et j'ai mes ID, plus qu'à les rentrer
-                                        $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aParams);
+                                        $iInsertedProduct = RecipeAssoc::addProductForRecipeTableAssoc($aParams);
 
                                         if ($iInsertedProduct === true) {
                                             $iTotalInsertedProduct++;
@@ -116,10 +118,10 @@ class Recipe extends Controller {
 
         if (count($aProductName) === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
 
-            \App\Misc::setCommitTransaction();
+            Misc::setCommitTransaction();
             echo "Ajout de la recette OK";
         } else {
-            \App\Misc::setRollbackTransaction();
+            Misc::setRollbackTransaction();
             echo "Ajout de la recette KO";
         }
 
@@ -176,13 +178,13 @@ class Recipe extends Controller {
      */
     public function updateRecipeGet($id) {
 
-        $aUnitSelect = \App\Misc::getUnit();
+        $aUnitSelect = Misc::getUnit();
         $aProduct = array();
         $iTotalCalorie = 0;
 
 
         //recupération du tableau d'unités
-        $aUnit = \App\Misc::getUnit();
+        $aUnit = Misc::getUnit();
         // récupération des informations de la recette
         $oRecipe = \App\Recipe::getRecipeByID($id);
         // récupération des product à partir de l'ID de la recete
@@ -215,13 +217,45 @@ class Recipe extends Controller {
 
     /**
      * Get the calorific value of a recipe when the user selects it
-     * @param $name
-     * @return void
+     * @param Request $request
+     * @return false|string
      */
-    public function getCalWithRecipeName($platChoisi) {
-        var_dump($platChoisi);
+    public function getCalWithRecipeNameGet(Request $request) {
+        $aCal = array();
+        $input = $request->all();
+        foreach ($input as $key => $oJour) {
+            foreach ($oJour as $repas => $plat) {
+                foreach ($plat as $moment => $valeur) {
+                    $aCal[$moment] = $this::getTotalCalByRecipe($valeur);
+                }
+            }
+        }
+        return $aCal;
     }
 
+
+    /**
+     * Get total calorie from recipe with his name
+     * @param $name
+     * @return float|int
+     */
+    public function getTotalCalByRecipe($name) {
+
+        $oRecipe = \App\Recipe::getRecipeIdByName($name);
+
+        $oRecipeProduct = RecipeAssoc::getRecipeProducts($oRecipe[0]->id);
+        $fTotalCal = 0;
+        foreach ($oRecipeProduct as $key => $element) {
+            $oProduct = \App\Product::getProductById($element->product_id);
+            foreach ($oProduct as $product) {
+                //var_dump($product->cal); // pour chaque produit voici sa valeur calorifique
+                //var_dump($element->quantity);
+                $fCal = $product->cal * $element->quantity;
+                $fTotalCal += $fCal;
+            }
+        }
+        return $fTotalCal;
+    }
 
     /**
      * Update a recipe
@@ -251,13 +285,13 @@ class Recipe extends Controller {
         //modification de la recette
         if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {
 
-            \App\Misc::setInitTransaction();
+            Misc::setInitTransaction();
 
             $iRowUpdated = \App\Recipe::updateRecipeData($aData);
             if ($iRowUpdated > 0) {
 
                 // si j'ai modifié, alors je supprime tous mes enregistrements where id recette = pouet
-                $iRowDeleted = \App\RecipeAssoc::deleteProductAssocTable($aData);
+                $iRowDeleted = RecipeAssoc::deleteProductAssocTable($aData);
 
                 if ($iRowDeleted > 0) {
 
@@ -296,7 +330,7 @@ class Recipe extends Controller {
                                 $aDataProduct['id_unit'] = (int)$aUnit[$key];
                                 // j'ai toutes les informations du produit dont l'ID je peux les add dans la table d'association
 
-                                $iInsertedProduct = \App\RecipeAssoc::addProductForRecipeTableAssoc($aDataProduct);
+                                $iInsertedProduct = RecipeAssoc::addProductForRecipeTableAssoc($aDataProduct);
 
                                 if ($iInsertedProduct === true) {
                                     $iCptAddedProduct++;
@@ -342,7 +376,7 @@ class Recipe extends Controller {
 
 
     public function getUnitAjax() {
-        $aUnit = \App\Misc::getUnit();
+        $aUnit = Misc::getUnit();
         return json_encode($aUnit);
     }
 

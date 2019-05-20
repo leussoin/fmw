@@ -4,10 +4,7 @@ Route::get('/menu', 'Welcome@welcome');
 Route::get('/recette/autocomplete', 'Recipe@getRecipeByPartialName');
 
 
-Route::get('/recette/getCalorie/{platChoisi}', 'Recipe@getCalWithRecipeName');
-
-
-
+Route::get('/recette/getCalorie', 'Recipe@getCalWithRecipeNameGet');
 
 Route::get('/', 'Login@getLogin');
 Route::post('/', 'Login@postLogin');

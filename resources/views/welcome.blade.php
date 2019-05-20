@@ -3,68 +3,79 @@
 @extends('layouts/master', ['title' => "menu"])
 @section('content')
 
-    <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ?</h1>
+    <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ? <button type="button" id="calcul">Calculer les calories</button>
+    </h1>
+
     <table class="table">
         <thead>
         <th></th>
         <th>Midi</th>
         <th>Soir</th>
         <th class="cal">Calories</th>
+
         </thead>
 
         <tr>
             <td>Lundi</td>
-            <td><input type="text" id="i-lm" class="input"><button class="modale" id="lm"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-ls" class="input"><button class="modale" id="ls"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal" type="text"></td>
+            <td><input type="text" id="i-lm" class="input lu"><button class="modale" id="lm"><i class="fas fa-utensils"></i></button></td>
+            <td><input type="text" id="i-ls" class="input lu"><button class="modale" id="ls"><i class="fas fa-utensils"></i></button></td>
+            <td><input id="lu" class="cal" type="text"></td>
         </tr>
 
         <tr>
             <td>Mardi</td>
-            <td><input type="text" id="i-mam" class="input"><button class="modale" id="mam"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-mas" class="input"><button class="modale" id="mas"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal"type="text"></td>
+            <td><input type="text" id="i-mam" class="input ma"><button class="modale" id="mam"><i class="fas fa-utensils"></i></button></td>
+            <td><input type="text" id="i-mas" class="input ma"><button class="modale" id="mas"><i class="fas fa-utensils"></i></button></td>
+            <td><input class="cal ma"type="text"></td>
 
         </tr>
 
         <tr>
             <td>Mercredi</td>
-            <td><input type="text" id="i-mem" class="input" ><button class="modale" id="mem"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-mes" class="input" ><button class="modale" id="mes"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal" type="text"></td>
+            <td><input type="text" id="i-mem" class="input mer" ><button class="modale" ><i class="fas fa-utensils"></i></button></td>
+            <td><input type="text" id="i-mes" class="input mer" ><button class="modale" ><i class="fas fa-utensils"></i></button></td>
+            <td><input class="cal mer" type="text"></td>
 
         </tr>
 
         <tr>
             <td>Jeudi</td>
-            <td><input type="text" id="i-jm" class="input"><button class="modale" id="jm"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-js" class="input"><button class="modale" id="js"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal" type="text"></td>
+            <td><input type="text" id="i-jm" class="input jeu"><button class="modale jeu" ><i class="fas fa-utensils"></i></button></td>
+            <td><input type="text" id="i-js" class="input jeu"><button class="modale jeu" ><i class="fas fa-utensils"></i></button></td>
+            <td><input class="cal jeu" type="text"></td>
 
         </tr>
 
         <tr>
             <td>Vendredi</td>
-            <td><input type="text" id="i-vm" class="input"><button class="modale" id="vm"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-vs" class="input"><button class="modale" id="vs"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal" type="text"></td>
+            <td><input type="text" id="i-vm" class="input ven"><button class="modale" ><i class="fas fa-utensils"></i></button></td>
+            <td><input type="text" id="i-vs" class="input ven"><button class="modale" ><i class="fas fa-utensils"></i></button></td>
+            <td><input class="cal ve" type="text"></td>
 
         </tr>
 
         <tr>
             <td>Samedi</td>
-            <td><input type="text" id="i-sm" class="input"><button class="modale" id="sm"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-ss" class="input"><button class="modale" id="ss"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal" type="text"></td>
+            <td><input type="text" id="i-sm" class="input sam"><button class="modale"><i class="fas fa-utensils"></i></button></td>
+            <td><input type="text" id="i-ss" class="input sam"><button class="modale"><i class="fas fa-utensils"></i></button></td>
+            <td><input class="cal sam" type="text"></td>
 
         </tr>
 
 
         <tr>
             <td>Dimanche</td>
-            <td><input type="text" id="i-dm" class="input"><button class="modale" id="dm"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-ds" class="input"><button class="modale" id="ds"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal" type="text"></td>
+            <td><input type="text" id="i-dm" class="input dim"><button class="modale"><i class="fas fa-utensils"></i></button></td>
+            <td><input type="text" id="i-ds" class="input dim"><button class="modale"><i class="fas fa-utensils"></i></button></td>
+            <td><input class="cal dim" type="text"></td>
+
+        </tr>
+
+        <tr>
+            <td>Total</td>
+            <td></td>
+            <td></td>
+            <td><input id="total" class="cal" type="text"></td>
 
         </tr>
 
