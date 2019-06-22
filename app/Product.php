@@ -111,8 +111,8 @@ class Product extends Model {
      * @return \Illuminate\Support\Collection
      */
     public static function getProductByIdRecipe($id) {
-        $aIdProduct = DB::Table('recipe_assoc')->select('*')->where('recipe_id', $id)->get();
-        return $aIdProduct;
+
+        return DB::Table('recipe_assoc')->select('*')->where('recipe_id', $id)->get();
     }
 
 

@@ -4,7 +4,6 @@
 @extends('layouts/master', ['title' => 'recette'])
 
 @section('content')
-
     <?php
     if (!empty($oRecipe->id)) {
         $title = "Modification de la recette '" . ucfirst($oRecipe->name) . "'.";

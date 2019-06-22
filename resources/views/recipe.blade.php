@@ -2,7 +2,6 @@
 
 @extends('layouts/master', ['title' => 'recipe'])
 @section('content')
-
     <h1>Ici créez une recette</h1>
     <a href='/menu'>Revenir en arriére</a>
     <br>

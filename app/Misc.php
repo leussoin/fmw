@@ -66,6 +66,9 @@ class Misc extends Model {
         $user = session('oUser');
         if ($user == null) {
             header('Location: /');
+            exit;
+            //return redirect()->action('Login@getLogin');
+
         }
     }
 

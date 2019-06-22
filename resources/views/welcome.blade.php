@@ -3,85 +3,159 @@
 @extends('layouts/master', ['title' => "menu"])
 @section('content')
 
-    <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ? <button type="button" id="calcul">Calculer les calories</button>
+    <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ?
+        <button type="button" id="calcul">Calculer les calories</button>
     </h1>
+    <form method="post">
+        {{ csrf_field() }}
 
-    <table class="table">
-        <thead>
-        <th></th>
-        <th>Midi</th>
-        <th>Soir</th>
-        <th class="cal">Calories</th>
-
-        </thead>
-
-        <tr>
-            <td>Lundi</td>
-            <td><input type="text" id="i-lm" class="input lu"><button class="modale" id="lm"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-ls" class="input lu"><button class="modale" id="ls"><i class="fas fa-utensils"></i></button></td>
-            <td><input id="lu" class="cal" type="text"></td>
-        </tr>
-
-        <tr>
-            <td>Mardi</td>
-            <td><input type="text" id="i-mam" class="input ma"><button class="modale" id="mam"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-mas" class="input ma"><button class="modale" id="mas"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal ma"type="text"></td>
-
-        </tr>
-
-        <tr>
-            <td>Mercredi</td>
-            <td><input type="text" id="i-mem" class="input mer" ><button class="modale" ><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-mes" class="input mer" ><button class="modale" ><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal mer" type="text"></td>
-
-        </tr>
-
-        <tr>
-            <td>Jeudi</td>
-            <td><input type="text" id="i-jm" class="input jeu"><button class="modale jeu" ><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-js" class="input jeu"><button class="modale jeu" ><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal jeu" type="text"></td>
-
-        </tr>
-
-        <tr>
-            <td>Vendredi</td>
-            <td><input type="text" id="i-vm" class="input ven"><button class="modale" ><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-vs" class="input ven"><button class="modale" ><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal ve" type="text"></td>
-
-        </tr>
-
-        <tr>
-            <td>Samedi</td>
-            <td><input type="text" id="i-sm" class="input sam"><button class="modale"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-ss" class="input sam"><button class="modale"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal sam" type="text"></td>
-
-        </tr>
+        <button name="button" value="save" type="submit">Sauvegarder la semaine</button>
+        <br>
 
 
-        <tr>
-            <td>Dimanche</td>
-            <td><input type="text" id="i-dm" class="input dim"><button class="modale"><i class="fas fa-utensils"></i></button></td>
-            <td><input type="text" id="i-ds" class="input dim"><button class="modale"><i class="fas fa-utensils"></i></button></td>
-            <td><input class="cal dim" type="text"></td>
-
-        </tr>
-
-        <tr>
-            <td>Total</td>
-            <td></td>
-            <td></td>
-            <td><input id="total" class="cal" type="text"></td>
-
-        </tr>
-
-    </table>
+        <button name="button" value="+" id="+">+</button>
+        <h2>Nous sommes le <?php echo $date;
+            $jourDeLaSemaine = date('N');
+            ?></h2>
+        <button name="button" value="-" id="-">-</button>
 
 
+        <table class="table">
+            <thead>
+            <th></th>
+            <th>Midi</th>
+            <th>Soir</th>
+            <th class="cal">Calories</th>
+
+            </thead>
+
+            <tr <?php if ($jourDeLaSemaine == '1') {
+                echo 'class="current-day";';
+            } ;?>>
+                <td>Lundi {{$aSemaine[1]}}</td>
+                <input type="hidden" name="first-day" value="{{$aSemaine[1]}}">
+                <td>
+                    <input type="text" name="midi[]" value="<?php if (!empty($aPlatUser['midi'][1])) {
+                        echo $aPlatUser['midi'][1];
+                    } ?>" id="i-lm" class="input lu">
+                    
+                </td>
+                <td><input type="text" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][1])) {
+                        echo $aPlatUser['soir'][1];
+                    } ?>" id="i-ls" class="input lu">
+                </td>
+                <td><input id="lu" class="cal" type="text"></td>
+            </tr>
+
+            <tr <?php if ($jourDeLaSemaine == '2') {
+                echo 'class="current-day";';
+            } ;?> >
+                <td>Mardi {{$aSemaine[2]}}</td>
+                <td><input type="text" name="midi[]" value="<?php if (!empty($aPlatUser['midi'][2])) {
+                        echo $aPlatUser['midi'][2];
+                    } ?>" id="i-mam" class="input ma">
+                </td>
+                <td><input type="text" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][2])) {
+                        echo $aPlatUser['soir'][2];
+                    } ?>" id="i-mas" class="input ma">
+                </td>
+                <td><input id="ma" class="cal" type="text"></td>
+
+            </tr>
+
+            <tr <?php if ($jourDeLaSemaine == '3') {
+                echo 'class="current-day";';
+            } ;?> >
+                <td>Mercredi {{$aSemaine[3]}}</td>
+                <td><input type="text" name="midi[]" value="<?php if (!empty($aPlatUser['midi'][3])) {
+                        echo $aPlatUser['midi'][3];
+                    } ?>" id="i-mem" class="input mer">
+                </td>
+                <td><input type="text" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][3])) {
+                        echo $aPlatUser['soir'][3];
+                    } ?>" id="i-mes" class="input mer">
+                </td>
+                <td><input id="mer" class="cal" type="text"></td>
+
+            </tr>
+
+            <tr <?php if ($jourDeLaSemaine == '4') {
+                echo 'class="current-day";';
+            } ;?> >
+                <td>Jeudi {{$aSemaine[4]}}</td>
+                <td><input type="text" name="midi[]" value="<?php if (!empty($aPlatUser['midi'][4])) {
+                        echo $aPlatUser['midi'][4];
+                    } ?>" id="i-jm" class="input jeu">
+                </td>
+                <td><input type="text" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][4])) {
+                        echo $aPlatUser['soir'][4];
+                    } ?>" id="i-js" class="input jeu">
+                </td>
+                <td><input id="jeu" class="cal" type="text"></td>
+
+            </tr>
+
+            <tr <?php if ($jourDeLaSemaine == '5') {
+                echo 'class="current-day";';
+            } ;?> >
+                <td>Vendredi {{$aSemaine[5]}}</td>
+                <td><input type="text" name="midi[]" value="<?php if (!empty($aPlatUser['midi'][5])) {
+                        echo $aPlatUser['midi'][5];
+                    } ?>" id="i-vm" class="input ven">
+                </td>
+                <td><input type="text" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][5])) {
+                        echo $aPlatUser['soir'][5];
+                    } ?>" id="i-vs" class="input ven">
+                </td>
+                <td><input id="ve" class="cal" type="text"></td>
+
+            </tr>
+
+            <tr <?php if ($jourDeLaSemaine == '6') {
+                echo 'class="current-day";';
+            } ;?> >
+                <td>Samedi {{$aSemaine[6]}}</td>
+                <td><input type="text" id="i-sm" value="<?php if (!empty($aPlatUser['midi'][6])) {
+                        echo $aPlatUser['midi'][6];
+                    } ?>" name="midi[]" class="input sam">
+                </td>
+                <td><input type="text" id="i-ss" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][6])) {
+                        echo $aPlatUser['soir'][6];
+                    } ?>" class="input sam">
+                </td>
+                <td><input id="sam" class="cal" type="text"></td>
+
+            </tr>
+
+
+            <tr <?php if ($jourDeLaSemaine == '7') {
+                echo 'class="current-day"';
+            } ;?> >
+                <td>Dimanche {{$aSemaine[7]}}</td>
+                <td><input type="text" id="i-dm" value="<?php if (!empty($aPlatUser['midi'][7])) {
+                        echo $aPlatUser['midi'][7];
+                    } ?>" name="midi[]" class="input dim">
+                </td>
+                <td><input type="text" id="i-ds" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][7])) {
+                        echo $aPlatUser['soir'][7];
+                    } ?>" class="input dim">
+                </td>
+                <td><input id="dim" class="cal" type="text"></td>
+
+            </tr>
+
+            <tr>
+                <td>Total</td>
+                <td></td>
+                <td></td>
+                <td><input id="total" type="text"></td>
+
+            </tr>
+
+        </table>
+
+
+    </form>
 
 
 

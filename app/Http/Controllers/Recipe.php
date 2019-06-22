@@ -65,26 +65,16 @@ class Recipe extends Controller {
                     // dd($aProductName);
                     foreach ($aProductName as $key => $name) {
                         if (!empty($name)) {
-
                             if (Validator::isValidStr($name)) {
-
-
                                 if (Validator::isValidInt($aQuantity[$key])) {
-
                                     $oProduct = \App\Product::getIdProductByName($name);
-
                                     $iIdProduct = $oProduct[0]->id;
                                     if (!empty($iIdProduct)) {
-
                                         $aParams['id_recipe'] = $idRecipe;
                                         $aParams['id_product'] = $iIdProduct;
                                         $aParams['quantity'] = (float)$aQuantity[$key];
                                         $aParams['id_unit'] = (int)$aUnit[$key];
-
-
-                                        // j'ai validé toutes mes informations et j'ai mes ID, plus qu'à les rentrer
                                         $iInsertedProduct = RecipeAssoc::addProductForRecipeTableAssoc($aParams);
-
                                         if ($iInsertedProduct === true) {
                                             $iTotalInsertedProduct++;
                                         } else {
@@ -104,7 +94,6 @@ class Recipe extends Controller {
                             echo 'Le premier champs est vide';
                         }
                     }
-
                 } else {
                     echo "Une erreur s'est produite sur la requette AddRecipe";
                 }
@@ -154,8 +143,6 @@ class Recipe extends Controller {
             }
         }
         return $aData;
-
-
     }
 
     public function deleteRecipeAjaxPost($id) {
@@ -185,8 +172,12 @@ class Recipe extends Controller {
 
         //recupération du tableau d'unités
         $aUnit = Misc::getUnit();
+
+
         // récupération des informations de la recette
         $oRecipe = \App\Recipe::getRecipeByID($id);
+
+
         // récupération des product à partir de l'ID de la recete
         $listeObjProduit = \App\Product::getProductByIdRecipe($id);
 
@@ -271,6 +262,10 @@ class Recipe extends Controller {
         $aUnit = Request('aUnit');
         $sCookingRecipe = Request('cooking_recipe');
 
+        $aProductName = array_filter($aProductName);
+        $aQuantity = array_filter($aQuantity);
+        $aUnit = array_filter($aUnit);
+
 
         // id du nom de la recette
         $id = Request('id');
@@ -309,7 +304,7 @@ class Recipe extends Controller {
         }
         foreach ($aProductName as $key => $product) {
 
-            // si AUCUN des elements de mon produits n'est vide (si TOUT est rempli)
+            // si AUCUN des elements de mon produit n'est vide (si TOUT est rempli)
             if (!empty($product) || !empty($aQuantity[$key]) || !empty($aUnit[$key])) {
 
 
@@ -321,12 +316,13 @@ class Recipe extends Controller {
 
                             $oProduct = \App\Product::getIdProductByName($product);
 
+
                             // si j'ai bien un produit
                             if (count($oProduct) === 1) {
 
                                 $aDataProduct['id_recipe'] = (int)$id;
                                 $aDataProduct['id_product'] = $oProduct[0]->id;
-                                $aDataProduct['quantity'] = (int)$aQuantity[$key];
+                                $aDataProduct['quantity'] = floatval($aQuantity[$key]);
                                 $aDataProduct['id_unit'] = (int)$aUnit[$key];
                                 // j'ai toutes les informations du produit dont l'ID je peux les add dans la table d'association
 
@@ -335,6 +331,7 @@ class Recipe extends Controller {
                                 if ($iInsertedProduct === true) {
                                     $iCptAddedProduct++;
                                 }
+
                             } else {
                                 $sError = "Erreur sur la recupération du produit (requette 'getIdProductByName' erreur ou bien produit inconu en base ou bien doublon sur l'ID du produit?)";
                             }
@@ -348,10 +345,11 @@ class Recipe extends Controller {
                     $sError = "le nom du produit est incorect.";
                 }
                 if (!empty($sError)) {
-                    echo $sError;
+                    dd($sError);
                 }
             }
         }
+
 
         // compte le veritable nombre de produit modifiés
         foreach ($aProductName as $product) {
@@ -364,10 +362,11 @@ class Recipe extends Controller {
 
             // tout vas bien j'init la transaction
 
-            \DB::commit();
+            DB::commit();
             echo "Ajout de la recette OK";
+
         } else {
-            \DB::rollBack();
+            DB::rollBack();
             echo "Ajout de la recette KO";
 
         }

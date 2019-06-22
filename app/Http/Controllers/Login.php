@@ -31,10 +31,12 @@ class Login extends Controller {
     public static function postLogin() {
         $aData['name'] = Request('login');
         $password = Request('password');
-        $long = strlen($aData['name']);
-        $aData['password'] = hash('sha512', $password . "*" . $long);
-        $oUser = Misc::getUserByNameAndPass($aData);
 
+        $aData['password'] = hash('sha512', $password);
+        //dd($aData['password']);
+
+        //dd($aData['password']);
+        $oUser = Misc::getUserByNameAndPass($aData);
         if (!empty($oUser)) {
 
             Session::put('oUser', $oUser[0]);

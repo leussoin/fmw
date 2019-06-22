@@ -9,8 +9,6 @@
 
 
 <script src="{{ URL::asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-
-
 <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>

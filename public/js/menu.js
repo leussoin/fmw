@@ -21,26 +21,8 @@ $(document).ready(function () {
             $('#description').val(ui.item); // on ajoute la description de l'objet dans un bloc
             platChoisi = ui.item.label;
 
-
-            // je souhaite récupérer la quantité de calorie d'un plat
-            /*$.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "/recette/getCalorie",
-                type: 'get',
-                data: {platChoisi: platChoisi},
-                dataType: 'JSON',
-                success: function (response) {
-                    alert(response);
-                },
-                error: function (e) {
-                    console.log(e.responseText);
-                },
-            });*/
         }
     });
-
 
     $("#ajouter").on("click", function () {
 
@@ -51,7 +33,7 @@ $(document).ready(function () {
     });
 
     $("#calcul").on("click", function () {
-        //let tableauRecette = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+
         let tableauRecette = [];
         let platDuJour, jour, repas, calories = 0, totalCalories = 0;
         $(".input").each(function () {
@@ -67,7 +49,7 @@ $(document).ready(function () {
                         $(this).attr("id")[$(this).attr("id").length - 1] == 'm' ? tableauRecette.push({'i-mam': platDuJour}) : tableauRecette.push({'i-mas': platDuJour});
                         break;
                     case 'mer':
-                        $(this).attr("id")[$(this).attr("id").length - 1] == 'm' ? tableauRecette.push({'i-mem': platDuJour}) : tableauRecette.push({'i-mem': platDuJour});
+                        $(this).attr("id")[$(this).attr("id").length - 1] == 'm' ? tableauRecette.push({'i-mem': platDuJour}) : tableauRecette.push({'i-mes': platDuJour});
                         break;
                     case 'jeu':
                         $(this).attr("id")[$(this).attr("id").length - 1] == 'm' ? tableauRecette.push({'i-jm': platDuJour}) : tableauRecette.push({'i-js': platDuJour});
@@ -97,26 +79,71 @@ $(document).ready(function () {
             data: {tableauRecette: tableauRecette},
             dataType: 'JSON',
             success: function (response) {
-                console.log(response);
                 for (let prop in response) {
+                    //console.log(response[prop]);
 
-                    calories += response[prop];
-                    console.log(calories);
-                    if (prop == 'i-lm' || prop == 'i-ls') {
+                    if (prop === 'i-lm' || prop === 'i-ls') {
+                        calories += response[prop];
                         $('#lu').val(calories);
-                    } else if (prop == 'i-mam' || prop == 'i-mas') {
+                        if (prop === 'i-ls') {
+                            calories = 0;
+                        }
+
+                    } else if (prop === 'i-mam' || prop === 'i-mas') {
+                        calories += response[prop];
                         $('#ma').val(calories);
-                    } else if (prop == 'i-mem' || prop == 'i-mes') {
+                        if (prop === 'i-mas') {
+                            calories = 0;
+                        }
+                    } else if (prop === 'i-mem' || prop === 'i-mes') {
+                        calories += response[prop];
                         $('#mer').val(calories);
+                        if (prop === 'i-mes') {
+                            calories = 0;
+                        }
+                    } else if (prop === 'i-jm' || prop === 'i-js') {
+                        calories += response[prop];
+                        $('#jeu').val(calories);
+                        if (prop === 'i-js') {
+                            calories = 0;
+                        }
+                    } else if (prop === 'i-vm' || prop === 'i-vs') {
+                        calories += response[prop];
+                        $('#ve').val(calories);
+                        if (prop === 'i-vs') {
+                            calories = 0;
+                        }
+                    } else if (prop === 'i-sm' || prop === 'i-ss') {
+                        calories += response[prop];
+                        $('#sam').val(calories);
+                        if (prop === 'i-ss') {
+                            calories = 0;
+                        }
+                    } else if (prop === 'i-dm' || prop === 'i-ds') {
+                        calories += response[prop];
+                        $('#dim').val(calories);
+                        if (prop === 'i-ds') {
+                            calories = 0;
+                        }
                     }
+                }
 
-                    totalCalories += calories;
-                    //calories = 0;
+                totalCalories = 0;
+                $(".cal").each(function () {
+                    if ($(this).val().length > 0) {
+                        if ($(this).val() > 2400) {
+                            $(this).css("background", "red");
+                        } else {
+                            $(this).css("background", "green");
+                        }
 
-                    //console.log('ID du jour : '+prop+ '=' + response[prop]);
+                        totalCalories += parseInt($(this).val());
+                    }
+                });
+                if (totalCalories > 16800) {
+                    alert('Attention cette semaine ne corresponds pas a vos attentes');
                 }
                 $('#total').val(totalCalories);
-
 
                 /*var myarr = response.toString().split(",");
                 var total = parseInt(myarr[0]) + parseInt(myarr[1]);
@@ -126,11 +153,36 @@ $(document).ready(function () {
             },
             error: function (e) {
                 //console.log(e.responseText);
+            }
+        });
+
+    });
+
+    $("#-").on("click", function () {
+        console.log('ok');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            url: "/recette/getCalorie",
+            type: 'get',
+            data: {tableauRecette: tableauRecette},
+            dataType: 'JSON',
+            success: function () {
+
+
+            },
+            error: function (e) {
+                //console.log(e.responseText);
+            }
         });
     });
 
+    $(".input").on("click", function () {
+        $(this).select();
+    });
 
-})
-;
+
+});
 

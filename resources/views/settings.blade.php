@@ -1,4 +1,3 @@
-<?php App\Misc::isAuth(); ?>
 
 @extends('layouts/master', ['title' => 'parametres'])
 
@@ -23,13 +22,18 @@
 
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Genre</label>
-                    <select class="form-control" id="select-gender">
+                    <label for="genre">Genre</label>
+                    <select name="genre" class="form-control" id="select-gender">
                         <option value="">Veuillez choisir une valeur</option>
-                        <option value="Femme">Femme</option>
-                        <option value="Homme">Homme</option>
+                        <option <?php if ($oUser->genre === 'Femme') {
+                            echo 'selected';
+                        } ?>
+                                value="Femme">Femme
+                        </option>
+                        <option <?php if ($oUser->genre === 'Homme') {
+                            echo 'selected';
+                        } ?> value="Homme">Homme</option>
                         <option value="Confidentiel">Ne préfére pas répondre</option>
-
                     </select>
                 </div>
             </div>
@@ -40,7 +44,7 @@
                 <div class="form-group">
                     <label for="Login">Mot de passe</label>
                     <input type="password" class="form-control"
-                           id="Entre votre nouveau nom d'utilisateur"
+                           id="password"
                            placeholder="Entrez votre nouveau mot de passe"
                            name="passwd"/>
                 </div>
@@ -50,6 +54,7 @@
                 <div class="form-group">
                     <label for="Login">Validez votre mot de passe</label>
                     <input type="password" class="form-control"
+                           id="confirm-password"
                            placeholder="Confirmez votre mot de passe"
                            name="passwd"/>
                 </div>
@@ -60,36 +65,39 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Quels aliments n'appréciez vous pas ?</label>
+                    <label for="produit">Quels aliments n'appréciez vous pas ?</label>
                     <input type="text" id="produit" class="form-control">
                 </div>
             </div>
 
 
+            <div class="col">Toto
+                <div id="div-textarea">
+                    <?php
+                    if (!empty($aProduct)) {
+                        foreach ($aProduct as $product) {
 
-
-            <div class="col">Toto<div id="div-textarea"></div></div>
+                            echo "<span class='box-product'>" . $product . "<i class='delete far fa-window-close'></i></span>";
+                        }
+                    } ?></div>
+            </div>
         </div>
-
+        <?php //dd($oUser->will); ?>
         <div class="col">
             <div class="form-group">
-                <label for="selectWill">Volonté: ce réglage permet d'adapter les suggestion des plats selon votre volontée d'assainir votre alimentation : 1 = débuttant / 5 = mode hardcore :)</label>
-                <select class="form-control" id="select-will">
+                <label for="selectWill">Volonté: ce réglage permet d'adapter les suggestion des plats selon votre
+                    volontée d'assainir votre alimentation : 1 = débuttant / 5 = mode hardcore :)</label>
+                <select name="will" class="form-control" id="select-will">
                     <option value="">Veuillez choisir une valeur</option>
-                    <option value="1">Le gras c'est la vie</option>
-                    <option value="2">Bon, pas plus de 100 grammes de rapé dans mes pates</option>
-                    <option value="3">Et si on réduisait la viande ?</option>
-                    <option value="4">C'est l'heure des grandes résolutions</option>
-                    <option value="5">A moi les tablettes, et pas en chocolat :)</option>
-
-                    <option value="Confidentiel">Ne préfére pas répondre</option>
+                    <option <?php if ($oUser->will === 1) {echo 'selected=selected';} ?> value="1">Le gras c'est la vie</option>
+                    <option <?php if ($oUser->will === 2) {echo 'selected=selected';} ?> value="2">Bon, pas plus de 100 grammes de rapé dans mes pates</option>
+                    <option <?php if ($oUser->will === 3) {echo 'selected=selected';} ?> value="3">Et si on réduisait la viande ?</option>
+                    <option <?php if ($oUser->will === 4) {echo 'selected=selected';} ?> value="4">C'est l'heure des grandes résolutions</option>
+                    <option <?php if ($oUser->will === 5) {echo 'selected=selected';} ?> value="5">A moi les tablettes, et pas en chocolat !</option>
 
                 </select>
             </div>
         </div>
-
-
-
 
 
         <div class="form-group">

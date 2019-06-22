@@ -13,3 +13,7 @@
 .cal {
     width: 30%;
 }
+
+.current-day {
+    background: orange !important;
+}

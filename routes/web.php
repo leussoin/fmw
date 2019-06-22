@@ -1,6 +1,9 @@
 <?php
 
 Route::get('/menu', 'Welcome@welcome');
+Route::post('/menu', 'Welcome@welcomePost');
+
+
 Route::get('/recette/autocomplete', 'Recipe@getRecipeByPartialName');
 
 
@@ -36,7 +39,8 @@ Route::post('/recette/supprimer/{id}', 'Recipe@deleteRecipeAjaxPost');
 Route::get('/recette/modifier/{id}', 'Recipe@updateRecipeGet');
 Route::post('/recette/modifier/{id}', 'Recipe@updateRecipePost');
 
-Route::resource('/settings', 'Settings');
+Route::get('/parametres', 'Settings@index');
+Route::post('/parametres', 'Settings@store');
 
 // -------------- Ajax recette
 Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');

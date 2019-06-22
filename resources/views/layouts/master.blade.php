@@ -1,4 +1,6 @@
-<!doctype html>
+<?php App\Misc::isAuth(); ?>
+
+        <!doctype html>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +14,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+<!-- Modale -->
 <!-- Modale -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -73,9 +76,9 @@
                 </li>
 
                 <li>
-                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "settings")) {
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "parametres")) {
                         echo "class = 'visit'";
-                    } ?> href='/settings'>Paramètres</a>
+                    } ?> href='/parametres'>Paramètres</a>
                 </li>
 
                 <?php $oUser = session('oUser'); ?>
