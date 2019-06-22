@@ -39,7 +39,22 @@ class Product extends Controller {
      */
     public function productList() {
         $aProduct = \App\Product::getAllProduct();
-        return view('product_list')->with(compact('aProduct'));
+        $aSeasonProduct = array();
+        foreach ($aProduct as $key => $product) {
+            $mResult = Misc::getProductMonth($product->id);
+            if (!empty($mResult)) {
+                if ($key) {
+                    foreach ($mResult as $lemois) {
+                        $aSeasonProduct[$lemois->id_produit][] = $lemois->id_season;
+                    }
+                }
+            }
+        }
+
+        return view('product_list',
+            ['aProduct' => $aProduct,
+                'aSeasonProduct' => $aSeasonProduct
+            ]);
     }
 
 
@@ -50,12 +65,14 @@ class Product extends Controller {
     public function productAddPost() {
 
         $iInsertedRow = 0;
-
+        $sMonths = '';
         $aNomProduit = Request('aNomProduit');
         $aPrixProduit = Request('aPrixProduit');
         $aSeason = Request('aSeason');
+
         $aListSeason = Misc::getSeasons();
 
+        //$input = $request->all();
         $iLastInsertedIdProduct = 0;
 
         $aCaloriesProduit = Request('aCaloriesProduit');
@@ -79,7 +96,8 @@ class Product extends Controller {
 
         if (empty($error)) {
             foreach ($aNomProduit as $key => $info) {
-                $iLastInsertedIdProduct = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key]);
+
+                $iLastInsertedIdProduct = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key], $sMonths);
             }
 
             if ($iLastInsertedIdProduct != 0) {
@@ -90,9 +108,7 @@ class Product extends Controller {
             } else {
                 echo "Une erreur est survenue sur l'insertion du produit";
             }
-
         }
-
 
         if ($iInsertedRow > 0) {
             $mResult = "Insertion(s) réussie(s).";
@@ -107,6 +123,10 @@ class Product extends Controller {
 
     }
 
+    /**
+     * Handle update product view
+     * @return RedirectResponse
+     */
     public function updateProductGet($id) {
         $aProduct = \App\Product::getProductById($id);
         return view('modify_product')->with(compact('aProduct'));
@@ -122,7 +142,9 @@ class Product extends Controller {
         $sName = Request('sName');
         $fPrice = Request('fPrice');
         $iCal = Request('iCal');
-        $aProduct = \App\Product::getProductById($id);
+        //$aProduct = \App\Product::getProductById($id);
+        $aProduct = \App\Product::getAllProduct();
+
 
         if (!empty($sName) && !empty($fPrice) && !empty($iCal)) {
 
@@ -140,7 +162,10 @@ class Product extends Controller {
                 $error = "le nom du produit est incorect.";
             }
         }
-        return view('Product@productList')->with(compact('aProduct'));
+        // TODO : si y'a une erreur l'afficher sinon, rediriger
+        //return view('product_list')->with(compact('aProduct'));
+        return redirect('produit/lister');
+
     }
 
     /**

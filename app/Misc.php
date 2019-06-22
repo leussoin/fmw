@@ -67,20 +67,25 @@ class Misc extends Model {
         if ($user == null) {
             header('Location: /');
             exit;
-            //return redirect()->action('Login@getLogin');
-
         }
     }
 
     /**
      * Get all seasons
-     * @param $sProduct
      * @return Collection
      */
     public static function getSeasons() {
         return DB::table('saisonalite')->get();
     }
 
+    /**
+     * Get months for a product
+     * @param $id
+     * @return Collection
+     */
+    public static function getProductMonth($id) {
+        return DB::select('SELECT * FROM assoc_saison WHERE id_produit = '. $id);
+    }
 
     /**
      * Set one season for a product

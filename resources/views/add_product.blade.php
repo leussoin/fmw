@@ -27,11 +27,9 @@
                 </div>
             </div>
 
-            <?php // dd($aSeason); ?>
-
             <div class="col">
                 <div class="form-group">
-                    <label for="sel2">Mutiple select list (hold shift to select more than one):</label>
+                    <label for="sel2">Selectionnez les mois du produit (maintenez Shift pour en selectionner plusieurs)</label>
                     <select name='aSeason[]' multiple class="form-control" id="sel2">
                         <?php if (!empty($aSeason)) { ?>
                         @foreach ($aSeason as $season)
