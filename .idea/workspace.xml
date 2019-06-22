@@ -9,25 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3ae65922-5512-4ea4-9873-b9e1ab410ac0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Welcome.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Misc.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Misc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/menu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/parametres.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/parametres.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/produit.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/produit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/recette.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/recette.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/add_recipe.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/add_recipe.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/recipe.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/recipe.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/settings.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,46 +25,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/add_recipe.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="48" column="14" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/add_product.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/menu.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="4" lean-forward="true" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="75" column="49" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="49" />
+            <state relative-caret-position="466">
+              <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/js/menu.js">
+        <entry file="file://$PROJECT_DIR$/public/js/recette.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="173" lean-forward="true" selection-start-line="173" selection-end-line="173" />
+            <state relative-caret-position="279">
+              <caret line="70" column="27" lean-forward="true" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -97,10 +53,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>consol</find>
-      <find>getCalWithRecipeName</find>
-      <find>getRecipeBy</find>
-      <find>getCalWithRecipeNamePost</find>
       <find>getCalWithRecipeN</find>
       <find>/recette/getCalorie</find>
       <find>getCalWithRecipeNameGet</find>
@@ -108,7 +60,6 @@
       <find>Lister les recettes</find>
       <find>conso</find>
       <find>aler</find>
-      <find>calcul</find>
       <find>lu</find>
       <find>console</find>
       <find>propa</find>
@@ -126,7 +77,12 @@
       <find>$request</find>
       <find>texta</find>
       <find>ajouter</find>
+      <find>'une nouvelle rece</find>
+      <find>add_product</find>
       <find>inpu</find>
+      <find>calcul</find>
+      <find>wrapper</find>
+      <find>container_input</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -161,14 +117,12 @@
         <option value="$PROJECT_DIR$/app/Misc.php" />
         <option value="$PROJECT_DIR$/resources/views/add_product.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Product.php" />
-        <option value="$PROJECT_DIR$/resources/views/add_recipe.blade.php" />
         <option value="$PROJECT_DIR$/app/Product.php" />
         <option value="$PROJECT_DIR$/app/Recipe.php" />
         <option value="$PROJECT_DIR$/resources/views/product_list.blade.php" />
         <option value="$PROJECT_DIR$/public/js/global.js" />
         <option value="$PROJECT_DIR$/resources/views/layouts/master.blade.php" />
         <option value="$PROJECT_DIR$/public/css/menu.css" />
-        <option value="$PROJECT_DIR$/public/js/recette.js" />
         <option value="$PROJECT_DIR$/resources/views/recipe_list.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" />
@@ -178,6 +132,8 @@
         <option value="$PROJECT_DIR$/resources/views/settings.blade.php" />
         <option value="$PROJECT_DIR$/public/js/parametres.js" />
         <option value="$PROJECT_DIR$/public/js/menu.js" />
+        <option value="$PROJECT_DIR$/resources/views/add_recipe.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/recette.js" />
       </list>
     </option>
   </component>
@@ -586,11 +542,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561236025426</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="select tout le champs dans le menu">
+      <created>1561236584520</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1561236584520</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106593000" />
+    <option name="totallyTimeSpent" value="107100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1294" height="1047" extended-state="0" />
@@ -601,7 +564,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49801272" weight="0.31310943" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4974293" weight="0.39973083" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -634,7 +597,8 @@
     <MESSAGE value="Saisonalité des produits" />
     <MESSAGE value="Selection des recettes utilisateur OK" />
     <MESSAGE value="Merge params =&gt; master" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge params =&gt; master" />
+    <MESSAGE value="select tout le champs dans le menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="select tout le champs dans le menu" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Container/Container.php">
@@ -754,13 +718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/add_recipe.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="54" column="56" selection-start-line="54" selection-start-column="56" selection-end-line="54" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Misc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1554">
@@ -811,13 +768,6 @@
         <state relative-caret-position="-16">
           <caret line="258" lean-forward="true" selection-start-line="258" selection-end-line="258" />
           <caret line="257" column="13" lean-forward="true" selection-start-line="257" selection-start-column="13" selection-end-line="257" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/recette.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="96" column="26" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -948,8 +898,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/menu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="173" lean-forward="true" selection-start-line="173" selection-end-line="173" />
+        <state relative-caret-position="193">
+          <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/add_recipe.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/recette.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="70" column="27" lean-forward="true" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
         </state>
       </provider>
     </entry>

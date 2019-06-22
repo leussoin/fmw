@@ -8,7 +8,7 @@
     if (!empty($oRecipe->id)) {
         $title = "Modification de la recette '" . ucfirst($oRecipe->name) . "'.";
     } else {
-        $title = 'Création d\'une nouvelle recette';
+        $title = "Création d'une nouvelle recette";
     }
     ?>
 
@@ -38,8 +38,6 @@
                            }?>" name="iTotalCal"/>
                 </div>
             </div>
-
-
 
 
             <a href="#" class="hidden_delete">X</a>
@@ -130,6 +128,13 @@
         <?php }
 
         } ?>
+
+        <div id="container_input"></div>
+        <div class="form-group">
+            <button type="button" id="add_product" class="btn btn-success">+</button>
+        </div>
+
+
         <span>Procédure de la recette</span>
 
         <textarea class="form-control" id="summary-ckeditor"
@@ -138,10 +143,6 @@
             } ?></textarea>
 
 
-        <div id="container_input"></div>
-        <div class="form-group">
-            <button type="button" id="add_product" class="btn btn-success">+</button>
-        </div>
         <div class="form-group">
             <button type="submit" name="ajouter" class="btn btn-primary">Envoyer</button>
         </div>

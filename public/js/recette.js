@@ -68,7 +68,6 @@ $(document).ready(function () {
      * Delete product row when add or update product to create a recipe
      */
     $(wrapper).on("click", ".delete", function (e) {
-        alert('toto');
         e.preventDefault();
         $(this).parent('div').remove();
     });
