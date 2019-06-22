@@ -24,15 +24,20 @@ $(document).ready(function () {
             }
         });
         $("#products").val(produitDeteste);
-        document.getElementById("formulaire").submit();
+
+        if ($("#password").val() === $("#confirm-password").val()) {
+            document.getElementById("formulaire").submit();        } else {
+            alert('Les mots de passe ne correspondent pas');
+        }
+
     });
 
-    $('#produit').click( function() {
+    $('#produit').click(function () {
         $(this).select();
     });
 
     $(document).on("click", '.delete', function () {
-        $(this).parent('span').remove();
+        $(this).closest('span').remove();
     });
 
 
