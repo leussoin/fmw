@@ -19,7 +19,7 @@ use Illuminate\View\View;
 
 /**
  * Handle all that refers to products
- * @package App\Http\Controllers
+ * @package App\Http\Controfllers
  */
 class Product extends Controller {
 

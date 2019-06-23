@@ -14,7 +14,7 @@
 
 
         <button name="button" value="+" id="+">+</button>
-        <h2>Nous sommes le <?php echo $date;
+        <h2>Nous sommes le <?php echo date('d-m-Y');
             $jourDeLaSemaine = date('N');
             ?></h2>
         <button name="button" value="-" id="-">-</button>
@@ -29,7 +29,7 @@
 
             </thead>
 
-            <tr <?php if ($jourDeLaSemaine == '1') {
+            <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[0] == date('d-m-Y') ) {
                 echo 'class="current-day";';
             } ;?>>
                 <td>Lundi {{$aSemaine[1]}}</td>
@@ -47,7 +47,7 @@
                 <td><input id="lu" class="cal" type="text"></td>
             </tr>
 
-            <tr <?php if ($jourDeLaSemaine == '2') {
+            <tr <?php if ($jourDeLaSemaine == '2' && $aSemaine[2] == date('d-m-Y')) {
                 echo 'class="current-day";';
             } ;?> >
                 <td>Mardi {{$aSemaine[2]}}</td>
@@ -63,7 +63,7 @@
 
             </tr>
 
-            <tr <?php if ($jourDeLaSemaine == '3') {
+            <tr <?php if ($jourDeLaSemaine == '3' && $aSemaine[3] == date('d-m-Y')) {
                 echo 'class="current-day";';
             } ;?> >
                 <td>Mercredi {{$aSemaine[3]}}</td>
@@ -79,7 +79,7 @@
 
             </tr>
 
-            <tr <?php if ($jourDeLaSemaine == '4') {
+            <tr <?php if ($jourDeLaSemaine == '4' && $aSemaine[4] == date('d-m-Y')) {
                 echo 'class="current-day";';
             } ;?> >
                 <td>Jeudi {{$aSemaine[4]}}</td>
@@ -95,7 +95,7 @@
 
             </tr>
 
-            <tr <?php if ($jourDeLaSemaine == '5') {
+            <tr <?php if ($jourDeLaSemaine == '5' && $aSemaine[5] == date('d-m-Y')) {
                 echo 'class="current-day";';
             } ;?> >
                 <td>Vendredi {{$aSemaine[5]}}</td>
@@ -111,7 +111,7 @@
 
             </tr>
 
-            <tr <?php if ($jourDeLaSemaine == '6') {
+            <tr <?php if ($jourDeLaSemaine == '6' && $aSemaine[6] == date('d-m-Y')) {
                 echo 'class="current-day";';
             } ;?> >
                 <td>Samedi {{$aSemaine[6]}}</td>
@@ -127,8 +127,7 @@
 
             </tr>
 
-
-            <tr <?php if ($jourDeLaSemaine == '7') {
+            <tr <?php if ($jourDeLaSemaine == '7' && $aSemaine[7] == date('d-m-Y')) {
                 echo 'class="current-day"';
             } ;?> >
                 <td>Dimanche {{$aSemaine[7]}}</td>
