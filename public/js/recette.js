@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     let wrapper = $("#container_input");
     let icpt = 0, sName, iQantity, iIdUnit;
 
@@ -67,9 +66,11 @@ $(document).ready(function () {
     /**
      * Delete product row when add or update product to create a recipe
      */
-    $(wrapper).on("click", ".delete", function (e) {
+    $('.delete').on("click", function (e) {
+        console.log('click');
+        $(this).closest('.row').remove();
         e.preventDefault();
-        $(this).parent('div').remove();
+
     });
 
 
