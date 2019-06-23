@@ -128,6 +128,7 @@ class Product extends Controller {
     public function updateProductGet($id) {
         $aProduct = \App\Product::getProductById($id);
         $aMonths = Misc::getSeasons();
+        $aMonthsProduct = array();
 
         $mResult = Misc::getProductMonth($id);
         if (!empty($mResult)) {
@@ -151,6 +152,8 @@ class Product extends Controller {
         $sName = Request('sName');
         $fPrice = Request('fPrice');
         $iCal = Request('iCal');
+        $aSelectedMonth = Request('aSelectedMonth');
+
         //$aProduct = \App\Product::getProductById($id);
         $aProduct = \App\Product::getAllProduct();
 
@@ -171,6 +174,15 @@ class Product extends Controller {
                 $error = "le nom du produit est incorect.";
             }
         }
+
+        //suppression des mois TODO: les retours les retours.........
+        \App\Misc::deleteProductSeason($id);
+
+        foreach ($aSelectedMonth as $month) {
+            // TODO: les retours les retours.........
+            \App\Misc::setProductSeason($id, $month);
+        }
+
         // TODO : si y'a une erreur l'afficher sinon, rediriger
         //return view('product_list')->with(compact('aProduct'));
         return redirect('produit/lister');

@@ -93,10 +93,18 @@ class Misc extends Model {
      * @return Collection
      */
     public static function setProductSeason($id_produit, $id_season) {
-
         return DB::table('assoc_saison')->insert(['id_produit' => $id_produit, 'id_season' => $id_season]);
     }
 
+    /**
+     * Delete all months from product
+     * @param $sProduct
+     * @return Collection
+     */
+    public static function deleteProductSeason($id_produit) {
+        return DB::delete('DELETE from assoc_saison where id_produit = ' . $id_produit . ' ');
+        //return DB::table('assoc_saison')->insert(['id_produit' => $id_produit, 'id_season' => $id_season]);
+    }
 
     /**
      * This function is called to init query transaction

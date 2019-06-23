@@ -36,17 +36,19 @@
                 <div class="form-group">
                     <label for="sel2">Selectionnez les mois du produit (maintenez Shift pour en selectionner
                         plusieurs)</label>
-                    <select name='aSeason[]' multiple class="form-control" id="sel2">
+                    <select name='aSelectedMonth[]' multiple class="form-control" id="sel2">
                         <?php
                         $sSelected = '';
                         if (!empty($aMonths)) {
                             foreach ($aMonths as $month) {
-                                foreach ($aMonthsProduct as $sProductMonth) {
-                                    $sSelected = '';
-                                    foreach ($sProductMonth as $mois) {
-                                        if ($mois == $month->id) {
-                                            $sSelected = 'selected';
-                                            break;
+                                if (!empty($aMonthsProduct)) {
+                                    foreach ($aMonthsProduct as $sProductMonth) {
+                                        $sSelected = '';
+                                        foreach ($sProductMonth as $mois) {
+                                            if ($mois == $month->id) {
+                                                $sSelected = 'selected';
+                                                break;
+                                            }
                                         }
                                     }
                                 }

@@ -14,7 +14,6 @@
 
     <h1>{{ $title }}</h1>
 
-    <?php// dd($oRecipe);?>
 
     <form method="post">
         <!-- nom de la recette -->
@@ -96,14 +95,7 @@
                 </div>
             </div>
 
-            <?php// dd($aUnit);
-            /*
-             * afficher la croix de suppression pour supprimer un produit
-             * comparer la valeur de ma table d'association avec ma liste d'unité pour select la bonne unité
-             *
-             * reecrire la fonction de suppression des lignes de produits
-             */
-            ?>
+
 
 
             <div class="col">
