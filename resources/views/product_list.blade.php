@@ -3,14 +3,6 @@
 @extends('layouts/master', ['title' => 'produit'])
 
 @section('content')
-
-    <?php
-    //dd($aSeasonProduct[45]);
-
-
-    ?>
-
-
     <div class=".col-xs-6 .col-sm-4 centered">
 
         <h1>Lister les produits</h1>
@@ -37,7 +29,7 @@
             </thead>
             <tbody>
 
-            <?php echo date('m');
+            <?php
 
             foreach($aProduct as $produit) { ?>
             <tr id="<?php echo $produit->id;?>">

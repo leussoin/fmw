@@ -19,13 +19,14 @@ use Illuminate\Http\Response;
  * Handle all that refers to users settings
  * @package App\Http\Controllers
  */
-class Settings extends Controller {
+class Settings extends Controller
+{
 
     public function index() {
         Misc::isAuth();
 
         $oUser = session('oUser');
-        $aDislikedProduct = Users::getDislikedProduct($oUser->id);
+        $aDislikedProduct = \App\Users::getPreferences($oUser->id);
 
         $aProduct = array();
         if (!empty($aDislikedProduct)) {
@@ -45,49 +46,95 @@ class Settings extends Controller {
      * @return Response
      */
     public function store(Request $request) {
-        App\Misc::isAuth();
+
+        \App\Misc::isAuth();
 
         $term = $request->all();
         $oUser = session('oUser');
         $aProduct = array_filter(array_unique(explode(';', $term['products'])));
-        $term['passwd'] = hash('sha512', $term['passwd']);
-        // update le paramétrages des utilisateurs
-        $iValidationUpdate = users::setUserParams($term, $oUser->id);
+        if ($term['passwd']) {
+            $term['passwd'] = hash('sha512', $term['passwd']);
+        }
         $oProduct = array();
 
-        //TODO: faire le systéme d'erreur d'affichage de messages d'erreur
-        if ($iValidationUpdate === 1) {
-            echo 'Les modifications seront toutes effectives lors de votre prochaine connexion.';
-        } else {
-            echo 'Erreur sur update settings utilisateur';
-        }
 
-        //suppression de tous les enregistrement where id user
-        //Users::deleteDislikedProduct($oUser->id);
+        $mResult = $this::deleteUserDislikedProduct($oUser->id);
 
-        // je récupére les produits
-        $aDislikedProduct = Users::getDislikedProduct($oUser->id);
-        foreach ($aDislikedProduct as $oItem) {
-            $oProduct = Product::getProductById($oItem->product_disliked);
-        }
-
-        //Je reinsére les datas
         foreach ($aProduct as $product) {
             $cProduct = Product::getIdProductByName($product);
-            //dd($iIdProduct[0]->id);
-            //TODO: checker le retour pour verifier les erreurs
-            //si le couple ID du produit + id utilisateur existe en base je ne l'insére pas
-            $bExistingData = users::getAssocProduct($oUser->id, $cProduct[0]->id);
 
-            if (!$bExistingData) {
-                $mData = Users::setDislikedProduct($oUser->id, $cProduct[0]->id);
-                //if ($mData) {//do something}
-            } else {
-                //var_dump("y'a déjà");
-            }
+            $iValidationUpdate = $this::setUserPreferencesProduct($cProduct[0]->id, $oUser->id);
+        }
+        //Si j'ai un password...
+        if ($term['passwd']) {
+            $iValidationUpdate = $this::setUserPassword($oUser->id, $term['passwd']);
+        }
+
+        if ($term['genre']) {
+            $iValidationUpdate = $this::setUserGenre($oUser->id, $term['genre']);
+            //TODO : verifier le retour
+            session(['genre' => $term['genre']]);
+        }
+
+        if ($term['will']) {
+            dd($oUser);
+            $this::updateUserWill($oUser->id, $term['will']);
+            session(['will' => $term['will']]);
+
         }
 
         return view('settings', ['oUser' => $oUser, 'aProduct' => $aProduct]);
+    }
+
+    /**
+     * Manage users disliked product
+     * TODO : ajouter les produits qu'on aime bien
+     * @param $iIdProduct
+     * @param null $iIdUser
+     * @return bool
+     */
+    public function setUserPreferencesProduct($iIdProduct, $iIdUser = null) {
+        $mResult = \App\Users::addUserData($iIdUser, $iIdProduct);
+        return $mResult;
+    }
+
+
+    /**
+     * Update user password
+     * @param null $iIdUser
+     * @param null $sPassword
+     * @return bool
+     */
+    public function setUserPassword($iIdUser, $sPassword) {
+        return \App\Users::updatePassword($iIdUser, $sPassword);
+    }
+
+    /**
+     * Update user genre
+     * @param null $iIdUser
+     * @param $sgenre
+     * @return bool
+     */
+    public function setUserGenre($iIdUser, $sgenre) {
+        return \App\Users::updateUserGenre($iIdUser, $sgenre);
+    }
+
+    /**
+     * Delete all removed user disliked products
+     * @param null $iIdUser
+     * @return bool
+     */
+    public function deleteUserDislikedProduct($iIdUser) {
+        return \App\Users::deleteUserData($iIdUser);
+    }
+
+    /**
+     * Update user will
+     * @param null $iIdUser
+     * @return bool
+     */
+    public function updateUserWill($iIdUser, $iIdwill) {
+        return \App\Users::updateUserWill($iIdUser, $iIdwill);
     }
 
 

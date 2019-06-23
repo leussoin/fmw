@@ -71,18 +71,17 @@
             </div>
 
 
-            <div class="col">Toto
+            <div class="col">Liste de produits que vous ne souhaitez pas voir dans les suggestions de recettes
                 <div id="div-textarea">
                     <?php
                     if (!empty($aProduct)) {
                         foreach ($aProduct as $product) {
-
                             echo "<span class='box-product'>" . $product . "<i class='delete far fa-window-close'></i></span>";
                         }
                     } ?></div>
             </div>
         </div>
-        <?php //dd($oUser->will); ?>
+
         <div class="col">
             <div class="form-group">
                 <label for="selectWill">Volonté: ce réglage permet d'adapter les suggestion des plats selon votre
