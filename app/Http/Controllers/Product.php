@@ -96,12 +96,10 @@ class Product extends Controller {
 
         if (empty($error)) {
             foreach ($aNomProduit as $key => $info) {
-
                 $iLastInsertedIdProduct = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key], $sMonths);
             }
 
             if ($iLastInsertedIdProduct != 0) {
-
                 foreach ($aSeason as $idSaison) {
                     $mResult = Misc::setProductSeason($iLastInsertedIdProduct, $idSaison);
                 }
@@ -129,7 +127,18 @@ class Product extends Controller {
      */
     public function updateProductGet($id) {
         $aProduct = \App\Product::getProductById($id);
-        return view('modify_product')->with(compact('aProduct'));
+        $aMonths = Misc::getSeasons();
+
+        $mResult = Misc::getProductMonth($id);
+        if (!empty($mResult)) {
+            foreach ($mResult as $lemois) {
+                $aMonthsProduct[$lemois->id_produit][] = $lemois->id_season;
+            }
+        }
+
+        $mResult = Misc::getProductMonth($id);
+
+        return view('modify_product', ['aProduct' => $aProduct, 'aMonths' => $aMonths, 'aMonthsProduct' => $aMonthsProduct]);
     }
 
     /**
