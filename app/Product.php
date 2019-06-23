@@ -84,14 +84,12 @@ class Product extends Model {
 
     /**
      * Get product with partial name
-     * @param Request $request
-     * @return bool
+     * @param $term
+     * @return array
      */
-    public static function getProductByPartialNameAjax(Request $request) {
-        $data = DB::select("nom_produit")
-            ->where("nom_produit", "LIKE", "%{$request->input('query')}%")
-            ->get();
-        return response()->json($data);
+    public static function getProductByPartialNameAjax($term) {
+    return DB::select("select name from product where name like '%$term%'");
+
     }
 
 
@@ -111,7 +109,6 @@ class Product extends Model {
      * @return \Illuminate\Support\Collection
      */
     public static function getProductByIdRecipe($id) {
-
         return DB::Table('recipe_assoc')->select('*')->where('recipe_id', $id)->get();
     }
 

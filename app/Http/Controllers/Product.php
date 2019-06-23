@@ -214,7 +214,8 @@ class Product extends Controller {
     public function getProductByPartialName(Request $request) {
 
         $term = $request->get('term');
-        $data = DB::select("select name from product where name like '%$term%'");
+        $data = \App\Product::getProductByPartialNameAjax($term);
+
         $aData[] = array();
         foreach ($data as $a) {
             foreach ($a as $i) {

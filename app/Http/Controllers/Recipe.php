@@ -121,11 +121,11 @@ class Recipe extends Controller {
      * Handle select like to suggest products to users
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProductByPartialNameAjaxPost() {
+    /*public function getProductByPartialNameAjaxPost() {
         $term = Request('term');
         $sProduct = \App\Product::getProductByPartialNameAjax($term);
         return response()->json($sProduct);
-    }
+    }*/
 
 
     /**
