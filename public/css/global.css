@@ -102,26 +102,30 @@ input:checked + .slider:before {
 }
 
 /* pour les tableaux */
-table.table {
+table.datatable {
     border-collapse: collapse;
 }
-.table tr {
+.datatable tr {
     background-color: #eee;
     border-top: 1px solid #fff;
 }
-.table tr:hover {
+.datatable tr:hover {
     background-color: #ccc;
 }
-.table th {
+.datatable th {
     background-color: #fff;
 }
-.table th, #table td {
+.datatable th, #table td {
     padding: 3px 5px;
 }
-.table td:hover {
+.datatable td:hover {
     cursor: pointer;
 }
 
 #user-name{
     color: whitesmoke;
+}
+
+.datatable td:hover {
+    cursor: pointer;
 }

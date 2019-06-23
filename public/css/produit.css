@@ -14,6 +14,4 @@ table.table {
 .table th, #table td {
     padding: 3px 5px;
 }
-.table td:hover {
-    cursor: pointer;
-}
+
