@@ -51,21 +51,29 @@ class Recipe extends Controller {
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
         $sCookingRecipe = Request('cooking_recipe');
+        $iNullCpt = 0;
 
 
         $iTotalInsertedProduct = 0;
 
         if (count($aProductName) === count($aQuantity) && count($aQuantity) === count($aUnit)) {
+
             if (Validator::isValidStr($sRecipeName)) {
+
                 Misc::setInitTransaction();
                 $iRecipeNameInserted = \App\Recipe::setRecipeData($sRecipeName, $sCookingRecipe);
                 if ($iRecipeNameInserted > 0) {
+
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
+
                     $idRecipe = $oRecipe[0]->id;
-                    // dd($aProductName);
                     foreach ($aProductName as $key => $name) {
-                        if (!empty($name)) {
-                            if (Validator::isValidStr($name)) {
+
+                        //if (!empty($name)) {
+
+
+                            if (Validator::isValidStr($name) && !empty($name) && !is_null($name)) {
+
                                 if (Validator::isValidInt($aQuantity[$key])) {
                                     $oProduct = \App\Product::getIdProductByName($name);
                                     $iIdProduct = $oProduct[0]->id;
@@ -88,11 +96,11 @@ class Recipe extends Controller {
                                     echo "Erreur sur la quantité";
                                 }
                             } else {
-                                echo "Erreur sur nom d'un des produits";
+                                $iNullCpt++;                                //echo "Erreur sur nom d'un des produits";
                             }
-                        } else {
-                            echo 'Le premier champs est vide';
-                        }
+                        //} else {
+                        //    echo 'Le premier champs est vide';
+                        //}
                     }
                 } else {
                     echo "Une erreur s'est produite sur la requette AddRecipe";
@@ -103,9 +111,10 @@ class Recipe extends Controller {
         } else {
             echo "Il manque des informations (un ou plusieurs champs sont vides)";
         }
+        var_dump(count($aProductName)-$iNullCpt);
+        var_dump(($iTotalInsertedProduct));
 
-
-        if (count($aProductName) === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
+        if (count($aProductName)-$iNullCpt === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
 
             Misc::setCommitTransaction();
             echo "Ajout de la recette OK";

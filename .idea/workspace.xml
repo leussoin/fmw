@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/Recipe.php" line="323" />
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/Recipe.php" line="332" />
     <bookmark url="file://$PROJECT_DIR$/app/Product.php" line="55" />
     <bookmark url="file://$PROJECT_DIR$/public/js/parametres.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ae65922-5512-4ea4-9873-b9e1ab410ac0" name="Default Changelist" comment="correction ajax model dans les controleurs">
+    <list default="true" id="3ae65922-5512-4ea4-9873-b9e1ab410ac0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,38 +25,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="216" column="42" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
-              <folding>
-                <element signature="e#744#1385#0#PHP" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="131" column="19" lean-forward="true" selection-start-line="131" selection-start-column="19" selection-end-line="131" selection-end-column="19" />
+            <state relative-caret-position="147">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Product.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1713">
-              <caret line="89" column="63" selection-start-line="89" selection-start-column="63" selection-end-line="89" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Recipe.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="127" column="7" selection-start-line="127" selection-start-column="7" selection-end-line="127" selection-end-column="7" />
+            <state relative-caret-position="384">
+              <caret line="121" column="43" lean-forward="true" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="43" />
               <folding>
                 <element signature="e#40#53#0#PHP" expanded="true" />
               </folding>
@@ -77,9 +54,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Volonté: ce réglage permet d'adapter les suggestion des plats selon votre volontée d'assainir votre alimentation : 1 = débuttant / 5 = mode hardcore :)</find>
-      <find>Liste d'ingrédients</find>
-      <find>Paramé</find>
       <find>setting</find>
       <find>$request</find>
       <find>texta</find>
@@ -107,6 +81,9 @@
       <find>Nous sommes le</find>
       <find>getProductByPartialName</find>
       <find>current-day</find>
+      <find>Modification de la recette</find>
+      <find>Le premier champs est vide</find>
+      <find>delete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,21 +127,21 @@
         <option value="$PROJECT_DIR$/public/js/parametres.js" />
         <option value="$PROJECT_DIR$/public/js/menu.js" />
         <option value="$PROJECT_DIR$/resources/views/add_recipe.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/recette.js" />
         <option value="$PROJECT_DIR$/app/Misc.php" />
         <option value="$PROJECT_DIR$/resources/views/product_list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/add_product.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Product.php" />
         <option value="$PROJECT_DIR$/app/Product.php" />
+        <option value="$PROJECT_DIR$/public/js/recette.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Recipe.php" />
       </list>
     </option>
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" zd_debug_auto_detect_ide_hosts="false" zd_debug_configured_ide_host="192.168.1.103,127.0.0.1, 192.168.1.90" />
+  <component name="PhpDebugGeneral" zd_debug_auto_detect_ide_hosts="false" zd_debug_configured_ide_host="192.168.1.103,127.0.0.1, 192.168.1.90" />
   <component name="PhpServers">
     <servers>
       <server host="192.168.1.90" id="2f31ae74-164c-4b24-a0d3-68ec36d9e833" name="Xdebug Ubuntu" />
@@ -508,7 +485,7 @@
       <workItem from="1558252956337" duration="619000" />
       <workItem from="1558375474583" duration="5797000" />
       <workItem from="1561276197267" duration="558000" />
-      <workItem from="1561321847474" duration="2959000" />
+      <workItem from="1561321847474" duration="7022000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1553813338989</created>
@@ -636,11 +613,25 @@
       <option name="project" value="LOCAL" />
       <updated>1561324883425</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="correction ajax model dans les controleurs">
+      <created>1561325390560</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1561325390560</updated>
+    </task>
+    <task id="LOCAL-00020" summary="correction bug js suppression produit modification produit">
+      <created>1561326107810</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1561326107810</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117511000" />
+    <option name="totallyTimeSpent" value="121574000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1294" height="1047" extended-state="0" />
@@ -689,7 +680,9 @@
     <MESSAGE value="Affichage de la saison (via smiley) liste des produits" />
     <MESSAGE value="Debug affichage mois création produit" />
     <MESSAGE value="affichage du jour en cours uniquement + orange pour le jour en cours" />
-    <option name="LAST_COMMIT_MESSAGE" value="affichage du jour en cours uniquement + orange pour le jour en cours" />
+    <MESSAGE value="correction ajax model dans les controleurs" />
+    <MESSAGE value="correction bug js suppression produit modification produit" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction bug js suppression produit modification produit" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php">
@@ -799,13 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/produit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/web.config">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -869,20 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/add_recipe.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2856">
-          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/recette.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="45" column="44" lean-forward="true" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -983,6 +955,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="89" column="63" selection-start-line="89" selection-start-column="63" selection-end-line="89" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -990,30 +969,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Recipe.php">
+    <entry file="file://$PROJECT_DIR$/public/js/recette.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="127" column="7" selection-start-line="127" selection-start-column="7" selection-end-line="127" selection-end-column="7" />
-          <folding>
-            <element signature="e#40#53#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="546">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/produit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-21">
+          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/add_recipe.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="56" column="69" selection-start-line="56" selection-start-column="69" selection-end-line="56" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="216" column="42" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
-          <folding>
-            <element signature="e#744#1385#0#PHP" />
-          </folding>
+        <state relative-caret-position="147">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Product.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Recipe.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1713">
-          <caret line="89" column="63" selection-start-line="89" selection-start-column="63" selection-end-line="89" selection-end-column="63" />
+        <state relative-caret-position="384">
+          <caret line="121" column="43" lean-forward="true" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="43" />
+          <folding>
+            <element signature="e#40#53#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
