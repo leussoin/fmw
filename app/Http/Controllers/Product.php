@@ -29,8 +29,8 @@ class Product extends Controller {
      * @return Response
      */
     public function productAddGet() {
-        $aSeason = Misc::getSeasons();
-        return view('add_product')->with(compact('aSeason'));
+        $aMonths = Misc::getSeasons();
+        return view('add_product')->with(compact('aMonths'));
     }
 
     /**

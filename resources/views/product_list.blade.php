@@ -40,13 +40,9 @@
                 <td><?php echo $produit->price;?></td>
                 <td><?php
                     if (!empty($aSeasonProduct[$produit->id])) {
-
                         foreach ($aSeasonProduct[$produit->id] as $month) {
                             if ($month == date('m')) {
                                 echo ":)";
-                                break;
-                            } else {
-                                echo ":(";
                                 break;
                             }
                         }
@@ -56,7 +52,6 @@
                     // pour chaque mois
                     // si le mois en cours = un des mois de la liste :) sinon :(
                     ?></td>
-                <td>{{ $produit->price }}</td>
                 <td>
                     <a data-id="{{ $produit->id }}" class="suppr-produit btn btn-info btn-sm">
                         <span class="glyphicon glyphicon-trash"></span> X
