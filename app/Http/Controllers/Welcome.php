@@ -15,15 +15,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Session;
 
-class welcome extends Controller {
+class welcome extends Controller
+{
 
     /**
      * Manage get welcome page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
-    public function welcome() {
+    public function welcome()
+    {
         Misc::isAuth();
+        Misc::fmwLogSystem('youhou !'.rand());
+
+        echo "Chemin: " . getcwd() . "<br>\n";
+
+
 
         $oUser = session('oUser');
 
@@ -57,7 +64,8 @@ class welcome extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
-    public function welcomePost(Request $request) {
+    public function welcomePost(Request $request)
+    {
 
         Misc::isAuth();
         $input = $request->all();
@@ -103,7 +111,8 @@ class welcome extends Controller {
      * @param $sDate
      * @return false|string
      */
-    public function getFirstMonday($sDate) {
+    public function getFirstMonday($sDate)
+    {
         return date('d-m-Y', strtotime('last monday', strtotime($sDate)));
     }
 
@@ -113,7 +122,8 @@ class welcome extends Controller {
      * @param $sDate
      * @return mixed
      */
-    public function getWeeklyRecipe($oUser, $sDate) {
+    public function getWeeklyRecipe($oUser, $sDate)
+    {
         $aPlatUser = array();
         $aRepasMidi = array();
         $aRepasSoir = array();
@@ -161,7 +171,8 @@ class welcome extends Controller {
      * @return array
      * @throws \Exception
      */
-    public function getDaysOfWeek($sDate) {
+    public function getDaysOfWeek($sDate)
+    {
 
         $sFirstDay = date('Y-m-d', strtotime('last monday', strtotime($sDate)));
         $oFirstDay = new \DateTime($sFirstDay);
@@ -185,7 +196,8 @@ class welcome extends Controller {
      * @param $aInput
      * @return array
      */
-    public function checkRecipeAndGetIdByName($aInput) {
+    public function checkRecipeAndGetIdByName($aInput)
+    {
         $aIdRecipe = array();
         $iCpt = 0;
         foreach ($aInput as $aMidiOuSoir) {
@@ -220,8 +232,9 @@ class welcome extends Controller {
      * @param $oUser
      * @return bool|string
      */
-    public function addMenu($aMenuSemaine, $sLundi, $bIsMidi, $oUser) {
-       // dd($aMenuSemaine);
+    public function addMenu($aMenuSemaine, $sLundi, $bIsMidi, $oUser)
+    {
+        // dd($aMenuSemaine);
         //TODO: gerer les deux semaines en cas d'erreur d'insertion sur une data en particulier
         $iCpt = 0;
         $mResult = '';
