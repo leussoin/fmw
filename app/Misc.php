@@ -107,6 +107,25 @@ class Misc extends Model {
     }
 
     /**
+     * Log de l'application
+     * @param $sMessage
+     * @return int
+     */
+    public static function fmwLogSystem($sMessage) {
+
+        $log  = $sMessage.PHP_EOL;
+        file_put_contents('../fmw_log/'.date("d-m-Y").'.log', $log, FILE_APPEND);
+
+        //TODO: voir le retour pour loguer l
+        //$my_file = '../fmw_log/file.txt';
+        //$handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file); //implicitly creates file
+        //$handle = fopen('C:\wamp64\www\fmw\fmw_log\\'.date('d-m-Y').'.txt', 'r+');
+        //fwrite($handle, $sMessage);
+
+    }
+
+
+    /**
      * This function is called to init query transaction
      */
     public static function setInitTransaction() {
