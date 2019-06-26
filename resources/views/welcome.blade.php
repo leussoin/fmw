@@ -29,7 +29,7 @@
 
             </thead>
 
-            <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[0] == date('d-m-Y') ) {
+            <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[1] == date('d-m-Y') ) {
                 echo 'class="current-day";';
             } ;?>>
                 <td>Lundi {{$aSemaine[1]}}</td>

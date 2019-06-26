@@ -77,10 +77,8 @@ class Settings extends Controller
         }
 
         if ($term['will']) {
-            dd($oUser);
             $this::updateUserWill($oUser->id, $term['will']);
             session(['will' => $term['will']]);
-
         }
 
         return view('settings', ['oUser' => $oUser, 'aProduct' => $aProduct]);
