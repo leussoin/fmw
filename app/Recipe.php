@@ -43,8 +43,6 @@ class Recipe extends Model {
     }
 
 
-
-
     /**
      * Get id recipe with his name
      * @param $sName
@@ -131,12 +129,21 @@ class Recipe extends Model {
      */
     public static function getRecipeByPartialName($name) {
 
-        return DB::table('recipe')->select('name')->where('name','LIKE',"%{$name}%")->get();
+        return DB::table('recipe')->select('name')->where('name', 'LIKE', "%{$name}%")->get();
         //return json_encode($sRecipeName[0]->name);
 
-            //$data = DB::select("name")->where("name", "LIKE", "%.$name.%")->get();
-            //return response()->json($data);
+        //$data = DB::select("name")->where("name", "LIKE", "%.$name.%")->get();
+        //return response()->json($data);
 
+    }
+
+    /**
+     * Get all recipe who contains one or secveral ID product
+     * @param $sQuery
+     * @return array
+     */
+    public static function getRecipeByProductId($sQuery) {
+        return DB::select($sQuery);
     }
 
 

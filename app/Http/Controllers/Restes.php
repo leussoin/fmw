@@ -21,16 +21,14 @@ use Illuminate\View\View;
  * Handle all that refers to products
  * @package App\Http\Controfllers
  */
-class Restes extends Controller
-{
+class Restes extends Controller {
 
     /**
      * Get 'restes' view
      *
      * @return Response
      */
-    public function welcomeGet()
-    {
+    public function welcomeGet() {
         return view('restes');
     }
 
@@ -40,51 +38,46 @@ class Restes extends Controller
      * @param Request $request
      * @return Response
      */
-    public function welcomePost(Request $request)
-    {
+    public function welcomePost(Request $request) {
         $sInput = $request->all();
-        $bError = false;
         $aNameRecipeList = array();
-        $aProduct = explode(",", $sInput['products']);
+        $aProduct = explode(";", $sInput['products']);
 
-        // supprimer quand j'aaurai remplacé par la div
+
+        $sQuery = 'SELECT * from recipe_assoc where product_id in (';
+
         foreach ($aProduct as $sProduct) {
-            if (Validator::isValidStr($sProduct) == false) {
-                echo "Il y à des caractéres spéciaux";
-                $bError = true;
+
+            $iIdproduct = \App\Product::getIdProductByName($sProduct);
+
+            if (!empty($iIdproduct[0]->id)) {
+                $sQuery .= $iIdproduct[0]->id . ',';
             }
         }
+        $sQuery = rtrim($sQuery, ',');
+        $sQuery .= ')';
 
-        // supprimer la condition quand j'aurai remplacé par la div
-        if ($bError == false) {
-            $sQuery = 'SELECT * from recipe_assoc where product_id in (';
-
-            foreach ($aProduct as $sProduct) {
-                $iIdproduct = \App\Product::getIdProductByName($sProduct);
-                if ($iIdproduct) {
-                    $sQuery .= $iIdproduct[0]->id . ',';
-                }
-            }
-            $sQuery = rtrim($sQuery,',');
-            $sQuery .= ')';
-
+        // 49 = le nombre de de caractéres requete vide
+        if (strlen($sQuery) > 49) {
             $aListIdRecipe = \App\Recipe::getRecipeByProductId($sQuery);
         }
 
-        if ($aListIdRecipe) {
+        if (!empty($aListIdRecipe)) {
+
             foreach ($aListIdRecipe as $iIdRecipe) {
                 $aListRecipe[] = \App\Recipe::getRecipeByID($iIdRecipe->recipe_id);
             }
+
+
+            foreach ($aListRecipe as $oRecipe) {
+
+                $aNameRecipeList[$oRecipe->id] = $oRecipe->name;
+            }
+
+            var_dump($aNameRecipeList);
         }
 
-        foreach ($aListRecipe as $oRecipe) {
-            $aNameRecipeList[$oRecipe->id] = $oRecipe->name;
-        }
-
-        var_dump($aNameRecipeList);
-
-
-        return view('restes', ['aNameRecipeList' => $aNameRecipeList, ]);
+        return view('restes', ['aNameRecipeList' => $aNameRecipeList,]);
     }
 
 

@@ -77,8 +77,8 @@ class Product extends Model {
      * @return bool
      */
     public static function deleteProduct($id) {
-        $iModifiedRow = DB::update('UPDATE product set status = 0, modified_at = "' . date("Y-m-d H:i:s") . '" where id = ' . $id);
-        return $iModifiedRow;
+        return DB::update('UPDATE product set status = 0, modified_at = "' . date("Y-m-d H:i:s") . '" where id = ' . $id);
+
     }
 
 
@@ -99,8 +99,8 @@ class Product extends Model {
      * @return \Illuminate\Support\Collection
      */
     public static function getIdProductByName($sProduct) {
-        $aProduct = DB::table('product')->where('name', "=", $sProduct)->get();
-        return $aProduct;
+        return DB::table('product')->where('name', "=", $sProduct)->get();
+
     }
 
     /**

@@ -10,25 +10,20 @@
         <div class=".col-xs-6 .col-sm-4 centered">
 
             <form method="POST">
+                <input type='hidden' name="products" id='products'>
+
                 {{ csrf_field() }}
-
-                <div class="form-group">
-                    <label for="Login">Entrez des produits, séparés par une virgule (",")</label>
-                    <input type="text" class="form-control" name="products" aria-describedby="Login" placeholder="Entrez votre login">
-                </div>
-
 
 
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="produit">Quels aliments n'appréciez vous pas ?</label>
+                            <label for="produit">Insérez des produits</label>
                             <input type="text" id="produit" class="form-control">
                         </div>
                     </div>
 
-
-                    <div class="col">Liste de produits que vous ne souhaitez pas voir dans les suggestions de recettes
+                    <div class="col">Liste de produits pour tenter de récupérer des recettes !
                         <div id="div-textarea">
                             <?php
                             if (!empty($aProduct)) {
@@ -38,13 +33,6 @@
                             } ?></div>
                     </div>
                 </div>
-
-
-
-
-
-
-
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
