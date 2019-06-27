@@ -26,10 +26,7 @@ class welcome extends Controller
     public function welcome()
     {
         Misc::isAuth();
-        Misc::fmwLogSystem('youhou !'.rand());
-
-        echo "Chemin: " . getcwd() . "<br>\n";
-
+        //Misc::fmwLogSystem();
 
 
         $oUser = session('oUser');

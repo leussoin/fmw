@@ -6,7 +6,8 @@
     <bookmark url="file://$PROJECT_DIR$/public/js/parametres.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ae65922-5512-4ea4-9873-b9e1ab410ac0" name="Default Changelist" comment="">
+    <list default="true" id="3ae65922-5512-4ea4-9873-b9e1ab410ac0" name="Default Changelist" comment="Merge branch 'master' of github.com:leussoin/fmw&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Welcome.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Misc.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Misc.php" afterDir="false" />
     </list>
@@ -25,8 +26,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="52" column="47" lean-forward="true" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
+            <state relative-caret-position="1092">
+              <caret line="52" column="47" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Welcome.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -40,21 +50,26 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Misc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2031">
-              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+            <state relative-caret-position="279">
+              <caret line="114" selection-start-line="114" selection-end-line="114" />
               <folding>
                 <element signature="e#23#62#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fmw_log/26-06-2019.log">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -118,7 +133,6 @@
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/login.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/login.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Welcome.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Login.php" />
         <option value="$PROJECT_DIR$/resources/views/menu.blade.php" />
@@ -142,7 +156,6 @@
         <option value="$PROJECT_DIR$/public/js/parametres.js" />
         <option value="$PROJECT_DIR$/public/js/menu.js" />
         <option value="$PROJECT_DIR$/resources/views/add_recipe.blade.php" />
-        <option value="$PROJECT_DIR$/app/Misc.php" />
         <option value="$PROJECT_DIR$/resources/views/product_list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/add_product.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Product.php" />
@@ -154,6 +167,8 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Settings.php" />
         <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/app/Misc.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Welcome.php" />
       </list>
     </option>
   </component>
@@ -277,6 +292,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="fmw" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Z:\fmw" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="fmw" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Z:\fmw" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="fmw_log" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -357,22 +388,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="fmw" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Z:\fmw" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="fmw" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="Z:\fmw" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -381,16 +396,16 @@
     <property name="jsx.switch.disabled" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Z:\fmw\resources\views" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="Z:\fmw\public\js" />
       <recent name="Z:\fmw\public\css" />
       <recent name="Z:\fmw\app\Http\Controllers" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="Z:\fmw\resources\views" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -455,7 +470,8 @@
       <workItem from="1561276197267" duration="558000" />
       <workItem from="1561321847474" duration="10806000" />
       <workItem from="1561407744176" duration="1907000" />
-      <workItem from="1561566978827" duration="1268000" />
+      <workItem from="1561566978827" duration="2506000" />
+      <workItem from="1561569499106" duration="1958000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1553813338989</created>
@@ -615,13 +631,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128533000" />
+    <option name="totallyTimeSpent" value="131729000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1273" y="0" width="1294" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17747164" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12884927" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -635,8 +651,9 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.12800875" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49801272" visible="true" weight="0.21334793" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5019873" side_tool="true" weight="0.22647703" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49801272" weight="0.309628" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="11" sideWeight="0.5019873" side_tool="true" visible="true" weight="0.22647703" />
+      <window_info anchor="right" id="Key Promoter X" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -668,27 +685,10 @@
     <MESSAGE value="correction bug js suppression produit modification produit" />
     <MESSAGE value="bug insertion premiere ligne vide résolu" />
     <MESSAGE value="bug hover table résolu" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug hover table résolu" />
+    <MESSAGE value="Merge branch 'master' of github.com:leussoin/fmw&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of github.com:leussoin/fmw&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/storage/framework/views/fd5ec9bbb375905c16ac7307c5a8268c1f591b5a.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#33#72#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/storage/framework/sessions/fN7O0fxLiBxZA1C8oV1fwBY48xrPgszfoCwD6eYx" />
     <entry file="file://$PROJECT_DIR$/storage/framework/sessions/bty4iUhUmtvK7EKqDbUmo61EnJxHUJVrx9PDr5xq" />
     <entry file="file://$PROJECT_DIR$/storage/framework/views/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
@@ -977,12 +977,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml~d928e25e85f9697a694a6da80055ea9c7a02bb9b" />
     <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="52" column="47" lean-forward="true" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
+        <state relative-caret-position="1092">
+          <caret line="52" column="47" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fmw_log/26-06-2019.log">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/fmw.iml">
       <provider selected="true" editor-type-id="text-editor" />
@@ -990,17 +994,24 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Misc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2031">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        <state relative-caret-position="279">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
           <folding>
             <element signature="e#23#62#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Welcome.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
         </state>
       </provider>
     </entry>
