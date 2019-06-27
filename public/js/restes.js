@@ -35,7 +35,6 @@ $(document).ready(function () {
         $(this).closest('span').remove();
     });
 
-
 });
 
 

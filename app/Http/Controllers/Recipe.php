@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Misc;
 use App\RecipeAssoc;
+use App\Users;
 use DB;
 use Illuminate\Http\Request;
 
@@ -72,32 +73,32 @@ class Recipe extends Controller {
                         //if (!empty($name)) {
 
 
-                            if (Validator::isValidStr($name) && !empty($name) && !is_null($name)) {
+                        if (Validator::isValidStr($name) && !empty($name) && !is_null($name)) {
 
-                                if (Validator::isValidInt($aQuantity[$key])) {
-                                    $oProduct = \App\Product::getIdProductByName($name);
-                                    $iIdProduct = $oProduct[0]->id;
-                                    if (!empty($iIdProduct)) {
-                                        $aParams['id_recipe'] = $idRecipe;
-                                        $aParams['id_product'] = $iIdProduct;
-                                        $aParams['quantity'] = (float)$aQuantity[$key];
-                                        $aParams['id_unit'] = (int)$aUnit[$key];
-                                        $iInsertedProduct = RecipeAssoc::addProductForRecipeTableAssoc($aParams);
-                                        if ($iInsertedProduct === true) {
-                                            $iTotalInsertedProduct++;
-                                        } else {
-                                            echo "Une erreur sur l'insertion des produit s'est produite";
-                                        }
+                            if (Validator::isValidInt($aQuantity[$key])) {
+                                $oProduct = \App\Product::getIdProductByName($name);
+                                $iIdProduct = $oProduct[0]->id;
+                                if (!empty($iIdProduct)) {
+                                    $aParams['id_recipe'] = $idRecipe;
+                                    $aParams['id_product'] = $iIdProduct;
+                                    $aParams['quantity'] = (float)$aQuantity[$key];
+                                    $aParams['id_unit'] = (int)$aUnit[$key];
+                                    $iInsertedProduct = RecipeAssoc::addProductForRecipeTableAssoc($aParams);
+                                    if ($iInsertedProduct === true) {
+                                        $iTotalInsertedProduct++;
                                     } else {
-                                        unset($aParams);
-                                        echo "Un des produit est inconnu.";
+                                        echo "Une erreur sur l'insertion des produit s'est produite";
                                     }
                                 } else {
-                                    echo "Erreur sur la quantité";
+                                    unset($aParams);
+                                    echo "Un des produit est inconnu.";
                                 }
                             } else {
-                                $iNullCpt++;                                //echo "Erreur sur nom d'un des produits";
+                                echo "Erreur sur la quantité";
                             }
+                        } else {
+                            $iNullCpt++;                                //echo "Erreur sur nom d'un des produits";
+                        }
                         //} else {
                         //    echo 'Le premier champs est vide';
                         //}
@@ -111,10 +112,10 @@ class Recipe extends Controller {
         } else {
             echo "Il manque des informations (un ou plusieurs champs sont vides)";
         }
-        var_dump(count($aProductName)-$iNullCpt);
+        var_dump(count($aProductName) - $iNullCpt);
         var_dump(($iTotalInsertedProduct));
 
-        if (count($aProductName)-$iNullCpt === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
+        if (count($aProductName) - $iNullCpt === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
 
             Misc::setCommitTransaction();
             echo "Ajout de la recette OK";
@@ -140,12 +141,43 @@ class Recipe extends Controller {
     /**
      * Handle select like to suggest recipe to users
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function getRecipeByPartialName(Request $request) {
         $term = $request->get('term');
-        $data = DB::select("select id, name from recipe where name like '%$term%'");
+        $oUser = session('oUser');
+        $aDislikedRecipeList = array();
         $aData[] = array();
+
+        $aDislikedProduct = Users::getPreferences($oUser->id);
+        foreach ($aDislikedProduct as $sProduct) {
+
+            $cRecipe = \App\Recipe::getRecipeByOnceProductId($sProduct->product_disliked);
+            if (!empty($cRecipe)) {
+                foreach ($cRecipe as $iIdRecipe) {
+
+                    $aDislikedRecipeList[] = \App\Recipe::getRecipeByID($iIdRecipe->recipe_id);
+                }
+            }
+        }
+
+        $data = \App\Recipe::getRecipeByPartialName($term);
+        var_dump($data[0]->name);
+        var_dump($aDislikedRecipeList[0]->name);
+
+
+        foreach ($data as $cSuggeredRecipe) {
+            foreach ($aDislikedRecipeList as $cDislikedRecipe) {
+                var_dump($cSuggeredRecipe->name);
+                var_dump($cDislikedRecipe->name);
+
+                //si j'ai un plat que j'aime pas alors je l'ajoute pas
+            }
+        }
+
+
+        dd('');
+
         foreach ($data as $k => $a) {
             foreach ($a as $i) {
                 $aData[$k] = $i;
@@ -382,11 +414,20 @@ class Recipe extends Controller {
         return redirect()->action('Recipe@recipeList');
     }
 
-
+    /**
+     * @return units
+     */
     public function getUnitAjax() {
         $aUnit = Misc::getUnit();
         return json_encode($aUnit);
     }
 
+
+    /**
+     * @return units
+     */
+    public function getDislikedRecipe($iIdUser) {
+        //return \App\Recipe::get
+    }
 
 }

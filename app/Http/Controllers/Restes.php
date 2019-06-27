@@ -68,16 +68,12 @@ class Restes extends Controller {
                 $aListRecipe[] = \App\Recipe::getRecipeByID($iIdRecipe->recipe_id);
             }
 
-
             foreach ($aListRecipe as $oRecipe) {
-
-                $aNameRecipeList[$oRecipe->id] = $oRecipe->name;
+                $aRecipe[$oRecipe->id] = $oRecipe->name;
             }
-
-            var_dump($aNameRecipeList);
         }
 
-        return view('restes', ['aNameRecipeList' => $aNameRecipeList,]);
+        return view('restes', ['aRecipe' => $aRecipe,]);
     }
 
 

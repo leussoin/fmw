@@ -128,13 +128,7 @@ class Recipe extends Model {
      * @return Collection
      */
     public static function getRecipeByPartialName($name) {
-
         return DB::table('recipe')->select('name')->where('name', 'LIKE', "%{$name}%")->get();
-        //return json_encode($sRecipeName[0]->name);
-
-        //$data = DB::select("name")->where("name", "LIKE", "%.$name.%")->get();
-        //return response()->json($data);
-
     }
 
     /**
@@ -144,6 +138,15 @@ class Recipe extends Model {
      */
     public static function getRecipeByProductId($sQuery) {
         return DB::select($sQuery);
+    }
+
+    /**
+     * Get all recipe who contains juste one disliked product
+     * @param $iIdProduct
+     * @return Builder
+     */
+    public static function getRecipeByOnceProductId($iIdProduct) {
+        return DB::table('recipe_assoc')->select('recipe_id')->where('product_id', '=', $iIdProduct)->get();
     }
 
 

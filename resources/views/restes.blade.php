@@ -37,7 +37,40 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+        <input type="hidden" id="token" value="{{ csrf_token() }}">
 
+        <?php if (!empty($aRecipe)) { ?>
+        <table class="datatable">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php //dd($aRecipe); ?>
+            @foreach($aRecipe as $id => $recipe)
+                <a href="">
+                    <tr>
+
+                        <td>{{$id }}</td>
+                        <td>{{$recipe}}</td>
+                        <td>
+                            <a data-id="{{ $id }}" class="suppr-recipe btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-trash">X</span>
+                            </a>
+                        </td>
+
+                    </tr>
+                </a>
+
+            @endforeach
+
+
+            </tbody>
+        </table>
+        <?php } ?>
     </div>
 
 @endsection

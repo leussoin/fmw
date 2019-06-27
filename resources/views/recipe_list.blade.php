@@ -15,7 +15,7 @@
 
     <input type="hidden" id="token" value="{{ csrf_token() }}">
 
-
+    <?php if (!empty($aRecipe)) { ?>
     <table class="datatable">
         <thead>
         <tr>
@@ -45,10 +45,9 @@
             </a>
 
         @endforeach
-
-
         </tbody>
     </table>
+    <?php } ?>
 
 
 
