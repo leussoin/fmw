@@ -42,6 +42,13 @@ Route::post('/recette/modifier/{id}', 'Recipe@updateRecipePost');
 Route::get('/parametres', 'Settings@index');
 Route::post('/parametres', 'Settings@store');
 
+
+// -------------- Restes
+Route::get('/restes', 'Restes@welcomeGet');
+Route::post('/restes', 'Restes@welcomePost');
+
+
+
 // -------------- Ajax recette
 Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 

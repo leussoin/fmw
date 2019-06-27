@@ -81,6 +81,12 @@
                     } ?> href='/parametres'>Paramètres</a>
                 </li>
 
+                <li>
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "restes")) {
+                        echo "class = 'visit'";
+                    } ?> href='/restes'>Restes</a>
+                </li>
+
                 <?php $oUser = session('oUser'); ?>
                 <li><span id="user-name">Bienvenue {{$oUser->name}}</span></li>
 

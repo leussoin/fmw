@@ -55,8 +55,6 @@ class Restes extends Controller
             }
         }
 
-
-
         // supprimer la condition quand j'aurai remplacé par la div
         if ($bError == false) {
             $sQuery = 'SELECT * from recipe_assoc where product_id in (';
