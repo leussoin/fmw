@@ -50,12 +50,14 @@
         <!-- afficher au moins une ligne si j'ai 0 produits-->
         <div class="row">
             <div class="col">
+                <label>Nom du produit</label>
                 <div class="form-group">
                     <input type="text" id="name" class="form-control produit" placeholder="Entrez un produit"
                            name="aProductName[]"/>
                 </div>
             </div>
             <div class="col">
+                <label>Quantité</label>
                 <div class="form-group">
                     <input type="text" id="quantity" class="form-control" name="aQuantity[]"
                            placeholder="Quantité">
@@ -63,6 +65,7 @@
             </div>
 
             <div class="col">
+                <label>Quantité</label>
                 <div class="form-group">
                     <select class="form-control" id="unit" name="aUnit[]">
                         <option value="">Choisissez l'unité</option>

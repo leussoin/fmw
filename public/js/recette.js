@@ -38,12 +38,15 @@ $(document).ready(function () {
                     $('#units_' + icpt).append('<option value=' + unit.id + '>' + unit.name + '</option>');
                 });
                 $('#units_' + icpt).val(iIdUnit);
-
+                // selectionne de base choisissez l'unité
+                document.getElementById("units_" + icpt).selectedIndex = "0";
 
             },
             error: function (e) {
                 console.log(e.responseText);
             },
+
+
         });
 
 
