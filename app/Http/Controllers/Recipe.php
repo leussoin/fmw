@@ -6,7 +6,9 @@ use App\Misc;
 use App\RecipeAssoc;
 use App\Users;
 use DB;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 
 class Recipe extends Controller {
@@ -14,7 +16,7 @@ class Recipe extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function recipeList() {
         $aRecipe = \App\Recipe::getAllRecipe();
@@ -25,7 +27,7 @@ class Recipe extends Controller {
     /**
      * Display the form to add a recipe
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function addRecipeGet() {
         $aUnitSelect = Misc::getUnit();
@@ -40,7 +42,7 @@ class Recipe extends Controller {
     /**
      * Add a recipe
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function addRecipePost() {
 
@@ -128,17 +130,6 @@ class Recipe extends Controller {
     }
 
     /**
-     * Handle select like to suggest products to users
-     * @return \Illuminate\Http\JsonResponse
-     */
-    /*public function getProductByPartialNameAjaxPost() {
-        $term = Request('term');
-        $sProduct = \App\Product::getProductByPartialNameAjax($term);
-        return response()->json($sProduct);
-    }*/
-
-
-    /**
      * Handle select like to suggest recipe to users
      * @param Request $request
      * @return array
@@ -204,7 +195,7 @@ class Recipe extends Controller {
     /**
      * Display view to allow update recipe
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function updateRecipeGet($id) {
 
@@ -212,14 +203,11 @@ class Recipe extends Controller {
         $aProduct = array();
         $iTotalCalorie = 0;
 
-
         //recupération du tableau d'unités
         $aUnit = Misc::getUnit();
 
-
         // récupération des informations de la recette
         $oRecipe = \App\Recipe::getRecipeByID($id);
-
 
         // récupération des product à partir de l'ID de la recete
         $listeObjProduit = \App\Product::getProductByIdRecipe($id);
@@ -231,13 +219,14 @@ class Recipe extends Controller {
             $aProduct[$key][0]->quantity = $listeObjProduit[$key]->quantity;
 
             $aInfosProduits = \App\Product::getProductById($product->product_id);
+            //base 1000 car KG, je veux du gramme
+            // je dois diviser le coup calorifique par 1000 (avoir au gramme) puis arrondir
             $iCalorie = $aInfosProduits[0]->cal * $product->quantity;
 
             $iTotalCalorie += $iCalorie;
         }
 
         $oRecipe->total_calorie = $iTotalCalorie;
-
 
         return view('add_recipe', [
             'aUnit' => $aUnit,

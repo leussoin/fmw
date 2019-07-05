@@ -176,11 +176,11 @@ class Product extends Controller {
         }
 
         //suppression des mois TODO: les retours les retours.........
-        \App\Misc::deleteProductSeason($id);
+        Misc::deleteProductSeason($id);
 
         foreach ($aSelectedMonth as $month) {
             // TODO: les retours les retours.........
-            \App\Misc::setProductSeason($id, $month);
+            Misc::setProductSeason($id, $month);
         }
 
         // TODO : si y'a une erreur l'afficher sinon, rediriger

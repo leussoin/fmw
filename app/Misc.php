@@ -24,20 +24,6 @@ class Misc extends Model {
 
 
     /**
-     * Get all informations about units to recreate dynamics inputs
-     * @return array
-     */
-    /*public static function getUnitAjax() {
-        $oUnit = DB::select("SELECT * from unit");
-        $aUnit = array();
-        foreach ($oUnit as $key => $unit) {
-            $aUnit[$key]['id'] = $unit->id;
-            $aUnit[$key]['name'] = $unit->name;
-        }
-        return json_encode($aUnit);
-    }*/
-
-    /**
      * Get id unit with name
      * @param $sName
      * @return array $idUnit
@@ -59,7 +45,7 @@ class Misc extends Model {
 
     /**
      * Check if user is authenticated
-     * @return array $user
+     * @return void $user
      */
     public static function isAuth() {
 
@@ -81,7 +67,7 @@ class Misc extends Model {
     /**
      * Get months for a product
      * @param $id
-     * @return Collection
+     * @return array
      */
     public static function getProductMonth($id) {
         return DB::select('SELECT * FROM assoc_saison WHERE id_produit = '. $id);
@@ -89,8 +75,9 @@ class Misc extends Model {
 
     /**
      * Set one season for a product
-     * @param $sProduct
-     * @return Collection
+     * @param $id_produit
+     * @param $id_season
+     * @return bool
      */
     public static function setProductSeason($id_produit, $id_season) {
         return DB::table('assoc_saison')->insert(['id_produit' => $id_produit, 'id_season' => $id_season]);
@@ -98,8 +85,8 @@ class Misc extends Model {
 
     /**
      * Delete all months from product
-     * @param $sProduct
-     * @return Collection
+     * @param $id_produit
+     * @return int
      */
     public static function deleteProductSeason($id_produit) {
         return DB::delete('DELETE from assoc_saison where id_produit = ' . $id_produit . ' ');
@@ -109,7 +96,7 @@ class Misc extends Model {
     /**
      * Log de l'application
      * @param $sMessage
-     * @return int
+     * @return void
      */
     public static function fmwLogSystem($sMessage) {
         $log  = $sMessage.PHP_EOL;

@@ -14,18 +14,21 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
+                        <label>Nom du produit</label>
                         <input type="text" class="form-control produit" placeholder="Entrez un produit"
                                value="{{ $sProduct->name }}" name="sName"/>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
+                        <label>Calories</label>
                         <input type="text" class="form-control" name="iCal" value="{{ $sProduct->cal }}"
                                placeholder="Entrez sa valeur calorifique">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
+                        <label>Calories</label>
                         <input type="text" class="form-control" name="fPrice" value="{{ $sProduct->price }}"
                                placeholder="Entrez son prix">
                     </div>
