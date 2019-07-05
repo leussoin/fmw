@@ -31,7 +31,9 @@
 
             <?php
 
-            foreach($aProduct as $produit) { ?>
+            foreach($aProduct as $produit) {
+                var_dump($produit);
+                ?>
             <tr id="<?php echo $produit->id;?>">
 
                 <td><?php echo $produit->id;?></td>
@@ -41,13 +43,15 @@
                 <td><?php
                     if (!empty($aSeasonProduct[$produit->id])) {
                         foreach ($aSeasonProduct[$produit->id] as $month) {
-                            if ($month == date('m')) {
+                            var_dump($produit);
+
+                            if ($month == (int)date('m')) {
                                 echo ":)";
-                                break;
+                            } else {
+
+                                echo ":(";
                             }
                         }
-                    } else {
-                        echo ":(";
                     }
                     // pour chaque mois
                     // si le mois en cours = un des mois de la liste :) sinon :(

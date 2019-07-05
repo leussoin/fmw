@@ -147,40 +147,42 @@ class Recipe extends Controller {
         $term = $request->get('term');
         $oUser = session('oUser');
         $aDislikedRecipeList = array();
-        $aData[] = array();
+        $aData = array();
+        $aRecipe = array();
 
         $aDislikedProduct = Users::getPreferences($oUser->id);
         foreach ($aDislikedProduct as $sProduct) {
 
             $cRecipe = \App\Recipe::getRecipeByOnceProductId($sProduct->product_disliked);
+
+
             if (!empty($cRecipe)) {
                 foreach ($cRecipe as $iIdRecipe) {
 
-                    $aDislikedRecipeList[] = \App\Recipe::getRecipeByID($iIdRecipe->recipe_id);
+                    $aDislikedRecipe = \App\Recipe::getRecipeByID($iIdRecipe->recipe_id);
+                    $aDislikedRecipeList[$aDislikedRecipe->name] = $aDislikedRecipe->name;
                 }
             }
         }
 
-        $data = \App\Recipe::getRecipeByPartialName($term);
-        var_dump($data[0]->name);
-        var_dump($aDislikedRecipeList[0]->name);
+        $cSugestedRecipesWithoutFilter[] = \App\Recipe::getRecipeByPartialName($term);
 
+        foreach ($cSugestedRecipesWithoutFilter as $cSuggeredRecipe) {
 
-        foreach ($data as $cSuggeredRecipe) {
-            foreach ($aDislikedRecipeList as $cDislikedRecipe) {
-                var_dump($cSuggeredRecipe->name);
-                var_dump($cDislikedRecipe->name);
+            foreach ($cSuggeredRecipe as $sSuggRecipe) {
 
-                //si j'ai un plat que j'aime pas alors je l'ajoute pas
+                // pour chaque plat de ma liste depuis la db
+                // si je trouve la clef dans mon tableau de j'aime pas alors j'ajoute pas
+                if (!array_key_exists($sSuggRecipe->name, $aDislikedRecipeList)) {
+                    $aRecipe[] = $sSuggRecipe;
+                }
             }
         }
-
-
-        dd('');
-
-        foreach ($data as $k => $a) {
-            foreach ($a as $i) {
-                $aData[$k] = $i;
+        if (!empty($aRecipe)) {
+            foreach ($aRecipe as $k => $a) {
+                foreach ($a as $i) {
+                    $aData[$k] = $i;
+                }
             }
         }
         return $aData;
