@@ -10,6 +10,7 @@
         {{ csrf_field() }}
         @foreach($aProduct as $sProduct)
             <input type="hidden" value="{{ $sProduct->id }}" name="id">
+            <input type="hidden" id="price" name="fPrice">
 
             <div class="row">
                 <div class="col">
@@ -19,11 +20,16 @@
                                value="{{ $sProduct->name }}" name="sName"/>
                     </div>
                 </div>
+
                 <div class="col">
                     <div class="form-group">
-                        <label>Calories</label>
-                        <input type="text" class="form-control" name="iCal" value="{{ $sProduct->cal }}"
-                               placeholder="Entrez sa valeur calorifique">
+                        <label>Prix (estimation du cout)</label>
+                        <div>
+                            <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+                            <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+                            <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col">

@@ -32,7 +32,7 @@
             <?php
 
             foreach($aProduct as $produit) {
-                var_dump($produit);
+
                 ?>
             <tr id="<?php echo $produit->id;?>">
 
@@ -43,7 +43,6 @@
                 <td><?php
                     if (!empty($aSeasonProduct[$produit->id])) {
                         foreach ($aSeasonProduct[$produit->id] as $month) {
-                            var_dump($produit);
 
                             if ($month == (int)date('m')) {
                                 echo ":)";

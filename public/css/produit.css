@@ -1,17 +1,36 @@
 table.table {
     border-collapse: collapse;
 }
+
 .table tr {
     background-color: #eee;
     border-top: 1px solid #fff;
 }
+
 .table tr:hover {
     background-color: #ccc;
 }
+
 .table th {
     background-color: #fff;
 }
+
 .table th, #table td {
     padding: 3px 5px;
 }
 
+.euros {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.euros:hover {
+    cursor: pointer;
+}
+
+.img-euros {
+    width: 100%;
+    height: 100%;
+}
