@@ -26,10 +26,12 @@
                            placeholder="Entrez sa valeur calorifique">
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <div class="form-group">
-
-                    <label for="sel2">Selectionnez les mois du produit (maintenez Shift pour en selectionner plusieurs)</label>
+                    <label for="sel2">Selectionnez les mois du produit (maintenez Shift pour en selectionner
+                        plusieurs)</label>
                     <select name='aSeason[]' multiple class="form-control" id="sel2">
                         <?php if (!empty($aMonths)) { ?>
                         @foreach ($aMonths as $months)
@@ -39,9 +41,9 @@
                     </select>
                 </div>
             </div>
-
-            <a href="#" class="hidden_delete">X</a>
         </div>
+        <a href="#" class="hidden_delete">X</a>
+
         <div id="container_input"></div>
         <!--<div class="form-group">
             <button type="button" id="ajouter_produit" class="btn btn-success">+</button>

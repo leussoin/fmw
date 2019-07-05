@@ -28,6 +28,8 @@
                 </div>
             </div>
 
+            <?php if (!empty($oRecipe->id)) { ?>
+
             <div class="col">
                 <div class="form-group">
                     <label>Valeur calorifique</label>
@@ -37,6 +39,7 @@
                            }?>" name="iTotalCal"/>
                 </div>
             </div>
+            <?php } ?>
 
 
             <a href="#" class="hidden_delete">X</a>
@@ -94,8 +97,6 @@
                            name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
-
-
 
 
             <div class="col">
