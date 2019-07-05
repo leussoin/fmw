@@ -4,20 +4,19 @@
 @section('content')
 
     <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ?
-        <button type="button" id="calcul">Calculer les calories</button>
+        <button name="button" value="save" type="submit">Sauvegarder la semaine</button>
+
+        <!--<button type="button" id="calcul">Calculer les calories</button> -->
     </h1>
     <form method="post">
         {{ csrf_field() }}
 
-        <button name="button" value="save" type="submit">Sauvegarder la semaine</button>
-        <br>
+        <div>
+            <button class="inline-item" name="button" value="-" id="-"><</button>
+            <h2 class="inline-item">Nous sommes le <?php echo date('d-m-Y'); $jourDeLaSemaine = date('N');?></h2>
+            <button class="inline-item" name="button" value="+" id="+">></button>
 
-
-        <button name="button" value="+" id="+">+</button>
-        <h2>Nous sommes le <?php echo date('d-m-Y');
-            $jourDeLaSemaine = date('N');
-            ?></h2>
-        <button name="button" value="-" id="-">-</button>
+        </div>
 
 
         <table class="table">
@@ -29,7 +28,7 @@
 
             </thead>
 
-            <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[1] == date('d-m-Y') ) {
+            <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[1] == date('d-m-Y')) {
                 echo 'class="current-day";';
             } ;?>>
                 <td>Lundi {{$aSemaine[1]}}</td>
@@ -38,7 +37,7 @@
                     <input type="text" name="midi[]" value="<?php if (!empty($aPlatUser['midi'][1])) {
                         echo $aPlatUser['midi'][1];
                     } ?>" id="i-lm" class="input lu">
-                    
+
                 </td>
                 <td><input type="text" name="soir[]" value="<?php if (!empty($aPlatUser['soir'][1])) {
                         echo $aPlatUser['soir'][1];

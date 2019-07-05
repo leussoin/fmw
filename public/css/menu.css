@@ -17,3 +17,7 @@
 .current-day {
     background: orange !important;
 }
+
+.inline-item {
+    display: inline-block;
+}
