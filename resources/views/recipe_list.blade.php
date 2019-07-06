@@ -13,6 +13,12 @@
         <span class="slider"></span>
     </label>
 
+    <div>
+        <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+        <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+        <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+    </div>
+
     <input type="hidden" id="token" value="{{ csrf_token() }}">
 
     <?php if (!empty($aRecipe)) { ?>

@@ -150,26 +150,25 @@ class Product extends Controller {
 
         $id = Request('id');
         $sName = Request('sName');
-        $fPrice = Request('fPrice');
+        $iPrice = Request('price');
         $iCal = Request('iCal');
         $aSelectedMonth = Request('aSelectedMonth');
 
-        //$aProduct = \App\Product::getProductById($id);
-        $aProduct = \App\Product::getAllProduct();
 
-
-        if (!empty($sName) && !empty($fPrice) && !empty($iCal)) {
+        if (!empty($sName) && !empty($iPrice) && !empty($iCal)) {
 
             if (Validator::isValidStr($sName) !== false) {
-                if (Validator::isValidInt($fPrice) !== false) {
-                    if (Validator::isValidInt($iCal) !== false) {
-                        $iModifiedRow = \App\Product::updateProduct($sName, $fPrice, $iCal, $id);
+                //if (Validator::isValidInt($iPrice) !== false) {
+
+                if (Validator::isValidInt($iCal) !== false) {
+
+                        $iModifiedRow = \App\Product::updateProduct($sName, $iPrice, $iCal, $id);
                     } else {
                         $error = "la valeur énérgetique du produit est incorecte.";
                     }
-                } else {
-                    $error = "le prix du produit est incorect.";
-                }
+                //} else {
+                //    $error = "le prix du produit est incorect.";
+                //}
             } else {
                 $error = "le nom du produit est incorect.";
             }
@@ -178,10 +177,13 @@ class Product extends Controller {
         //suppression des mois TODO: les retours les retours.........
         Misc::deleteProductSeason($id);
 
-        foreach ($aSelectedMonth as $month) {
-            // TODO: les retours les retours.........
-            Misc::setProductSeason($id, $month);
+        if (!empty($aSelectedMonth)) {
+            foreach ($aSelectedMonth as $month) {
+                // TODO: les retours les retours.........
+                Misc::setProductSeason($id, $month);
+            }
         }
+
 
         // TODO : si y'a une erreur l'afficher sinon, rediriger
         //return view('product_list')->with(compact('aProduct'));

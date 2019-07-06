@@ -10,7 +10,7 @@
         {{ csrf_field() }}
         @foreach($aProduct as $sProduct)
             <input type="hidden" value="{{ $sProduct->id }}" name="id">
-            <input type="hidden" id="price" name="fPrice">
+            <input type="hidden"  value="{{ $sProduct->price }}" id="price" name="price">
 
             <div class="row">
                 <div class="col">
@@ -35,7 +35,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Calories</label>
-                        <input type="text" class="form-control" name="fPrice" value="{{ $sProduct->price }}"
+                        <input type="text" class="form-control" name="iCal" value="{{ $sProduct->cal }}"
                                placeholder="Entrez son prix">
                     </div>
                 </div>

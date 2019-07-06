@@ -48,32 +48,6 @@ $(document).ready(function () {
     });
 
 
-    $('#euro-vert').on("click", function () {
-        $(this).attr('src', 'http://fmw.com/svg/euros_vert.png' );
-        $('#euro-orange').attr('src', 'http://fmw.com/svg/euros_vide.png' );
-        $('#euro-rouge').attr('src', 'http://fmw.com/svg/euros_vide.png' );
-        $("#price").val("1");
-
-    });
-
-    $('#euro-orange').on("click", function () {
-        $(this).attr('src', 'http://fmw.com/svg/euros_orange.png' );
-        $('#euro-vert').attr('src', 'http://fmw.com/svg/euros_vert.png' );
-        $('#euro-rouge').attr('src', 'http://fmw.com/svg/euros_vide.png' );
-        $("#price").val("2");
-
-    });
-
-    $('#euro-rouge').on("click", function () {
-        $(this).attr('src', 'http://fmw.com/svg/euros_rouge.png' );
-        $('#euro-vert').attr('src', 'http://fmw.com/svg/euros_vert.png' );
-        $('#euro-orange').attr('src', 'http://fmw.com/svg/euros_orange.png' );
-        $("#price").val("3");
-
-    });
-
-
-
 // si je clique sur une valeur plus faible alors les symbols redeviennent normaux
 //http://fmw.com/svg/euros_vide.png
     //checkbox_deleted_products.checked => true or false
