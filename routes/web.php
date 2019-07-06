@@ -3,9 +3,7 @@
 Route::get('/menu', 'Welcome@welcome');
 Route::post('/menu', 'Welcome@welcomePost');
 
-
 Route::get('/recette/autocomplete', 'Recipe@getRecipeByPartialName');
-
 
 Route::get('/recette/getCalorie', 'Recipe@getCalWithRecipeNameGet');
 

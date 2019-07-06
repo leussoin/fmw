@@ -30,7 +30,7 @@ class Product extends Controller {
      */
     public function productAddGet() {
         $aMonths = Misc::getSeasons();
-        return view('add_product')->with(compact('aMonths'));
+        return view('product')->with(compact('aMonths'));
     }
 
     /**
@@ -99,9 +99,12 @@ class Product extends Controller {
                 $iLastInsertedIdProduct = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key], $sMonths);
             }
 
+
             if ($iLastInsertedIdProduct != 0) {
-                foreach ($aSeason as $idSaison) {
-                    $mResult = Misc::setProductSeason($iLastInsertedIdProduct, $idSaison);
+                if (!empty($aSeason)) {
+                    foreach ($aSeason as $idSaison) {
+                        $mResult = Misc::setProductSeason($iLastInsertedIdProduct, $idSaison);
+                    }
                 }
             } else {
                 echo "Une erreur est survenue sur l'insertion du produit";
@@ -139,7 +142,7 @@ class Product extends Controller {
 
         $mResult = Misc::getProductMonth($id);
 
-        return view('modify_product', ['aProduct' => $aProduct, 'aMonths' => $aMonths, 'aMonthsProduct' => $aMonthsProduct]);
+        return view('product', ['aProduct' => $aProduct, 'aMonths' => $aMonths, 'aMonthsProduct' => $aMonthsProduct]);
     }
 
     /**
@@ -162,10 +165,10 @@ class Product extends Controller {
 
                 if (Validator::isValidInt($iCal) !== false) {
 
-                        $iModifiedRow = \App\Product::updateProduct($sName, $iPrice, $iCal, $id);
-                    } else {
-                        $error = "la valeur énérgetique du produit est incorecte.";
-                    }
+                    $iModifiedRow = \App\Product::updateProduct($sName, $iPrice, $iCal, $id);
+                } else {
+                    $error = "la valeur énérgetique du produit est incorecte.";
+                }
                 //} else {
                 //    $error = "le prix du produit est incorect.";
                 //}
