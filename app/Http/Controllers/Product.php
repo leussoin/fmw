@@ -67,20 +67,26 @@ class Product extends Controller {
         $iInsertedRow = 0;
         $sMonths = '';
         $aNomProduit = Request('aNomProduit');
-        $aPrixProduit = Request('aPrixProduit');
+        $iPrice = Request('price');
         $aSeason = Request('aSeason');
+        $aProduct = \App\Product::getAllProduct();
+        $aCaloriesProduit = Request('aCaloriesProduit');
+
 
         $aListSeason = Misc::getSeasons();
 
         //$input = $request->all();
         $iLastInsertedIdProduct = 0;
 
-        $aCaloriesProduit = Request('aCaloriesProduit');
 
 
         foreach ($aNomProduit as $key => $nom) {
             if (Validator::isValidStr($nom) !== false) {
-                if (Validator::isValidInt($aPrixProduit[$key])) {
+                if (Validator::isValidInt($iPrice)) {
+
+                    var_dump($iPrice);
+
+
                     if (Validator::isValidInt($aCaloriesProduit[$key])) {
                         // tous les champs sont OK
                     } else {
@@ -96,9 +102,8 @@ class Product extends Controller {
 
         if (empty($error)) {
             foreach ($aNomProduit as $key => $info) {
-                $iLastInsertedIdProduct = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $aPrixProduit[$key], $sMonths);
+                $iLastInsertedIdProduct = \App\Product::addProduct($aCaloriesProduit[$key], $aNomProduit[$key], $iPrice, $sMonths);
             }
-
 
             if ($iLastInsertedIdProduct != 0) {
                 if (!empty($aSeason)) {
@@ -117,9 +122,10 @@ class Product extends Controller {
             $mResult = "Une erreur s'est produite sur la requette.";
         }
 
-        return view('add_product',
+        return view('product_list',
             ['mResult' => $mResult,
-                'aSeason' => $aListSeason
+                'aSeason' => $aListSeason,
+                'aProduct' => $aProduct
             ]);
 
     }

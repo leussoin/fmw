@@ -3,17 +3,19 @@
 @extends('layouts/master', ['title' => 'produit'])
 @section('content')
 
-    <?php if (empty($sProduct->id)) { ?>
+    <?php
+    if (empty($sProduct->id)) { ?>
     <h1>Ajoutez un produit</h1>
     <?php } else { ?>
     <h1>Modifier produit '{{ $aProduct[0]->name }}'</h1>
     <?php } ?>
     <form method="post">
         {{ csrf_field() }}
+        <input type="hidden" value="{{ !empty($sProduct->price) }}" id="price" name="price">
+
         <?php if (!empty($aProduct)) { ?>
         @foreach($aProduct as $sProduct)
             <input type="hidden" value="{{ !empty($sProduct->id) }}" name="id">
-            <input type="hidden" value="{{ !empty($sProduct->price) }}" id="price" name="price">
 
             <div class="row">
                 <div class="col">
@@ -27,14 +29,27 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Prix (estimation du cout)</label>
+
+                        <?php if ($sProduct->price == 1) { ?>
                         <div>
-                            <div class="euros"><img id="euro-vert" class="img-euros"
-                                                    src={{ asset('svg/euros_vide.png') }}></div>
-                            <div class="euros"><img id="euro-orange" class="img-euros"
-                                                    src={{ asset('svg/euros_vide.png') }}></div>
-                            <div class="euros"><img id="euro-rouge" class="img-euros"
-                                                    src={{ asset('svg/euros_vide.png') }}></div>
+                            <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vert.png') }}></div>
+                            <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+                            <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
                         </div>
+                        <?php } elseif ($sProduct->price == 2) { ?>
+                        <div>
+                            <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vert.png') }}></div>
+                            <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_orange.png') }}></div>
+                            <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+                        </div>
+                        <?php } elseif ($sProduct->price == 3) { ?>
+                        <div>
+                            <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vert.png') }}></div>
+                            <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_orange.png') }}></div>
+                            <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_rouge.png') }}></div>
+                        </div>
+                        <?php }  ?>
+
                     </div>
                 </div>
 
@@ -75,7 +90,11 @@
             </div>
 
         @endforeach
-        <?php } else { ?>
+        <?php
+        var_dump($aProduct);
+
+
+        } else { ?>
 
         <div class="row">
             <div class="col">
@@ -129,7 +148,11 @@
         <?php } ?>
         <div id="container_input"></div>
         <div class="form-group">
+            <?php if (empty($sProduct->id)) { ?>
+            <button type="submit" value="ajouter" class="btn btn-primary">Ajouter</button>
+            <?php } else { ?>
             <button type="submit" value="modifier" class="btn btn-primary">Modifier</button>
+            <?php } ?>
         </div>
 
     </form>
