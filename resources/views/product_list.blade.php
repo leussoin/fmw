@@ -33,13 +33,21 @@
 
             foreach($aProduct as $produit) {
 
-                ?>
+            ?>
             <tr id="<?php echo $produit->id;?>">
-
                 <td><?php echo $produit->id;?></td>
                 <td><?php echo $produit->name;?></td>
                 <td><?php echo $produit->cal;?></td>
-                <td><?php echo $produit->price;?></td>
+                <td>
+                    <?php
+                    if ($produit->price == 1) { ?>
+                        <div class="euros"><img class="img-euros" src={{ asset('svg/euros_vert.png') }}></div>
+                    <?php } elseif ($produit->price == 2) { ?>
+                        <div class="euros"><img class="img-euros" src={{ asset('svg/euros_orange.png') }}></div>
+                    <?php } elseif ($produit->price == 3) { ?>
+                        <div class="euros"><img class="img-euros" src={{ asset('svg/euros_rouge.png') }}></div>
+                    <?php } ?>
+                </td>
                 <td><?php
                     if (!empty($aSeasonProduct[$produit->id])) {
                         foreach ($aSeasonProduct[$produit->id] as $month) {
