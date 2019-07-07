@@ -67,10 +67,11 @@ class Misc extends Model {
     /**
      * Get months for a product
      * @param $id
-     * @return array
+     * @return Collection
      */
     public static function getProductMonth($id) {
-        return DB::select('SELECT * FROM assoc_saison WHERE id_produit = '. $id);
+        return DB::table('assoc_saison')->where('id_produit', '=', $id)->get();
+        //return DB::select('SELECT * FROM assoc_saison WHERE id_produit = '. $id);
     }
 
     /**
