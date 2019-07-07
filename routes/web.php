@@ -27,7 +27,8 @@ Route::post('/produit/supprimer/{id}', 'Product@deleteProductAjaxPost');
 
 // -------------- Recettes
 
-Route::get('/recette/lister', 'Recipe@recipeList');
+Route::get('/recette/lister', 'Recipe@recipeListGet');
+Route::post('/recette/lister', 'Recipe@recipeListPost');
 
 Route::get('/recette/ajouter', 'Recipe@addRecipeGet');
 Route::post('/recette/ajouter', 'Recipe@addRecipePost');

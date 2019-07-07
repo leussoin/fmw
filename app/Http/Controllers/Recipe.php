@@ -17,18 +17,27 @@ class Recipe extends Controller {
 
     /**
      * Display a listing of the resource.
-     *
-     * @param Input $selectedPrice
-     * @return Response
+     ** @return Response
      */
-    public function recipeList(Input $selectedPrice) {
-        $aRecipe = \App\Recipe::getAllRecipe(Input::get('selectedPrice'));
+    public function recipeListGet() {
+
+        $aRecipe = \App\Recipe::getAllRecipe();
         return view('recipe_list', ['aRecipe' => $aRecipe]);
     }
 
+
     /**
-     * Display the form to add a recipe
+     * Display a listing of the resource.
      *
+     * @return Response
+     */
+    public function recipeListPost() {
+        $aRecipe = \App\Recipe::getAllRecipe(Request('selectedPrice'));
+        return view('recipe_list', ['aRecipe' => $aRecipe, 'selectedPrice' => Request('selectedPrice')]);
+    }
+
+    /**
+     * Display the form to add a recipek
      * @return Response
      */
     public function addRecipeGet() {
@@ -36,7 +45,6 @@ class Recipe extends Controller {
 
         //calcul du total calorifique de ma recette
         //$iTotalCalorie = \App\RecipeAssoc::getRecipeProducts();   => besoin de l'ID de la recette
-
         return view('add_recipe', ['aUnitSelect' => $aUnitSelect]);
     }
 

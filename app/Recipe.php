@@ -21,6 +21,7 @@ class Recipe extends Model {
      * @return array
      */
     public static function getAllRecipe($iPrice = null) {
+
         if (!empty($iPrice)) {
             if ($iPrice == 1) {
                 $aRecipe = DB::select("SELECT * from recipe where price = 1 ");

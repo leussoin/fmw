@@ -4,8 +4,6 @@
 
 @section('content')
 
-    <input type="text" value="{{ !empty($sProduct->price) }}" id="price" name="price">
-
     <h1>Lister les recettes</h1>
 
     Afficher les produits supprimés
@@ -14,9 +12,9 @@
         <span class="slider"></span>
     </label>
 
-    <form>
-        <input type="hidden" id="token" value="{{ csrf_token() }}">
-
+    <form method="POST">
+        {{ csrf_field() }}
+        <input type="hidden" id="price" value="<?php if (!empty($selectedPrice)) {echo $selectedPrice; } ?>">
         <div>
             <button type="submit" name="selectedPrice" value="1">
                 <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
