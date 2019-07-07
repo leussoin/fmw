@@ -39,16 +39,17 @@ class Recipe extends Model {
     /**
      * Set the name and cooking recipe of new recipe
      * @param $sName
+     * @param $iPrice
      * @param $sCookingRecipe
      * @return bool
      */
-    public static function setRecipeData($sName, $sCookingRecipe) {
-
+    public static function setRecipeData($sName, $iPrice, $sCookingRecipe = null) {
         $iInsertedRow = DB::table('recipe')->insert(
             [
                 'name' => $sName,
                 'cooking_recipe' => $sCookingRecipe,
                 'statuscode' => 1,
+                'price' => $iPrice,
                 'created_at' => date("Y-m-d H:i:s"),
                 'modified_at' => date("Y-m-d H:i:s"),
                 'owner' => 1
@@ -99,6 +100,7 @@ class Recipe extends Model {
         $iModifiedRow = DB::update('UPDATE recipe set 
             name = "' . $aData['name'] . '", 
             cooking_recipe = "' . $aData['cooking_recipe'] . '", 
+            price = "'.$aData['iAveragePrice'].'",
             modified_at = "' . date("Y-m-d H:i:s") . '"   
             where id = ' . $aData['id']);
         return $iModifiedRow;

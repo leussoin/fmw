@@ -9,7 +9,6 @@ use DB;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Input;
 use Illuminate\View\View;
 
 
@@ -25,7 +24,6 @@ class Recipe extends Controller {
         return view('recipe_list', ['aRecipe' => $aRecipe]);
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +35,7 @@ class Recipe extends Controller {
     }
 
     /**
-     * Display the form to add a recipek
+     * Display the form to add a recipe
      * @return Response
      */
     public function addRecipeGet() {
@@ -63,17 +61,27 @@ class Recipe extends Controller {
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
         $sCookingRecipe = Request('cooking_recipe');
+        $aPrice = array();
         $iNullCpt = 0;
 
-
         $iTotalInsertedProduct = 0;
+
+        //faire le calcul des prix
+        if (!empty($aProductName)) {
+            Misc::setInitTransaction();
+
+            foreach ($aProductName as $sNameProduct) {
+                $cProduct = \App\Product::getIdProductByName($sNameProduct);
+                $aPrice[] = $cProduct[0]->price;
+            }
+        }
+        $iAveragePrice = array_sum($aPrice) / count($aPrice);
 
         if (count($aProductName) === count($aQuantity) && count($aQuantity) === count($aUnit)) {
 
             if (Validator::isValidStr($sRecipeName)) {
 
-                Misc::setInitTransaction();
-                $iRecipeNameInserted = \App\Recipe::setRecipeData($sRecipeName, $sCookingRecipe);
+                $iRecipeNameInserted = \App\Recipe::setRecipeData($sRecipeName, $iAveragePrice, $sCookingRecipe);
                 if ($iRecipeNameInserted > 0) {
 
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
@@ -82,7 +90,6 @@ class Recipe extends Controller {
                     foreach ($aProductName as $key => $name) {
 
                         //if (!empty($name)) {
-
 
                         if (Validator::isValidStr($name) && !empty($name) && !is_null($name)) {
 
@@ -95,6 +102,9 @@ class Recipe extends Controller {
                                     $aParams['quantity'] = (float)$aQuantity[$key];
                                     $aParams['id_unit'] = (int)$aUnit[$key];
                                     $iInsertedProduct = RecipeAssoc::addProductForRecipeTableAssoc($aParams);
+
+
+
                                     if ($iInsertedProduct === true) {
                                         $iTotalInsertedProduct++;
                                     } else {
@@ -123,8 +133,7 @@ class Recipe extends Controller {
         } else {
             echo "Il manque des informations (un ou plusieurs champs sont vides)";
         }
-        var_dump(count($aProductName) - $iNullCpt);
-        var_dump(($iTotalInsertedProduct));
+
 
         if (count($aProductName) - $iNullCpt === $iTotalInsertedProduct && $iRecipeNameInserted === true) {
 
@@ -305,6 +314,7 @@ class Recipe extends Controller {
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
         $sCookingRecipe = Request('cooking_recipe');
+        $aPrice = array();
 
         $aProductName = array_filter($aProductName);
         $aQuantity = array_filter($aQuantity);
@@ -320,6 +330,12 @@ class Recipe extends Controller {
         $sError = "";
         $iCptAddedProduct = 0;
         $iProduct = 0;
+
+        foreach ($aProductName as $sNameProduct) {
+            $cProduct = \App\Product::getIdProductByName($sNameProduct);
+            $aPrice[] = $cProduct[0]->price;
+        }
+        $aData['iAveragePrice'] = array_sum($aPrice) / count($aPrice);
 
         //modification de la recette
         if (!empty($sRecipeName) && Validator::isValidStr($sRecipeName)) {
@@ -407,14 +423,13 @@ class Recipe extends Controller {
             // tout vas bien j'init la transaction
 
             DB::commit();
-            echo "Ajout de la recette OK";
 
         } else {
             DB::rollBack();
             echo "Ajout de la recette KO";
 
         }
-        return redirect()->action('Recipe@recipeList');
+        return redirect()->action('Recipe@recipeListGet');
     }
 
     /**
