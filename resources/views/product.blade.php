@@ -4,14 +4,15 @@
 @section('content')
 
     <?php
-    if (empty($sProduct->id)) { ?>
+    if (empty($aProduct[0]->id)) { ?>
     <h1>Ajoutez un produit</h1>
     <?php } else { ?>
     <h1>Modifier produit '{{ $aProduct[0]->name }}'</h1>
     <?php } ?>
-    <form method="post">
+
+    <form method="post" id="form-product">
         {{ csrf_field() }}
-        <input type="hidden" value="{{ !empty($sProduct->price) }}" id="price" name="price">
+        <input type="hidden" value="{{ !empty($aProduct[0]->price) }}" id="price" name="price">
 
         <?php if (!empty($aProduct)) { ?>
         @foreach($aProduct as $sProduct)
@@ -32,21 +33,30 @@
 
                         <?php if ($sProduct->price == 1) { ?>
                         <div>
-                            <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vert.png') }}></div>
-                            <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
-                            <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+                            <div class="euros"><img id="euro-vert" class="img-euros"
+                                                    src={{ asset('svg/euros_vert.png') }}></div>
+                            <div class="euros"><img id="euro-orange" class="img-euros"
+                                                    src={{ asset('svg/euros_vide.png') }}></div>
+                            <div class="euros"><img id="euro-rouge" class="img-euros"
+                                                    src={{ asset('svg/euros_vide.png') }}></div>
                         </div>
                         <?php } elseif ($sProduct->price == 2) { ?>
                         <div>
-                            <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vert.png') }}></div>
-                            <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_orange.png') }}></div>
-                            <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_vide.png') }}></div>
+                            <div class="euros"><img id="euro-vert" class="img-euros"
+                                                    src={{ asset('svg/euros_vert.png') }}></div>
+                            <div class="euros"><img id="euro-orange" class="img-euros"
+                                                    src={{ asset('svg/euros_orange.png') }}></div>
+                            <div class="euros"><img id="euro-rouge" class="img-euros"
+                                                    src={{ asset('svg/euros_vide.png') }}></div>
                         </div>
                         <?php } elseif ($sProduct->price == 3) { ?>
                         <div>
-                            <div class="euros"><img id="euro-vert" class="img-euros" src={{ asset('svg/euros_vert.png') }}></div>
-                            <div class="euros"><img id="euro-orange" class="img-euros" src={{ asset('svg/euros_orange.png') }}></div>
-                            <div class="euros"><img id="euro-rouge" class="img-euros" src={{ asset('svg/euros_rouge.png') }}></div>
+                            <div class="euros"><img id="euro-vert" class="img-euros"
+                                                    src={{ asset('svg/euros_vert.png') }}></div>
+                            <div class="euros"><img id="euro-orange" class="img-euros"
+                                                    src={{ asset('svg/euros_orange.png') }}></div>
+                            <div class="euros"><img id="euro-rouge" class="img-euros"
+                                                    src={{ asset('svg/euros_rouge.png') }}></div>
                         </div>
                         <?php }  ?>
 
@@ -56,43 +66,43 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Calories</label>
-                        <input type="text" class="form-control" name="iCal" value="{{ $sProduct->cal }}"
+                        <input type="text" id="cal" class="form-control" name="iCal" value="{{ $sProduct->cal }}"
                                placeholder="Entrez son prix">
                     </div>
                 </div>
             </div>
 
-            <div class="col">
-                <div class="form-group">
-                    <label for="sel2">Selectionnez les mois du produit (maintenez Shift pour en selectionner
-                        plusieurs)</label>
-                    <select name='aSelectedMonth[]' multiple class="form-control" id="sel2">
-                        <?php
-                        $sSelected = '';
-                        if (!empty($aMonths)) {
-                            foreach ($aMonths as $month) {
-                                if (!empty($aMonthsProduct)) {
-                                    foreach ($aMonthsProduct as $sProductMonth) {
-                                        $sSelected = '';
-                                        foreach ($sProductMonth as $mois) {
-                                            if ($mois == $month->id) {
-                                                $sSelected = 'selected';
-                                                break;
+            <div class="row">
+
+                <div class="col">
+                    <div class="form-group">
+                        <label for="sel2">Selectionnez les mois du produit (maintenez Shift pour en selectionner
+                            plusieurs)</label>
+                        <select name='aSelectedMonth[]' multiple class="form-control" id="sel2">
+                            <?php
+                            $sSelected = '';
+                            if (!empty($aMonths)) {
+                                foreach ($aMonths as $month) {
+                                    if (!empty($aMonthsProduct)) {
+                                        foreach ($aMonthsProduct as $sProductMonth) {
+                                            $sSelected = '';
+                                            foreach ($sProductMonth as $mois) {
+                                                if ($mois == $month->id) {
+                                                    $sSelected = 'selected';
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
+                                    echo '<option ' . $sSelected . ' value=' . $month->id . '>' . $month->nom . '</option>';
                                 }
-                                echo '<option ' . $sSelected . ' value=' . $month->id . '>' . $month->nom . '</option>';
-                            }
-                        } ?>
-                    </select>
+                            } ?>
+                        </select>
+                    </div>
                 </div>
             </div>
-
         @endforeach
         <?php
-        var_dump($aProduct);
-
 
         } else { ?>
 
@@ -123,8 +133,7 @@
             <div class="col">
                 <label>Calories</label>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="aCaloriesProduit[]"
-                           placeholder="Entrez sa valeur calorifique">
+                    <input type="text"  id="cal" class="form-control" name="aCaloriesProduit[]" placeholder="Entrez sa valeur calorifique">
                 </div>
             </div>
         </div>
@@ -156,18 +165,4 @@
         </div>
 
     </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection

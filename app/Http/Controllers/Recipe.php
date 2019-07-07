@@ -43,7 +43,7 @@ class Recipe extends Controller {
 
         //calcul du total calorifique de ma recette
         //$iTotalCalorie = \App\RecipeAssoc::getRecipeProducts();   => besoin de l'ID de la recette
-        return view('add_recipe', ['aUnitSelect' => $aUnitSelect]);
+        return view('recipe', ['aUnitSelect' => $aUnitSelect]);
     }
 
     /**
@@ -144,7 +144,7 @@ class Recipe extends Controller {
             echo "Ajout de la recette KO";
         }
 
-        return view('add_recipe', ['aUnitSelect' => $aUnitSelect]);
+        return view('recipe', ['aUnitSelect' => $aUnitSelect]);
     }
 
     /**
@@ -250,7 +250,7 @@ class Recipe extends Controller {
 
         $oRecipe->total_calorie = $iTotalCalorie;
 
-        return view('add_recipe', [
+        return view('recipe', [
             'aUnit' => $aUnit,
             'oRecipe' => $oRecipe,
             'aProduct' => $aProduct,

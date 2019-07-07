@@ -83,10 +83,6 @@ class Product extends Controller {
         foreach ($aNomProduit as $key => $nom) {
             if (Validator::isValidStr($nom) !== false) {
                 if (Validator::isValidInt($iPrice)) {
-
-                    var_dump($iPrice);
-
-
                     if (Validator::isValidInt($aCaloriesProduit[$key])) {
                         // tous les champs sont OK
                     } else {
