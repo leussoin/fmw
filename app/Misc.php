@@ -13,8 +13,7 @@ class Misc extends Model {
      * @return array
      */
     public static function getUnit() {
-        $oUnit = DB::select("SELECT * from unit");
-        $aUnit = array();
+        $oUnit = DB::table('unit')->get();
         foreach ($oUnit as $key => $unit) {
             $aUnit[$key]['id'] = $unit->id;
             $aUnit[$key]['name'] = $unit->name;

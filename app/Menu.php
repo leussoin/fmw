@@ -18,6 +18,7 @@ class Menu extends Model {
                 and midi = ' . $bIsMidi . '                    
                 ');
 
+
         return $a;
     }
 
@@ -39,7 +40,6 @@ class Menu extends Model {
             'id_user' => $id_user,
             'convives' => $convives,
             'created_at' => date('d-m-Y h:m'),
-
             'midi' => $bIsMidi
         ]);
 
