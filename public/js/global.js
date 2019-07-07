@@ -11,7 +11,6 @@ $(document).ready(function () {
         $('#euro-vert').attr('src', 'http://fmw.com/svg/euros_vert.png' );
         $('#euro-orange').attr('src', 'http://fmw.com/svg/euros_orange.png' );
         $('#euro-rouge').attr('src', 'http://fmw.com/svg/euros_rouge.png' );
-
     }
 
     $('.datatable').DataTable( {

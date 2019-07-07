@@ -32,13 +32,15 @@ Route::get('/recette/lister', 'Recipe@recipeList');
 Route::get('/recette/ajouter', 'Recipe@addRecipeGet');
 Route::post('/recette/ajouter', 'Recipe@addRecipePost');
 
-Route::post('/recette/supprimer/{id}', 'Recipe@deleteRecipeAjaxPost');
-
 Route::get('/recette/modifier/{id}', 'Recipe@updateRecipeGet');
 Route::post('/recette/modifier/{id}', 'Recipe@updateRecipePost');
 
 Route::get('/parametres', 'Settings@index');
 Route::post('/parametres', 'Settings@store');
+
+Route::post('/recette/supprimer/{id}', 'Recipe@deleteRecipeAjaxPost');
+
+
 
 
 // -------------- Restes

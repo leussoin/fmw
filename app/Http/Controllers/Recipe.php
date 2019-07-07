@@ -9,6 +9,8 @@ use DB;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Input;
+use Illuminate\View\View;
 
 
 class Recipe extends Controller {
@@ -16,13 +18,13 @@ class Recipe extends Controller {
     /**
      * Display a listing of the resource.
      *
+     * @param Input $selectedPrice
      * @return Response
      */
-    public function recipeList() {
-        $aRecipe = \App\Recipe::getAllRecipe();
+    public function recipeList(Input $selectedPrice) {
+        $aRecipe = \App\Recipe::getAllRecipe(Input::get('selectedPrice'));
         return view('recipe_list', ['aRecipe' => $aRecipe]);
     }
-
 
     /**
      * Display the form to add a recipe
@@ -37,7 +39,6 @@ class Recipe extends Controller {
 
         return view('add_recipe', ['aUnitSelect' => $aUnitSelect]);
     }
-
 
     /**
      * Add a recipe
@@ -179,6 +180,11 @@ class Recipe extends Controller {
         return $aData;
     }
 
+    /**
+     * Soft deletes a recipe
+     * @param $id
+     * @return false|string
+     */
     public function deleteRecipeAjaxPost($id) {
 
         $iModifiedRow = \App\Recipe::deleteRecipe($id);
@@ -187,7 +193,6 @@ class Recipe extends Controller {
         } else {
             $sMessage = "Erreur sur la suppression du produit.";
         }
-
         return json_encode($sMessage);
     }
 
@@ -195,7 +200,7 @@ class Recipe extends Controller {
     /**
      * Display view to allow update recipe
      * @param $id
-     * @return Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function updateRecipeGet($id) {
 
@@ -241,7 +246,7 @@ class Recipe extends Controller {
     /**
      * Get the calorific value of a recipe when the user selects it
      * @param Request $request
-     * @return false|string
+     * @return array
      */
     public function getCalWithRecipeNameGet(Request $request) {
         $aCal = array();
@@ -255,7 +260,6 @@ class Recipe extends Controller {
         }
         return $aCal;
     }
-
 
     /**
      * Get total calorie from recipe with his name

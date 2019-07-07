@@ -15,8 +15,23 @@ class Recipe extends Model {
         'aQuantity'
     ];
 
-    public static function getAllRecipe() {
-        $aRecipe = DB::select("SELECT * from recipe");
+    /**
+     * Select recipes
+     * @param null $iPrice
+     * @return array
+     */
+    public static function getAllRecipe($iPrice = null) {
+        if (!empty($iPrice)) {
+            if ($iPrice == 1) {
+                $aRecipe = DB::select("SELECT * from recipe where price = 1 ");
+            } elseif ($iPrice == 2) {
+                $aRecipe = DB::select("SELECT * from recipe where price in (1,2)");
+            } elseif ($iPrice == 3) {
+                $aRecipe = DB::select("SELECT * from recipe where price in (1,2,3) ");
+            }
+        } else {
+            $aRecipe = DB::select("SELECT * from recipe");
+        }
         return $aRecipe;
     }
 

@@ -76,7 +76,6 @@ $(document).ready(function () {
 
     });
 
-
     /**
      * Display availlable products to add or update a recipe
      */
@@ -86,7 +85,6 @@ $(document).ready(function () {
             $('#description').val(ui.item); // on ajoute la description de l'objet dans un bloc
         }
     });
-
 
     /**
      * Soft delete recipe ajax
@@ -118,7 +116,6 @@ $(document).ready(function () {
 
     });
 
-
     /**
      * redirect to update product view
      */
@@ -129,4 +126,6 @@ $(document).ready(function () {
             window.location = "/recette/modifier/" + id;
         }
     });
+
 });
+
