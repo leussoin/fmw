@@ -13,16 +13,19 @@
     <h1>{{ $title }}</h1>
 
 
-    <form method="post">
+    <form id="form-recipe" method="post">
         <!-- nom de la recette -->
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label>Nom de la recette</label>
-                    <input type="text" class="form-control" placeholder="Entrez le nom de la recette"
-                           value="<?php if (!empty($oRecipe)) {
-                               echo $oRecipe->name;
-                           }?>" name="sRecipeName"/>
+                    <input type="text"
+                           id="recipeName"
+                           class="form-control"
+                           placeholder="Entrez le nom de la recette"
+                           value="<?php if (!empty($oRecipe)) { echo $oRecipe->name; }?>"
+                           name="sRecipeName"
+                    />
                 </div>
             </div>
 
@@ -50,22 +53,29 @@
             <div class="col">
                 <label>Nom du produit</label>
                 <div class="form-group">
-                    <input type="text" id="name" class="form-control produit" placeholder="Entrez un produit"
-                           name="aProductName[]"/>
+                    <input type="text"
+                           id="name"
+                           class="form-control produit"
+                           placeholder="Entrez un produit"
+                           name="aProductName[]"
+                    />
                 </div>
             </div>
             <div class="col">
                 <label>Quantité</label>
                 <div class="form-group">
-                    <input type="text" id="quantity" class="form-control" name="aQuantity[]"
+                    <input type="text"
+                           id="quantity"
+                           class="form-control quantity"
+                           name="aQuantity[]"
                            placeholder="Quantité">
                 </div>
             </div>
 
             <div class="col">
-                <label>Quantité</label>
+                <label>Unité</label>
                 <div class="form-group">
-                    <select class="form-control" id="unit" name="aUnit[]">
+                    <select class="form-control unit-select" id="unit" name="aUnit[]">
                         <option value="">Choisissez l'unité</option>
                         @foreach($aUnitSelect as $unit)
                             <option value="{{ $unit['id'] }}">{{ $unit['name'] }}</option>

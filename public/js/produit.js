@@ -57,7 +57,7 @@ $(document).ready(function () {
         let price = $("#price").val();
 
 
-        console.log(cal);;
+        console.log(cal);
 
         event.preventDefault();
         // si c'est un nombre
