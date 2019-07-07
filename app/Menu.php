@@ -54,8 +54,7 @@ class Menu extends Model {
      * @return array
      */
     public static function getMenu($date, $id_user) {
-
-        return DB::select("SELECT * from menu where date = '" . $date . "' and id_user = '" . $id_user . "' ");
+        return DB::table('menu')->where('date', '=', $date)->where('id_user', '=', $id_user)->get();
 
     }
 
