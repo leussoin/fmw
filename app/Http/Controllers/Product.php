@@ -132,6 +132,7 @@ class Product extends Controller {
      */
     public function updateProductGet($id) {
         $aProduct = \App\Product::getProductById($id);
+
         $aMonths = Misc::getSeasons();
         $aMonthsProduct = array();
 

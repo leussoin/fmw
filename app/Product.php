@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
 
 class Product extends Model {
 
@@ -18,21 +20,19 @@ class Product extends Model {
 
     /**
      * Get all active product
-     * @return array
+     * @return Collection
      */
     public static function getAllProduct() {
-        $aProduit = DB::select("SELECT * from product where status = 1");
-        return $aProduit;
+        return DB::table('product')->where('status', '=', 1)->get();
     }
 
     /**
      * Get a single product by his id
      * @param $id
-     * @return array
+     * @return Model|Builder|object|null
      */
     public static function getProductById($id) {
-        $aProduct = DB::select("SELECT * from product where id = " . $id);
-        return $aProduct;
+        return DB::table('product')->where('id', '=', $id)->first();
     }
 
     /**
@@ -96,7 +96,7 @@ class Product extends Model {
     /**
      * Get id product with his name
      * @param $sProduct
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function getIdProductByName($sProduct) {
         return DB::table('product')->where('name', "=", $sProduct)->get();
@@ -106,7 +106,7 @@ class Product extends Model {
     /**
      * Get product by ID recipe
      * @param $id
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function getProductByIdRecipe($id) {
         return DB::Table('recipe_assoc')->select('*')->where('recipe_id', $id)->get();
