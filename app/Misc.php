@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use DB;
 use Illuminate\Support\Collection;
@@ -25,7 +26,7 @@ class Misc extends Model {
     /**
      * Get id unit with name
      * @param $sName
-     * @return array $idUnit
+     * @return Collection $idUnit
      */
     public static function getIdUnitByName($sName) {
         $idUnit = DB::table('unit')->where('name', '=', $sName)->get();
@@ -36,11 +37,10 @@ class Misc extends Model {
     /**
      * Get user by name and password input
      * @param $aData
-     * @return array $user
+     * @return Model|Builder|object|null $user
      */
     public static function getUserByNameAndPass($aData) {
-        return DB::select("SELECT * from user where name = '" . $aData['name'] . "' and passwd = '" . $aData['password'] . "' ");
-
+        return DB::table('user')->where('name', '=',$aData['name'])->where('passwd', '=', $aData['password'])->first();
     }
 
     /**

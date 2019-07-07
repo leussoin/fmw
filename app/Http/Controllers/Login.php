@@ -39,7 +39,7 @@ class Login extends Controller {
         $oUser = Misc::getUserByNameAndPass($aData);
         if (!empty($oUser)) {
 
-            Session::put('oUser', $oUser[0]);
+            Session::put('oUser', $oUser);
             return redirect()->action('Welcome@welcome');
 
         } else {
