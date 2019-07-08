@@ -85,11 +85,12 @@ class Product extends Model {
     /**
      * Get product with partial name
      * @param $term
-     * @return array
+     * @return Collection
      */
     public static function getProductByPartialNameAjax($term) {
+        return DB::table('product')->where('name', 'like', '%'.$term.'%')->get();
 
-    return DB::select("select name from product where name like '%$term%'");
+    //return DB::select("select name from product where name like '%$term%'");
 
     }
 

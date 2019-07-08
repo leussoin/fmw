@@ -97,14 +97,14 @@
             <div class="col">
                 <div class="form-group">
                     <input type="text" id="name" class="form-control produit" placeholder="Entrez un produit"
-                           value="<?php echo $product[0]->name; ?>" name="aProductName[]"/>
+                           value="<?php echo $product->name; ?>" name="aProductName[]"/>
                 </div>
             </div>
 
 
             <div class="col">
                 <div class="form-group">
-                    <input type="text" value="<?php echo $product[0]->quantity; ?>" id="quantity" class="form-control"
+                    <input type="text" value="<?php echo $product->quantity; ?>" id="quantity" class="form-control"
                            name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>

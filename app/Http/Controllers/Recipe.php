@@ -238,12 +238,14 @@ class Recipe extends Controller {
         foreach ($listeObjProduit as $key => $product) {
             $aProduct[$key] = \App\Product::getProductById($product->product_id);
             // je veux la quantité pour chaque produit
-            $aProduct[$key][0]->quantity = $listeObjProduit[$key]->quantity;
+            //var_dump($aProduct);
+            //dd($aProduct);
+            $aProduct[$key]->quantity = $listeObjProduit[$key]->quantity;
 
             $aInfosProduits = \App\Product::getProductById($product->product_id);
             //base 1000 car KG, je veux du gramme
             // je dois diviser le coup calorifique par 1000 (avoir au gramme) puis arrondir
-            $iCalorie = $aInfosProduits[0]->cal * $product->quantity;
+            $iCalorie = $aInfosProduits->cal * $product->quantity;
 
             $iTotalCalorie += $iCalorie;
         }
