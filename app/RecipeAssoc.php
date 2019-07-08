@@ -22,20 +22,14 @@ class RecipeAssoc extends Model {
      */
     public static function addProductForRecipeTableAssoc($aProduct) {
 
-        $idRecipe = $aProduct['id_recipe'];
-        $iIdProduct = $aProduct['id_product'];
-        $iQuantity = $aProduct['quantity'];
-        $idUnit = $aProduct['id_unit'];
-
-        $iInsertedRow = DB::table('recipe_assoc')->insert(
+        return DB::table('recipe_assoc')->insert(
             [
-                'id_unit' => $idUnit,
-                'product_id' => $iIdProduct,
-                'quantity' => $iQuantity,
-                'recipe_id' => $idRecipe
+                'id_unit' => $aProduct['id_unit'],
+                'product_id' => $aProduct['id_product'],
+                'quantity' => $aProduct['quantity'],
+                'recipe_id' => $aProduct['id_recipe']
             ]
         );
-        return $iInsertedRow;
     }
 
     /**
@@ -44,8 +38,7 @@ class RecipeAssoc extends Model {
      * @return false|string
      */
     public static function deleteProductAssocTable($aData) {
-        $iDeletedRow = RecipeAssoc::where('recipe_id', $aData['id'])->delete();
-        return $iDeletedRow;
+        return RecipeAssoc::where('recipe_id', $aData['id'])->delete();
     }
 
 
@@ -55,8 +48,7 @@ class RecipeAssoc extends Model {
      * @return false|string
      */
     public static function getRecipeProducts($id) {
-        $aProduct = DB::table('recipe_assoc')->where('recipe_id', $id)->get();
-        return $aProduct;
+        return DB::table('recipe_assoc')->where('recipe_id', $id)->get();
     }
 
 }
