@@ -67,7 +67,6 @@ class Recipe extends Model {
      */
     public static function getRecipeIdByName($sName) {
         return DB::table('recipe')->where('name', "=", $sName)->first();
-        //$idRecipe = DB::select("SELECT id from recipe where name = '" . $sName . "' ");
     }
 
     /**
@@ -76,9 +75,7 @@ class Recipe extends Model {
      * @return int
      */
     public static function deleteRecipe($id) {
-        $iModifiedRow = DB::update('UPDATE recipe set statuscode = 0, modified_at = "' . date("Y-m-d H:i:s") . '" where id = ' . $id);
-        var_dump($iModifiedRow);
-        return $iModifiedRow;
+        return DB::table('recipe')->where('id', '=', $id)->update(['statuscode'=>0, 'modified_at'=>date("Y-m-d H:i:s")]);
     }
 
     /**
@@ -87,7 +84,7 @@ class Recipe extends Model {
      * @return Model|Builder|object|null
      */
     public static function getRecipeByID($id) {
-        return $aRecipe = DB::table('recipe')->where('id', $id)->first();
+        return DB::table('recipe')->where('id', $id)->first();
     }
 
     /**
@@ -97,13 +94,14 @@ class Recipe extends Model {
      */
     public static function updateRecipeData($aData) {
 
-        $iModifiedRow = DB::update('UPDATE recipe set 
-            name = "' . $aData['name'] . '", 
-            cooking_recipe = "' . $aData['cooking_recipe'] . '", 
-            price = "'.$aData['iAveragePrice'].'",
-            modified_at = "' . date("Y-m-d H:i:s") . '"   
-            where id = ' . $aData['id']);
-        return $iModifiedRow;
+        return DB::table('recipe')->where('id', '=', $aData['id'])->update(
+            [
+                'statuscode'=>0,
+                'modified_at'=>date("Y-m-d H:i:s"),
+                'name'=>$aData['name'],
+                'cooking_recipe'=>$aData['cooking_recipe'],
+                'price' => $aData['iAveragePrice']
+            ]);
     }
 
     /**
