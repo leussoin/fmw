@@ -32,7 +32,7 @@ class Settings extends Controller
         if (!empty($aDislikedProduct)) {
             foreach ($aDislikedProduct as $oDislikedProduct) {
                 $oProduct = Product::getProductById($oDislikedProduct->product_disliked);
-                $aProduct[] = $oProduct[0]->name;
+                $aProduct[] = $oProduct->name;
             }
         }
         return view('settings', ['oUser' => $oUser, 'aProduct' => $aProduct]);

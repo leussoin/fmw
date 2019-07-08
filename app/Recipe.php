@@ -66,8 +66,8 @@ class Recipe extends Model {
      * @return array
      */
     public static function getRecipeIdByName($sName) {
-        $idRecipe = DB::select("SELECT id from recipe where name = '" . $sName . "' ");
-        return $idRecipe;
+        return DB::table('recipe')->where('name', "=", $sName)->first();
+        //$idRecipe = DB::select("SELECT id from recipe where name = '" . $sName . "' ");
     }
 
     /**

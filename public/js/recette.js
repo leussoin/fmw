@@ -148,13 +148,16 @@ $(document).ready(function () {
         $('.quantity').each(function () {
             aQuantity.push($(this).val());
         });
-
         $('.unit-select').each(function () {
             aUnit.push($(this).val());
         });
 
 
         if (recipeName.length > 3) {
+
+            console.log(aUnit);
+
+
 
             $.each(aProductName, function (key, value) {
                 // si j'ai un nom de produit
@@ -165,21 +168,18 @@ $(document).ready(function () {
                         console.log(aQuantity[key].length);
                         // verifier quelle valeur il prends: est sa value ? ou bien la valeur 'affichée'
                         if (aUnit[key].length > 0) {
-                            console.log(aUnit[key].length);
+
                             error = '';
                         } else {
                             error = "Erreur sur l'unité";
-                            $(this.input).css("background", "red");
                             return false;
                         }
                     } else {
                         error = "Erreur sur quantité";
-                        $(this.input).css("background", "red");
                         return false;
                     }
                 } else {
                     error = "Pas de nom";
-                    $(this.input).css("background", "red");
                     return false;
                 }
             })

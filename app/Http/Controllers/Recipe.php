@@ -104,7 +104,6 @@ class Recipe extends Controller {
                                     $iInsertedProduct = RecipeAssoc::addProductForRecipeTableAssoc($aParams);
 
 
-
                                     if ($iInsertedProduct === true) {
                                         $iTotalInsertedProduct++;
                                     } else {
@@ -305,17 +304,21 @@ class Recipe extends Controller {
 
     /**
      * Update a recipe
-     * @param Request $request
      * @return void
      * @throws \Exception
      */
-    public function updateRecipePost(request $request) {
+    public function updateRecipePost(Request $request) {
+
+        $input = $request->all();
 
         $sRecipeName = Request('sRecipeName');
         $aProductName = Request('aProductName');
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
         $sCookingRecipe = Request('cooking_recipe');
+
+
+
         $aPrice = array();
 
         $aProductName = array_filter($aProductName);
@@ -333,10 +336,15 @@ class Recipe extends Controller {
         $iCptAddedProduct = 0;
         $iProduct = 0;
 
+
         foreach ($aProductName as $sNameProduct) {
+
+
             $cProduct = \App\Product::getIdProductByName($sNameProduct);
             $aPrice[] = $cProduct[0]->price;
         }
+
+
         $aData['iAveragePrice'] = array_sum($aPrice) / count($aPrice);
 
         //modification de la recette
@@ -419,6 +427,9 @@ class Recipe extends Controller {
                 $iProduct++;
             }
         }
+
+
+
 
         if ($iProduct === $iCptAddedProduct) {
 

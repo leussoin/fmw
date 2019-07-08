@@ -53,22 +53,13 @@
             <div class="col">
                 <label>Nom du produit</label>
                 <div class="form-group">
-                    <input type="text"
-                           id="name"
-                           class="form-control produit"
-                           placeholder="Entrez un produit"
-                           name="aProductName[]"
-                    />
+                    <input type="text" id="name" class="form-control produit" placeholder="Entrez un produit" name="aProductName[]" />
                 </div>
             </div>
             <div class="col">
                 <label>Quantité</label>
                 <div class="form-group">
-                    <input type="text"
-                           id="quantity"
-                           class="form-control quantity"
-                           name="aQuantity[]"
-                           placeholder="Quantité">
+                    <input class = "form-control quantity" type="text" id="quantity" name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
 
@@ -104,7 +95,7 @@
 
             <div class="col">
                 <div class="form-group">
-                    <input type="text" value="<?php echo $product->quantity; ?>" id="quantity" class="form-control"
+                    <input type="text" value="<?php echo $product->quantity; ?>" id="quantity" class="form-control quantity"
                            name="aQuantity[]" placeholder="Quantité">
                 </div>
             </div>
@@ -112,7 +103,7 @@
 
             <div class="col">
                 <div class="form-group">
-                    <select class="form-control" id="unit" name="aUnit[]">
+                    <select class="form-control unit-select" id="unit" name="aUnit[]">
                         <?php foreach ($aUnit as $unit) { ?>
                         <option value="{{ $unit['id'] }}"
                         <?php if ($oProduct[$key]->id_unit === $unit['id']) {
