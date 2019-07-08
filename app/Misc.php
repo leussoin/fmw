@@ -30,7 +30,6 @@ class Misc extends Model {
      */
     public static function getIdUnitByName($sName) {
         $idUnit = DB::table('unit')->where('name', '=', $sName)->get();
-        //$idUnit = DB::select("SELECT id from unit where name = '" . $sName . "' ");
         return $idUnit;
     }
 

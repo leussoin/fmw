@@ -79,7 +79,6 @@ class Product extends Controller {
         $iLastInsertedIdProduct = 0;
 
 
-
         foreach ($aNomProduit as $key => $nom) {
             if (Validator::isValidStr($nom) !== false) {
                 if (Validator::isValidInt($iPrice)) {
@@ -169,6 +168,8 @@ class Product extends Controller {
                 if (Validator::isValidInt($iCal) !== false) {
 
                     $iModifiedRow = \App\Product::updateProduct($sName, $iPrice, $iCal, $id);
+
+
                 } else {
                     $error = "la valeur énérgetique du produit est incorecte.";
                 }

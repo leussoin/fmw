@@ -16,6 +16,7 @@ class Product extends Model {
     ];
 
     protected $table = 'product';
+    public $timestamps = false;
 
 
     /**
@@ -66,8 +67,7 @@ class Product extends Model {
      * @return bool
      */
     public static function updateProduct($sName, $fPrice, $iCal, $id) {
-        $iModifiedRow = DB::update('UPDATE product set name = "' . $sName . '", price =' . $fPrice . ', cal = ' . $iCal . ', modified_at = "' . date("Y-m-d H:i:s") . '"   where id = ' . $id);
-        return $iModifiedRow;
+        return DB::table('product')->where('id', '=', $id)->update(['name'=>$sName, 'price'=>$fPrice, 'modified_at' =>  date("Y-m-d H:i:s") ]);
     }
 
 
