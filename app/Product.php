@@ -67,7 +67,7 @@ class Product extends Model {
      * @return bool
      */
     public static function updateProduct($sName, $fPrice, $iCal, $id) {
-        return DB::table('product')->where('id', '=', $id)->update(['name'=>$sName, 'price'=>$fPrice, 'modified_at' =>  date("Y-m-d H:i:s") ]);
+        return DB::table('product')->where('id', '=', $id)->update(['cal' => $iCal, 'name'=>$sName, 'price'=>$fPrice, 'modified_at' =>  date("Y-m-d H:i:s") ]);
     }
 
 
