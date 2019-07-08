@@ -77,7 +77,7 @@ class Product extends Model {
      * @return bool
      */
     public static function deleteProduct($id) {
-        return DB::update('UPDATE product set status = 0, modified_at = "' . date("Y-m-d H:i:s") . '" where id = ' . $id);
+        return DB::table('product')->where('id', '=', $id)->update(['status' => 0]);
 
     }
 
@@ -88,6 +88,7 @@ class Product extends Model {
      * @return array
      */
     public static function getProductByPartialNameAjax($term) {
+
     return DB::select("select name from product where name like '%$term%'");
 
     }
