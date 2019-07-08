@@ -223,14 +223,13 @@ class Product extends Controller {
     public function getProductByPartialName(Request $request) {
 
         $term = $request->get('term');
-        $data = \App\Product::getProductByPartialNameAjax($term);
+        $cProduct = \App\Product::getProductByPartialNameAjax($term);
 
-        $aData[] = array();
-        foreach ($data as $a) {
-            foreach ($a as $i) {
-                $aData[] = $i;
-            }
+        $aData = array();
+        foreach ($cProduct as $oProduct) {
+            $aData[] = $oProduct->name;
         }
+
         return $aData;
     }
 
