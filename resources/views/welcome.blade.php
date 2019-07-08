@@ -3,12 +3,13 @@
 @extends('layouts/master', ['title' => "menu"])
 @section('content')
 
-    <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ?
-        <button name="button" value="save" type="submit">Sauvegarder la semaine</button>
-
-        <!--<button type="button" id="calcul">Calculer les calories</button> -->
-    </h1>
     <form method="post">
+
+        <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ?
+            <button name="button" value="save" type="submit">Sauvegarder la semaine</button>
+
+            <!--<button type="button" id="calcul">Calculer les calories</button> -->
+        </h1>
         {{ csrf_field() }}
 
         <div>

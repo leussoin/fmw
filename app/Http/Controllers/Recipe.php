@@ -285,19 +285,15 @@ class Recipe extends Controller {
      * @return float|int
      */
     public function getTotalCalByRecipe($name) {
-
         $oRecipe = \App\Recipe::getRecipeIdByName($name);
 
-        $oRecipeProduct = RecipeAssoc::getRecipeProducts($oRecipe[0]->id);
+        $oRecipeProduct = RecipeAssoc::getRecipeProducts($oRecipe->id);
         $fTotalCal = 0;
         foreach ($oRecipeProduct as $key => $element) {
+
             $oProduct = \App\Product::getProductById($element->product_id);
-            foreach ($oProduct as $product) {
-                //var_dump($product->cal); // pour chaque produit voici sa valeur calorifique
-                //var_dump($element->quantity);
-                $fCal = $product->cal * $element->quantity;
-                $fTotalCal += $fCal;
-            }
+            $fCal = $oProduct->cal * $element->quantity;
+            $fTotalCal += $fCal;
         }
         return $fTotalCal;
     }
@@ -316,7 +312,6 @@ class Recipe extends Controller {
         $aQuantity = Request('aQuantity');
         $aUnit = Request('aUnit');
         $sCookingRecipe = Request('cooking_recipe');
-
 
 
         $aPrice = array();
@@ -427,8 +422,6 @@ class Recipe extends Controller {
                 $iProduct++;
             }
         }
-
-
 
 
         if ($iProduct === $iCptAddedProduct) {

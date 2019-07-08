@@ -209,9 +209,9 @@ class welcome extends Controller
                     $bError = true;
                 } else {
                     if ($iCpt == 0) {
-                        $aIdRecipe['midi'][$i] = $mExists[0]->id;
+                        $aIdRecipe['midi'][$i] = $mExists->id;
                     } else {
-                        $aIdRecipe['soir'][$i] = $mExists[0]->id;
+                        $aIdRecipe['soir'][$i] = $mExists->id;
                     }
                 }
             }

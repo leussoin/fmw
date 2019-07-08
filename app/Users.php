@@ -20,7 +20,6 @@ class Users extends Model {
     }
 
     public static function addUserData($iIdUser, $iIdProduct) {
-        //return DB::table('user_preferences')->where('id_user', $iIdUser)->get();
 
         return DB::table('user_preferences')->insert(
             [
