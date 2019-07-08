@@ -5,8 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class Users extends Model
-{
+class Users extends Model {
 
     protected $table = 'user_preferences';
 
@@ -31,20 +30,21 @@ class Users extends Model
         );
     }
 
+
     public static function getAssocProduct($iIdUser, $iIdProduct) {
         return DB::table('user_preferences')->where('id_user', $iIdUser)->where('product_liked', $iIdProduct)->get();
     }
 
     public static function updatePassword($iIdUser, $sPassword) {
-        return DB::update('UPDATE user set passwd = "' . $sPassword . '"  where id = ' . $iIdUser);
+        return DB::table('user')->where('id', '=', $iIdUser)->update('passwd', $sPassword);
     }
 
     public static function updateUserGenre($iIdUser, $sgenre) {
-        return DB::update('UPDATE user set genre = "' . $sgenre . '"  where id = ' . $iIdUser);
+        return DB::table('user')->where('id', '=', $iIdUser)->update('genre', $sgenre);
     }
 
     public static function updateUserWill($iIdUser, $iIdWill) {
-        return DB::update('UPDATE user set will = ' . $iIdWill . '  where id =  "' . $iIdUser . '" ');
+        return DB::table('user')->where('id', '=', $iIdUser)->update('will', $iIdWill);
     }
 
 }
