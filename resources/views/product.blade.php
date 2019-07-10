@@ -4,7 +4,7 @@
 @section('content')
 
     <?php
-
+var_dump($aProduct);
     if (empty($aProduct->id)) { ?>
     <h1>Ajoutez un produit</h1>
     <?php } else { ?>
@@ -13,11 +13,11 @@
 
     <form method="post" id="form-product">
         {{ csrf_field() }}
-        <input type="hidden" value="{{ !empty($aProduct->price) }}" id="price" name="price">
+        <input type="hidden" value="<?php if(!empty($aProduct->price)){echo $aProduct->price;}?>" id="price" name="price">
 
         <?php if (!empty($aProduct)) { ?>
 
-        <input type="hidden" value="{{ !empty($aProduct->id) }}" name="id">
+        <input type="text" value="<?php if(!empty($aProduct->id)){echo $aProduct->id;} ?>" name="id">
 
         <div class="row">
             <div class="col">

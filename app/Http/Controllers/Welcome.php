@@ -17,7 +17,6 @@ use Session;
 
 class welcome extends Controller
 {
-
     /**
      * Manage get welcome page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

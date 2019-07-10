@@ -151,13 +151,16 @@ class Product extends Controller {
      * Update a product
      * @return RedirectResponse
      */
-    public function updateProductPost() {
+    public function updateProductPost(Request $request) {
 
         $id = Request('id');
+        //var_dump($request);
         $sName = Request('sName');
         $iPrice = Request('price');
         $iCal = Request('iCal');
         $aSelectedMonth = Request('aSelectedMonth');
+
+
 
 
         if (!empty($sName) && !empty($iPrice) && !empty($iCal)) {
@@ -168,7 +171,7 @@ class Product extends Controller {
                 if (Validator::isValidInt($iCal) !== false) {
 
                     $iModifiedRow = \App\Product::updateProduct($sName, $iPrice, $iCal, $id);
-
+                    echo "OK";
 
                 } else {
                     $error = "la valeur énérgetique du produit est incorecte.";
@@ -190,6 +193,7 @@ class Product extends Controller {
                 Misc::setProductSeason($id, $month);
             }
         }
+
 
 
         // TODO : si y'a une erreur l'afficher sinon, rediriger

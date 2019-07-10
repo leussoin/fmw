@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 
 class Product extends Model {
 
-
     protected $fillable = [
         'aName',
         'aQuantity'
@@ -67,7 +66,7 @@ class Product extends Model {
      * @return bool
      */
     public static function updateProduct($sName, $fPrice, $iCal, $id) {
-        return DB::table('product')->where('id', '=', $id)->update(['cal' => $iCal, 'name'=>$sName, 'price'=>$fPrice, 'modified_at' =>  date("Y-m-d H:i:s") ]);
+        return DB::table('product')->where('id', '=', $id)->update(['cal' => $iCal, 'name'=>$sName, 'price'=>$fPrice, 'modified_at' => date("Y-m-d H:i:s"), 'status' => 1 ]);
     }
 
 
@@ -110,7 +109,6 @@ class Product extends Model {
     public static function getProductByIdRecipe($id) {
         return DB::Table('recipe_assoc')->select('*')->where('recipe_id', $id)->get();
     }
-
 
 }
 

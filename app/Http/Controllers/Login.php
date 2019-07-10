@@ -32,10 +32,9 @@ class Login extends Controller {
         $aData['name'] = Request('login');
         $password = Request('password');
 
+        //dd(addslashes($aData['name']));
         $aData['password'] = hash('sha512', $password);
-        //dd($aData['password']);
 
-        //dd($aData['password']);
         $oUser = Misc::getUserByNameAndPass($aData);
         if (!empty($oUser)) {
 
