@@ -39,11 +39,11 @@ class Users extends Model {
     }
 
     public static function updateUserGenre($iIdUser, $sgenre) {
-        return DB::table('user')->where('id', '=', $iIdUser)->update('genre', $sgenre);
+        return DB::table('user')->where('id', '=', $iIdUser)->update(['genre' => $sgenre]);
     }
 
     public static function updateUserWill($iIdUser, $iIdWill) {
-        return DB::table('user')->where('id', '=', $iIdUser)->update('will', $iIdWill);
+        return DB::table('user')->where('id', '=', $iIdUser)->update(['will' => $iIdWill]);
     }
 
 }

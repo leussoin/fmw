@@ -70,7 +70,9 @@
 
             </tbody>
         </table>
-        <?php } ?>
+        <?php } else {
+            echo "Il n'existe aucune recette avec les produits indiqués.";
+        } ?>
     </div>
 
 @endsection

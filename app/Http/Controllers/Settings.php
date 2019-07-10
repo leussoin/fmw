@@ -31,6 +31,7 @@ class Settings extends Controller
         $aProduct = array();
         if (!empty($aDislikedProduct)) {
             foreach ($aDislikedProduct as $oDislikedProduct) {
+
                 $oProduct = Product::getProductById($oDislikedProduct->product_disliked);
                 $aProduct[] = $oProduct->name;
             }

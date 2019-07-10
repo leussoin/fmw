@@ -4,7 +4,7 @@
 @section('content')
 
     <?php
-var_dump($aProduct);
+
     if (empty($aProduct->id)) { ?>
     <h1>Ajoutez un produit</h1>
     <?php } else { ?>
@@ -17,7 +17,7 @@ var_dump($aProduct);
 
         <?php if (!empty($aProduct)) { ?>
 
-        <input type="text" value="<?php if(!empty($aProduct->id)){echo $aProduct->id;} ?>" name="id">
+        <input type="hidden" value="<?php if(!empty($aProduct->id)){echo $aProduct->id;} ?>" name="id">
 
         <div class="row">
             <div class="col">

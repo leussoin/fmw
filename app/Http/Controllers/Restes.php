@@ -42,7 +42,7 @@ class Restes extends Controller {
         $sInput = $request->all();
         $aNameRecipeList = array();
         $aProduct = explode(";", $sInput['products']);
-
+        $aRecipe = array();
 
         $sQuery = 'SELECT * from recipe_assoc where product_id in (';
 

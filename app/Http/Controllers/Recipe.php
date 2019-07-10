@@ -86,7 +86,6 @@ class Recipe extends Controller {
 
                     $oRecipe = \App\Recipe::getRecipeIdByName($sRecipeName);
 
-                    $idRecipe = $oRecipe[0]->id;
                     foreach ($aProductName as $key => $name) {
 
                         //if (!empty($name)) {
@@ -97,7 +96,7 @@ class Recipe extends Controller {
                                 $oProduct = \App\Product::getIdProductByName($name);
                                 $iIdProduct = $oProduct[0]->id;
                                 if (!empty($iIdProduct)) {
-                                    $aParams['id_recipe'] = $idRecipe;
+                                    $aParams['id_recipe'] = $oRecipe->id;
                                     $aParams['id_product'] = $iIdProduct;
                                     $aParams['quantity'] = (float)$aQuantity[$key];
                                     $aParams['id_unit'] = (int)$aUnit[$key];
@@ -285,15 +284,20 @@ class Recipe extends Controller {
      * @return float|int
      */
     public function getTotalCalByRecipe($name) {
+        // je récupére l'ID de la recette avec le nom que l'utilisateur à inséré
         $oRecipe = \App\Recipe::getRecipeIdByName($name);
-
+        //je récupére la liste des produits qui composent la recette
         $oRecipeProduct = RecipeAssoc::getRecipeProducts($oRecipe->id);
-        $fTotalCal = 0;
-        foreach ($oRecipeProduct as $key => $element) {
 
+        $fTotalCal = 0;
+        // pour chaque ingrédient
+        foreach ($oRecipeProduct as $element) {
+            // je récupére le produit qui corresponds a l'ID de la table d'asso de la recette
             $oProduct = \App\Product::getProductById($element->product_id);
+
             $fCal = $oProduct->cal * $element->quantity;
             $fTotalCal += $fCal;
+
         }
         return $fTotalCal;
     }

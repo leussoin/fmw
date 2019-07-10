@@ -33,13 +33,13 @@ class welcome extends Controller
         //TODO : à factoriser => traitement de la volonté
         switch ($oUser->will) {
             case 0:
-                echo "Let's gros ! L'apport quotidien conseillé pour un homme est de 2400k cal / jour et de 1800 pour une femme ";
+                //echo "Let's gros ! L'apport quotidien conseillé pour un homme est de 2400k cal / jour et de 1800 pour une femme ";
                 break;
             case 1:
-                echo "Moins gros";
+                //echo "Moins gros";
                 break;
             case 2:
-                echo "Encore moins";
+                //echo "Encore moins";
                 break;
         }
 

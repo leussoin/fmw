@@ -96,7 +96,7 @@ class Recipe extends Model {
 
         return DB::table('recipe')->where('id', '=', $aData['id'])->update(
             [
-                'statuscode'=>0,
+                'statuscode'=>1,
                 'modified_at'=>date("Y-m-d H:i:s"),
                 'name'=>$aData['name'],
                 'cooking_recipe'=>$aData['cooking_recipe'],

@@ -53,9 +53,9 @@
                         foreach ($aSeasonProduct[$produit->id] as $month) {
 
                             if ($month == (int)date('m')) {
+
                                 echo ":)";
                             } else {
-
                                 echo ":(";
                             }
                         }
