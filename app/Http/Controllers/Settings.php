@@ -66,6 +66,13 @@ class Settings extends Controller
 
             $iValidationUpdate = $this::setUserPreferencesProduct($cProduct[0]->id, $oUser->id);
         }
+
+
+        //Si j'ai un password...
+        if ($term['name']) {
+            $iValidationUpdate = \App\Users::updateName($oUser->id, $term['name']);
+        }
+
         //Si j'ai un password...
         if ($term['passwd']) {
             $iValidationUpdate = $this::setUserPassword($oUser->id, $term['passwd']);

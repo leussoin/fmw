@@ -11,19 +11,18 @@ namespace App\Http\Controllers;
 
 use App\Menu;
 use App\Misc;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Session;
 
-class welcome extends Controller
-{
+class welcome extends Controller {
     /**
      * Manage get welcome page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
-    public function welcome()
-    {
+    public function welcome() {
         Misc::isAuth();
         //Misc::fmwLogSystem();
 
@@ -60,24 +59,22 @@ class welcome extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
-    public function welcomePost(Request $request)
-    {
+    public function welcomePost(Request $request) {
 
         Misc::isAuth();
         $input = $request->all();
         $oUser = session('oUser');
-
         $sCurrentDate = session('sDate');
         $sNewDate = '';
+        $aIdWeekRecipe['midi'] = $input['midi'];
+        $aIdWeekRecipe['soir'] = $input['soir'];
+
 
         if ($input['button'] === '+') {
             $sNewDate = date('d-m-Y', strtotime($sCurrentDate . ' +7 days'));
         } elseif ($input['button'] === '-') {
             $sNewDate = date('d-m-Y', strtotime($sCurrentDate . ' -7 days'));
         } elseif ($input['button'] === 'save') {
-
-            $aIdWeekRecipe['midi'] = $input['midi'];
-            $aIdWeekRecipe['soir'] = $input['soir'];
 
 
             // parse le tableau pour savoir si mes recettes existent, si oui = ID
@@ -93,6 +90,7 @@ class welcome extends Controller
         }
 
         $aPlatUser = $this::getWeeklyRecipe($oUser, $sNewDate);
+
         $aSemaine = $this->getDaysOfWeek($sNewDate);
 
         session(['sDate' => $sNewDate]);
@@ -107,8 +105,7 @@ class welcome extends Controller
      * @param $sDate
      * @return false|string
      */
-    public function getFirstMonday($sDate)
-    {
+    public function getFirstMonday($sDate) {
         return date('d-m-Y', strtotime('last monday', strtotime($sDate)));
     }
 
@@ -118,16 +115,11 @@ class welcome extends Controller
      * @param $sDate
      * @return mixed
      */
-    public function getWeeklyRecipe($oUser, $sDate)
-    {
+    public function getWeeklyRecipe($oUser, $sDate) {
         $aPlatUser = array();
-        $aRepasMidi = array();
-        $aRepasSoir = array();
-        //$week_start = $this::getFirstMonday(date('d-m-Y'));
-        $bSemaineVide = true;
+        $aRecipes = array();
 
         $sMonday = $this::getFirstMonday($sDate);
-
         // recupération de la liste compléte des recetes table assoc
         for ($i = 1; $i <= 7; $i++) {
             if ($i == 1) {
@@ -137,27 +129,22 @@ class welcome extends Controller
             }
             $aPlatUser[$i] = Menu::getMenu($sDate, $oUser->id);
         }
-
-
         // récupération des noms des recettes / jour / plat
         for ($i = 1; $i <= 7; $i++) {
-            // [0] = midi / [1] = soir
-            if (!empty($aPlatUser[$i][0]->id_recipe)) {
-                $idRecipeMidi = $aPlatUser[$i][0]->id_recipe;
 
-                $a = \App\Recipe::getRecipeByID($idRecipeMidi);
-                $aRepasMidi[$i] = $a->name;
+            //midi
+            if (!empty($aPlatUser[$i][0]->midi)) {
+                $oRecipeMidi = \App\Recipe::getRecipeByID($aPlatUser[$i][0]->id_recipe);
+                $aRecipes['midi'][$i] = $oRecipeMidi->name;
             }
 
-            if (!empty($aPlatUser[$i][1]->id_recipe)) {
-                $idRecipeSoir = $aPlatUser[$i][1]->id_recipe;
-                $b = \App\Recipe::getRecipeByID($idRecipeSoir);
-                $aRepasSoir[$i] = $b->name;
+            // soir = laisser ISSET car soir = 0 (verifier avec empty cause un bug car 0 = not empty)
+            if (isset($aPlatUser[$i][1]->midi)) {
+                $oRecipeSoir = \App\Recipe::getRecipeByID($aPlatUser[$i][1]->id_recipe);
+                $aRecipes['soir'][$i] = $oRecipeSoir->name;
             }
         }
 
-        $aRecipes['midi'] = $aRepasMidi;
-        $aRecipes['soir'] = $aRepasSoir;
         return $aRecipes;
     }
 
@@ -167,8 +154,8 @@ class welcome extends Controller
      * @return array
      * @throws \Exception
      */
-    public function getDaysOfWeek($sDate)
-    {
+    public
+    function getDaysOfWeek($sDate) {
 
         $sFirstDay = date('Y-m-d', strtotime('last monday', strtotime($sDate)));
         $oFirstDay = new \DateTime($sFirstDay);
@@ -192,8 +179,8 @@ class welcome extends Controller
      * @param $aInput
      * @return array
      */
-    public function checkRecipeAndGetIdByName($aInput)
-    {
+    public
+    function checkRecipeAndGetIdByName($aInput) {
         $aIdRecipe = array();
         $iCpt = 0;
         foreach ($aInput as $aMidiOuSoir) {
@@ -228,8 +215,8 @@ class welcome extends Controller
      * @param $oUser
      * @return bool|string
      */
-    public function addMenu($aMenuSemaine, $sLundi, $bIsMidi, $oUser)
-    {
+    public
+    function addMenu($aMenuSemaine, $sLundi, $bIsMidi, $oUser) {
         // dd($aMenuSemaine);
         //TODO: gerer les deux semaines en cas d'erreur d'insertion sur une data en particulier
         $iCpt = 0;

@@ -43,6 +43,16 @@ $(document).ready(function () {
         $("#price").val("3");
     });
 
+    /**
+     * redirect to update recipe view (reste + lister recettes)
+     */
+    $('.datatable tr').on("click", function () {
+        let id = $(this).closest("tr").attr("id");
+        console.log(id);
+        if (id) {
+            window.location = "/recette/modifier/" + id;
+        }
+    });
 
 
 

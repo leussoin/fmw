@@ -26,7 +26,8 @@ $(document).ready(function () {
         $("#products").val(produitDeteste);
 
         if ($("#password").val() === $("#confirm-password").val()) {
-            document.getElementById("formulaire").submit();        } else {
+            document.getElementById("formulaire").submit();
+        } else {
             alert('Les mots de passe ne correspondent pas');
         }
 

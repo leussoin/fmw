@@ -115,16 +115,7 @@ $(document).ready(function () {
 
     });
 
-    /**
-     * redirect to update product view
-     */
-    $('.datatable tr').on("click", function () {
-        let id = $(this).closest("tr").attr("id");
-        console.log(id);
-        if (id) {
-            window.location = "/recette/modifier/" + id;
-        }
-    });
+
 
 
     /**

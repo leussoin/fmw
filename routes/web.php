@@ -54,6 +54,9 @@ Route::post('/restes', 'Restes@welcomePost');
 Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 
 
+
+Route::get('/dashboard', 'Dashboard@indexGet');
+
 //Route::resource('/recette', 'Recipe');
 //Route::get('/toto','AdminController@index');
 //Route::get('/display/{term}','AdminController@searchData');

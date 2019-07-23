@@ -5,7 +5,7 @@
 
     <form method="post">
 
-        <h1>Coucou <?php echo $oUser->name; ?> bien ou bien ?
+        <h1>Bienvenue <?php echo $oUser->name; ?>
             <button name="button" value="save" type="submit">Sauvegarder la semaine</button>
 
             <!--<button type="button" id="calcul">Calculer les calories</button> -->
@@ -28,6 +28,13 @@
             <th class="cal">Calories</th>
 
             </thead>
+
+
+            <?php
+//var_dump($aPlatUser[1][0]);
+
+
+            ?>
 
             <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[1] == date('d-m-Y')) {
                 echo 'class="current-day";';

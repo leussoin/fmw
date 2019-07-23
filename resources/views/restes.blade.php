@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
         </div>
         <input type="hidden" id="token" value="{{ csrf_token() }}">
@@ -52,7 +52,7 @@
             <?php //dd($aRecipe); ?>
             @foreach($aRecipe as $id => $recipe)
                 <a href="">
-                    <tr>
+                    <tr id="{{$id }}">
 
                         <td>{{$id }}</td>
                         <td>{{$recipe}}</td>
@@ -64,10 +64,7 @@
 
                     </tr>
                 </a>
-
             @endforeach
-
-
             </tbody>
         </table>
         <?php } else {

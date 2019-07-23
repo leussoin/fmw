@@ -34,8 +34,12 @@ class Users extends Model {
         return DB::table('user_preferences')->where('id_user', $iIdUser)->where('product_liked', $iIdProduct)->get();
     }
 
+    public static function updateName($iIdUser, $sName) {
+        return DB::table('user')->where('id', '=', $iIdUser)->update(['name' => $sName]);
+    }
+
     public static function updatePassword($iIdUser, $sPassword) {
-        return DB::table('user')->where('id', '=', $iIdUser)->update('passwd', $sPassword);
+        return DB::table('user')->where('id', '=', $iIdUser)->update(['passwd' => $sPassword]);
     }
 
     public static function updateUserGenre($iIdUser, $sgenre) {
