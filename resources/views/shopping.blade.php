@@ -6,6 +6,8 @@
 
     <h1>Voici votre liste de course pour la semaine du tant au tant</h1>
     <?php
+            var_dump($aUnit);
+
     if (!empty($aListeDeProduit)) {
     echo "<ul>";
     foreach ($aListeDeProduit as $product => $quantity) { ?>

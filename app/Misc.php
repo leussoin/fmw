@@ -34,6 +34,16 @@ class Misc extends Model {
     }
 
     /**
+     * Get name unit with id
+     * @param $iIdUnit
+     * @return Collection $idUnit
+     */
+    public static function getNameUnitById($iIdUnit) {
+        $idUnit = DB::table('unit')->where('id', '=', $iIdUnit)->first();
+        return $idUnit;
+    }
+
+    /**
      * Get user by name and password input
      * @param $aData
      * @return Model|Builder|object|null $user

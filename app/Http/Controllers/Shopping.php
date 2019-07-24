@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Misc;
+
 class Shopping {
 
     public function shoppingListGet() {
@@ -13,6 +15,7 @@ class Shopping {
         $oWelcome = new welcome();
         $aRecipeList = $oWelcome->getWeeklyRecipe($oUser, $sCurrentDate);
         $aListeDeProduit = array();
+        $aUnit = array();
 
         $aRecipe = array_merge($aRecipeList['midi'], $aRecipeList['midi']);
 
@@ -24,6 +27,7 @@ class Shopping {
 
             // pour chaque produit composant une recette...
             foreach ($cAssocRecipe as $k => $mValues) {
+
                 // je veux la liste des produit
                 $oProduct = \App\Product::getProductById($mValues->product_id);
                 // index = produit => valeur = tableau de quantité
@@ -33,6 +37,11 @@ class Shopping {
 
         // somme des produits par ingrédient
         foreach ($aProductList as $product => $quantity) {
+dd($product);
+
+            $sUnit = Misc::getNameUnitById($mValues->id_unit);
+            $aUnit[] = $sUnit->name;
+
             $fQuantity = 0;
             foreach ($quantity as $qte) {
                 $fQuantity += $qte;
@@ -40,6 +49,6 @@ class Shopping {
             $aListeDeProduit[$product] = $fQuantity;
         }
 
-        return view('shopping', ['aListeDeProduit' => $aListeDeProduit ]);
+        return view('shopping', ['aListeDeProduit' => $aListeDeProduit, 'aUnit' => $aUnit]);
     }
 }
