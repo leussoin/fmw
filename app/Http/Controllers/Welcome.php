@@ -116,6 +116,7 @@ class welcome extends Controller {
      * @return mixed
      */
     public function getWeeklyRecipe($oUser, $sDate) {
+
         $aPlatUser = array();
         $aRecipes = array();
 
@@ -127,9 +128,10 @@ class welcome extends Controller {
             } else {
                 $sDate = date('d-m-Y', strtotime($sDate . ' +1 days'));
             }
+
             $aPlatUser[$i] = Menu::getMenu($sDate, $oUser->id);
         }
-        // récupération des noms des recettes / jour / plat
+        // récupération des noms des recettes / jour / plat peut être découpler en faisant deux boucles distinctes ?
         for ($i = 1; $i <= 7; $i++) {
 
             //midi

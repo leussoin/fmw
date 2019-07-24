@@ -2,15 +2,8 @@ body {
     background: #AEAEAE;
 }
 
-.nav-list {
+.nav-ul {
     list-style-type: none;
-}
-
-a.visit {
-    color: red;
-}
-
-ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -18,11 +11,16 @@ ul {
     background-color: #333;
 }
 
-li {
+.nav-list a.visit {
+    color: red;
+}
+
+
+.nav-list {
     float: left;
 }
 
-li a {
+.nav-list a {
     display: block;
     color: white;
     text-align: center;
@@ -30,7 +28,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+.nav-list a:hover {
     background-color: #111;
 }
 

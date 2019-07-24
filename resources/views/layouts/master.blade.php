@@ -35,9 +35,8 @@
 
 <script src="{{ URL::asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -56,32 +55,38 @@
 
         <!-- menu de navigation -->
         <div class="nav-container">
-            <ul class="nav-list">
-                <li>
+            <ul class="nav-ul">
+                <li class="nav-list">
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "menu")) {
                         echo "class = 'visit'";
                     } ?> href='/menu'>Menu</a>
                 </li>
 
-                <li>
+                <li class="nav-list">
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "liste-course")) {
+                        echo "class = 'visit'";
+                    } ?> href='/liste-course'>Liste de course</a>
+                </li>
+
+                <li class="nav-list">
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit")) {
                         echo "class = 'visit'";
                     } ?> href='/produit/lister'>Produit</a>
                 </li>
 
-                <li>
+                <li class="nav-list">
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) {
                         echo "class = 'visit'";
                     } ?> href='/recette/lister'>Recette</a>
                 </li>
 
-                <li>
+                <li class="nav-list">
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "parametres")) {
                         echo "class = 'visit'";
                     } ?> href='/parametres'>Paramètres</a>
                 </li>
 
-                <li>
+                <li class="nav-list">
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "restes")) {
                         echo "class = 'visit'";
                     } ?> href='/restes'>Restes</a>
@@ -92,20 +97,19 @@
 
             </ul>
 
-            <ul class="nav-list">
+            <ul class="nav-ul">
 
                 <!-- menu des produits -->
                 <?php if (strpos($_SERVER['REQUEST_URI'], "produit")) { ?>
 
-                <li>
-
+                <li class="nav-list">
                     <!-- lister produits -->
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "produit/lister")) {
                         echo "class = 'visit'";
                     } ?> href='/produit/lister'>Lister les produits</a>
                 </li>
 
-                <li>
+                <li class="nav-list">
                     <!-- ajouter produits -->
                     <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
                         echo "class = 'visit'";
@@ -119,30 +123,29 @@
                 } ?>
 
             <!-- menu des recettes -->
-            <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) { ?>
+                <?php if (strpos($_SERVER['REQUEST_URI'], "recette")) { ?>
 
-            <li>
-                <!-- lister recette -->
-                <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
-                    echo "class = 'visit'";
-                } ?> href='/recette/lister'>Lister les recettes</a>
-            </li>
+                <li class="nav-list">
+                    <!-- lister recette -->
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "lister")) {
+                        echo "class = 'visit'";
+                    } ?> href='/recette/lister'>Lister les recettes</a>
+                </li>
 
-            <li>
-                <!-- ajouter recette -->
-                <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
-                    echo "class = 'visit'";
-                } ?> href='/recette/ajouter'>Ajouter une recette</a>
-            </li>
+                <li class="nav-list">
+                    <!-- ajouter recette -->
+                    <a <?php if (strpos($_SERVER['REQUEST_URI'], "ajouter")) {
+                        echo "class = 'visit'";
+                    } ?> href='/recette/ajouter'>Ajouter une recette</a>
+                </li>
 
-            <!-- modifier recette -->
-            <?php if (strpos($_SERVER['REQUEST_URI'], "modifier")) { ?>
-            <li><a class='visit' href=''>Modifier une recette</a></li>
+                <!-- modifier recette -->
+                <?php if (strpos($_SERVER['REQUEST_URI'], "modifier")) { ?>
+                <li><a class='visit' href=''>Modifier une recette</a></li>
 
+                <?php }
 
-            <?php }
-
-            } ?>
+                } ?>
 
 
             </ul>

@@ -10,6 +10,9 @@ Route::get('/recette/getCalorie', 'Recipe@getCalWithRecipeNameGet');
 Route::get('/', 'Login@getLogin');
 Route::post('/', 'Login@postLogin');
 
+Route::get('/liste-course', 'Shopping@shoppingListGet');
+
+
 
 // ----------- Produits
 
