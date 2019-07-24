@@ -53,6 +53,8 @@ Route::post('/restes', 'Restes@welcomePost');
 // -------------- Ajax recette
 Route::get('/recette/getUnitAjax', 'Recipe@getUnitAjax');
 
+// utiliser cette route pour générer un PDF
+Route::get('/generate-pdf','HomeController@generatePDF');
 
 
 Route::get('/dashboard', 'Dashboard@indexGet');

@@ -7,6 +7,7 @@
 
         <h1>Bienvenue <?php echo $oUser->name; ?>
             <button name="button" value="save" type="submit">Sauvegarder la semaine</button>
+            <button name="button" value="pdf" type="submit">Générer la liste</button>
 
             <!--<button type="button" id="calcul">Calculer les calories</button> -->
         </h1>
@@ -29,12 +30,6 @@
 
             </thead>
 
-
-            <?php
-//var_dump($aPlatUser[1][0]);
-
-
-            ?>
 
             <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[1] == date('d-m-Y')) {
                 echo 'class="current-day";';
