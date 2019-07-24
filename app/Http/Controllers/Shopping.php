@@ -37,7 +37,7 @@ class Shopping {
 
         // somme des produits par ingrédient
         foreach ($aProductList as $product => $quantity) {
-dd($product);
+
 
             $sUnit = Misc::getNameUnitById($mValues->id_unit);
             $aUnit[] = $sUnit->name;
