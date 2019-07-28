@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\Misc;
 use function GuzzleHttp\Psr7\str;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Session;
@@ -19,13 +20,12 @@ use Session;
 class welcome extends Controller {
     /**
      * Manage get welcome page
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      * @throws \Exception
      */
     public function welcome() {
         Misc::isAuth();
         //Misc::fmwLogSystem();
-
 
         $oUser = session('oUser');
 
@@ -56,7 +56,7 @@ class welcome extends Controller {
     /**
      * Handle post welcome page
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      * @throws \Exception
      */
     public function welcomePost(Request $request) {
@@ -83,7 +83,8 @@ class welcome extends Controller {
             // TODO: pas bon, penser aux cas ou on à des jours sans repas et recette foireuses ?
             //if ($bErrorMidi === false && $bErrorSoir === false) {
 
-            $mResult = $this::addMenu($aIdRecipe, $input["first-day"], 1, $oUser);
+
+            $mResult = $this::addMenu($aIdRecipe, $input["first-day"], $oUser);
             //}
 
             $sNewDate = session('sDate');
@@ -91,7 +92,10 @@ class welcome extends Controller {
 
         $aPlatUser = $this::getWeeklyRecipe($oUser, $sNewDate);
 
+
+
         $aSemaine = $this->getDaysOfWeek($sNewDate);
+
 
         session(['sDate' => $sNewDate]);
 
@@ -130,10 +134,11 @@ class welcome extends Controller {
             }
 
             $aPlatUser[$i] = Menu::getMenu($sDate, $oUser->id);
+            //var_dump($aPlatUser[$i]);
         }
-        // récupération des noms des recettes / jour / plat peut être découpler en faisant deux boucles distinctes ?
-        for ($i = 1; $i <= 7; $i++) {
 
+        // récupération des noms des recettes / jour / plat
+        for ($i = 1; $i <= 7; $i++) {
             //midi
             if (!empty($aPlatUser[$i][0]->midi)) {
                 $oRecipeMidi = \App\Recipe::getRecipeByID($aPlatUser[$i][0]->id_recipe);
@@ -146,7 +151,8 @@ class welcome extends Controller {
                 $aRecipes['soir'][$i] = $oRecipeSoir->name;
             }
         }
-
+        #C'est là ou ça foire !!!!!!!!!!!!!!!!!
+//dd($aRecipes);
         return $aRecipes;
     }
 
@@ -185,9 +191,12 @@ class welcome extends Controller {
     function checkRecipeAndGetIdByName($aInput) {
         $aIdRecipe = array();
         $iCpt = 0;
+
         foreach ($aInput as $aMidiOuSoir) {
+
             for ($i = 1; $i <= 7; $i++) {
-                $mExists = \App\Recipe::getRecipeIdByName($aMidiOuSoir[$i - 1]);
+                $mExists = \App\Recipe::getRecipeIdByName($aMidiOuSoir[$i -1]);
+
                 if (!$mExists) {
                     if ($iCpt == 0) {
                         $aIdRecipe['midi'][$i] = false;
@@ -205,6 +214,7 @@ class welcome extends Controller {
             }
             $iCpt++;
         }
+
         return $aIdRecipe;
 
     }
@@ -218,13 +228,14 @@ class welcome extends Controller {
      * @return bool|string
      */
     public
-    function addMenu($aMenuSemaine, $sLundi, $bIsMidi, $oUser) {
-        // dd($aMenuSemaine);
+    function addMenu($aMenuSemaine, $sLundi, $oUser) {
         //TODO: gerer les deux semaines en cas d'erreur d'insertion sur une data en particulier
         $iCpt = 0;
         $mResult = '';
         foreach ($aMenuSemaine as $aMenu) {
+
             foreach ($aMenu as $key => $iIdRecipe) {
+
                 if ($key == 1) {
                     $jour = $sLundi;
                 } else {
@@ -246,7 +257,7 @@ class welcome extends Controller {
             }
             $iCpt++;
         }
-        //var_dump()
+
         return $mResult;
     }
 }

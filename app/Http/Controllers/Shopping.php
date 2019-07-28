@@ -17,7 +17,9 @@ class Shopping {
         $aListeDeProduit = array();
         $aUnit = array();
 
-        $aRecipe = array_merge($aRecipeList['midi'], $aRecipeList['midi']);
+        $aRecipe = array_merge($aRecipeList['midi'], $aRecipeList['soir']);
+
+        var_dump($aRecipe);
 
         // Tableau listant l'intégralitgé des produits et leur quantité
         foreach ($aRecipe as $key => $sRecipe) {

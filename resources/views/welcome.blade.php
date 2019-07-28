@@ -26,7 +26,11 @@
             <th class="cal">Calories</th>
 
             </thead>
+<?php
+#var_dump($aPlatUser['midi']);
+#var_dump($aPlatUser['soir']);
 
+?>
 
             <tr <?php if ($jourDeLaSemaine == '1' && $aSemaine[1] == date('d-m-Y')) {
                 echo 'class="current-day";';
